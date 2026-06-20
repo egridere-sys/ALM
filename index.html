@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Almanca A2 — 100 Temel Fiil</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0e12;--surface:#16161d;--surface2:#1e1e28;--border:rgba(255,255,255,0.07);--nav-bg:rgba(14,14,18,0.9);--accent:#d4a853;--accent2:#7b9ef0;--accent3:#6ecfa8;--accent4:#e07b7b;--text:#f0ede8;--muted:#888;--tag-bg:rgba(212,168,83,0.12);}
+html.light{--bg:#f5f2ec;--surface:#fff;--surface2:#edeae3;--border:rgba(0,0,0,0.08);--nav-bg:rgba(245,242,236,0.92);--accent:#b5852a;--accent2:#4a6fd4;--accent3:#2a9a72;--accent4:#c0504a;--text:#1a1814;--muted:#7a7060;--tag-bg:rgba(181,133,42,0.1);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.6;min-height:100vh;transition:background .3s,color .3s;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1.2rem;display:flex;align-items:center;gap:.8rem;height:52px;}
+.nav-logo{font-family:'Fraunces',serif;font-size:.95rem;color:var(--accent);white-space:nowrap;}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;list-style:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tabs button{background:none;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;padding:.28rem .65rem;border-radius:4px;cursor:pointer;white-space:nowrap;transition:color .2s,background .2s;}
+.nav-tabs button:hover,.nav-tabs button.active{color:var(--text);background:var(--surface2);}
+.nav-tabs button.active{color:var(--accent);}
+.theme-toggle{display:flex;align-items:center;gap:.4rem;background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:3px 6px;cursor:pointer;flex-shrink:0;transition:border-color .2s;}
+.theme-toggle:hover{border-color:var(--accent);}
+.t-thumb{width:24px;height:13px;background:var(--surface);border:1px solid var(--border);border-radius:999px;position:relative;}
+.t-thumb::after{content:'';position:absolute;top:2px;left:2px;width:7px;height:7px;border-radius:50%;background:var(--muted);transition:transform .25s,background .25s;}
+html.light .t-thumb::after{transform:translateX(11px);background:var(--accent);}
+.t-icon{font-size:11px;line-height:1;user-select:none;}
+.t-dark{opacity:.9;}.t-light{opacity:.4;}
+html.light .t-dark{opacity:.4;}html.light .t-light{opacity:.9;}
+
+/* PAGES */
+.page{display:none;padding-top:52px;}
+.page.active{display:block;}
+
+/* HERO */
+.hero{padding:4rem 2rem 2.5rem;max-width:860px;margin:0 auto;text-align:center;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:.6rem;}
+.eyebrow::before,.eyebrow::after{content:'';display:block;width:32px;height:1px;background:var(--accent);opacity:.4;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.8rem);font-weight:700;line-height:1.08;margin-bottom:.9rem;letter-spacing:-.02em;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero p{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto 2rem;}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+.stat .n{font-family:'Fraunces',serif;font-size:1.9rem;color:var(--accent);font-weight:700;line-height:1;}
+.stat .l{font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.07em;text-transform:uppercase;}
+
+/* SECTION */
+.section{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;}
+.sec-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:300;margin-bottom:.25rem;}
+.sec-sub{color:var(--muted);font-size:.84rem;margin-bottom:1.8rem;}
+
+/* CARDS */
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.card-head{background:var(--surface2);padding:.9rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.7rem;}
+.c-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.ic-g{background:rgba(110,207,168,.15);color:var(--accent3);}
+.ic-b{background:rgba(123,158,240,.15);color:var(--accent2);}
+.ic-a{background:rgba(212,168,83,.15);color:var(--accent);}
+.ic-r{background:rgba(224,123,123,.15);color:var(--accent4);}
+.ic-p{background:rgba(180,140,220,.15);color:#c09fe0;}
+.card-title{font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;}
+.card-sub{font-size:.72rem;color:var(--muted);}
+.card-body{padding:1.1rem 1.2rem;}
+
+/* RULE BOXES */
+.rb{background:rgba(212,168,83,.06);border-left:2px solid var(--accent);padding:.75rem .95rem;border-radius:0 7px 7px 0;margin-bottom:.75rem;font-size:.82rem;line-height:1.65;}
+.rb:last-child{margin-bottom:0;}
+.rb-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem;}
+.rb.b{background:rgba(123,158,240,.06);border-left-color:var(--accent2);}
+.rb.b .rb-label{color:var(--accent2);}
+.rb.r{background:rgba(224,123,123,.06);border-left-color:var(--accent4);}
+.rb.r .rb-label{color:var(--accent4);}
+.rb.g{background:rgba(110,207,168,.06);border-left-color:var(--accent3);}
+.rb.g .rb-label{color:var(--accent3);}
+
+/* TABLES */
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem;}
+.tbl th{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:.45rem .65rem;border-bottom:1px solid var(--border);text-align:left;}
+.tbl td{padding:.5rem .65rem;border-bottom:.5px solid var(--border);}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl .pr{color:var(--muted);font-size:.76rem;}
+.tbl .vf{color:var(--accent);font-family:'Fraunces',serif;font-size:.88rem;}
+.tbl .tr{font-size:.76rem;}
+
+/* VERB LIST */
+.filter-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.3rem;align-items:center;}
+.f-input{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'Outfit',sans-serif;font-size:.85rem;padding:.5rem .9rem;border-radius:8px;flex:1;min-width:160px;outline:none;transition:border-color .2s;}
+.f-input:focus{border-color:var(--accent);}
+.f-input::placeholder{color:var(--muted);}
+.cat-btns{display:flex;gap:3px;flex-wrap:wrap;}
+.cb{background:var(--surface2);border:1px solid var(--border);border-radius:5px;color:var(--muted);font-size:.67rem;letter-spacing:.05em;text-transform:uppercase;font-family:'DM Mono',monospace;padding:.28rem .65rem;cursor:pointer;transition:all .18s;}
+.cb:hover{color:var(--text);}
+.cb.on{background:var(--tag-bg);border-color:var(--accent);color:var(--accent);}
+.vcount{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);white-space:nowrap;}
+
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem;}
+.vc{background:var(--surface);border:1px solid var(--border);border-radius:11px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;}
+.vc:hover{border-color:rgba(212,168,83,.4);transform:translateY(-1px);}
+.vc.open{border-color:var(--accent);}
+.vc-h{padding:.85rem 1rem;display:flex;align-items:center;gap:.7rem;}
+.vc-num{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);opacity:.45;min-width:22px;}
+.vc-inf{flex:1;}
+.vc-de{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--accent);font-weight:700;line-height:1;}
+.vc-en{font-family:'DM Mono',monospace;font-size:.67rem;color:var(--accent2);letter-spacing:.04em;}
+.vc-tr{font-size:.78rem;color:var(--muted);}
+.vc-badges{display:flex;flex-direction:column;align-items:flex-end;gap:.25rem;}
+.vtype{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.04em;padding:2px 5px;border-radius:3px;}
+.vt-r{background:rgba(110,207,168,.12);color:var(--accent3);}
+.vt-i{background:rgba(224,123,123,.12);color:var(--accent4);}
+.vt-s{background:rgba(123,158,240,.12);color:var(--accent2);}
+.vt-m{background:rgba(212,168,83,.12);color:var(--accent);}
+.vcat{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--muted);}
+
+.vc-body{display:none;border-top:1px solid var(--border);padding:.9rem 1rem;}
+.vc.open .vc-body{display:block;}
+.et-tabs{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:.75rem;}
+.et{background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--muted);font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;font-family:'DM Mono',monospace;padding:.22rem .5rem;cursor:pointer;transition:all .15s;}
+.et:hover{color:var(--text);}
+.et.on{background:var(--tag-bg);border-color:var(--accent);color:var(--accent);}
+.mini-s{display:none;}
+.mini-s.on{display:block;}
+.mini-tbl{width:100%;border-collapse:collapse;font-size:.76rem;margin-bottom:.7rem;}
+.mini-tbl td{padding:.26rem .45rem;border-bottom:.5px solid var(--border);}
+.mini-tbl tr:last-child td{border-bottom:none;}
+.mini-tbl .p{color:var(--muted);width:55px;}
+.mini-tbl .v{color:var(--accent);font-family:'Fraunces',serif;font-size:.85rem;}
+.pz-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.pz{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:.22rem .55rem;font-size:.72rem;}
+.pz-l{color:var(--muted);font-size:.62rem;margin-right:.25rem;}
+.pz-v{color:var(--accent);}
+.ex-l{font-size:.76rem;line-height:1.5;margin-bottom:.3rem;}
+.ex-l strong{color:var(--accent);}
+.ex-tr{font-size:.7rem;color:var(--muted);margin-bottom:.6rem;}
+
+/* QUIZ */
+.quiz-wrap{max-width:640px;margin:0 auto;padding:2.5rem 1.5rem 5rem;}
+.qbox{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;}
+.qmode-tabs{display:flex;gap:.45rem;margin-bottom:1.6rem;flex-wrap:wrap;}
+.qmt{background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:.75rem;font-family:'Outfit',sans-serif;padding:.45rem .9rem;cursor:pointer;transition:all .18s;flex:1;text-align:center;}
+.qmt:hover{color:var(--text);}
+.qmt.on{background:var(--tag-bg);border-color:var(--accent);color:var(--accent);}
+.qprog{display:flex;align-items:center;gap:.7rem;margin-bottom:1.6rem;}
+.qprog-lbl{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);white-space:nowrap;}
+.qprog-bar{flex:1;height:2px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.qprog-fill{height:100%;background:var(--accent);transition:width .4s;border-radius:2px;}
+.qq{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:300;margin-bottom:.45rem;line-height:1.3;}
+.qhint{font-size:.78rem;color:var(--muted);margin-bottom:1.6rem;}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.1rem;}
+.qo{background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:.8rem .95rem;cursor:pointer;font-size:.92rem;transition:all .15s;text-align:left;font-family:'Fraunces',serif;color:var(--text);}
+.qo:hover{border-color:var(--accent);color:var(--accent);}
+.qo.correct{background:rgba(110,207,168,.15);border-color:var(--accent3);color:var(--accent3);}
+.qo.wrong{background:rgba(224,123,123,.12);border-color:var(--accent4);color:var(--accent4);}
+.qfb{min-height:2rem;font-size:.82rem;color:var(--muted);margin-bottom:.7rem;line-height:1.5;}
+.qnext{background:var(--accent);color:#0e0e12;border:none;border-radius:7px;padding:.65rem 1.5rem;font-size:.86rem;font-weight:600;cursor:pointer;display:none;font-family:'Outfit',sans-serif;}
+.qnext:hover{opacity:.85;}
+.qscore{text-align:center;display:none;}
+.qscore-n{font-family:'Fraunces',serif;font-size:3.2rem;color:var(--accent);font-weight:700;line-height:1;}
+.qscore-l{color:var(--muted);margin-bottom:1.3rem;font-size:.87rem;}
+.qrestart{background:transparent;border:1px solid var(--border);color:var(--text);padding:.6rem 1.3rem;border-radius:7px;cursor:pointer;font-size:.8rem;font-family:'Outfit',sans-serif;transition:border-color .15s;margin:.25rem;}
+.qrestart:hover{border-color:var(--accent);color:var(--accent);}
+
+/* TENSES PAGE */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.1rem;}
+.tcard{background:var(--surface);border:1px solid var(--border);border-radius:13px;overflow:hidden;}
+.tcard-h{background:var(--surface2);padding:.9rem 1.2rem;border-bottom:1px solid var(--border);}
+.tcard-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;color:var(--accent);}
+.tcard-tr{font-size:.75rem;color:var(--muted);margin-top:.1rem;}
+.tcard-b{padding:1.1rem 1.2rem;}
+.formula{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.6rem .9rem;font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent2);margin-bottom:.9rem;letter-spacing:.03em;}
+.tex{margin-bottom:.6rem;}
+.tex-de{font-size:.85rem;color:var(--text);}
+.tex-de strong{color:var(--accent);}
+.tex-tr{font-size:.73rem;color:var(--muted);}
+.when-list{margin-top:.9rem;}
+.wl-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;}
+.wl-i{font-size:.78rem;padding:.27rem 0;border-bottom:.5px solid var(--border);display:flex;gap:.45rem;}
+.wl-i:last-child{border-bottom:none;}
+.wl-i::before{content:'→';color:var(--accent);flex-shrink:0;}
+.cd-grid2{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:.8rem;}
+.cdr{display:flex;gap:.4rem;align-items:baseline;padding:.22rem .4rem;border-radius:4px;}
+.cdr:hover{background:var(--surface2);}
+.cdp{font-size:.72rem;color:var(--muted);min-width:38px;}
+.cdv{font-family:'Fraunces',serif;font-size:.87rem;color:var(--accent);}
+.cd-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.8rem;margin-bottom:.5rem;}
+
+/* CHIP */
+.chip{display:inline-flex;align-items:center;background:var(--tag-bg);border:1px solid rgba(212,168,83,.2);border-radius:999px;padding:.18rem .65rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);letter-spacing:.04em;}
+
+/* RESPONSIVE */
+@media(max-width:580px){.qopts{grid-template-columns:1fr;}.vgrid{grid-template-columns:1fr;}.tgrid{grid-template-columns:1fr;}.grid2{grid-template-columns:1fr;}.cd-grid2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Verben A2</div>
+  <ul class="nav-tabs">
+    <li><button class="active" onclick="showPage('home',this)">Ana Sayfa</button></li>
+    <li><button onclick="showPage('grammar',this)">Gramer</button></li>
+    <li><button onclick="showPage('tenses',this)">Zamanlar</button></li>
+    <li><button onclick="showPage('verbs',this)">100 Fiil</button></li>
+    <li><button onclick="showPage('quiz',this)">Alıştırma</button></li>
+  </ul>
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <span class="t-icon t-dark">🌙</span>
+    <div class="t-thumb"></div>
+    <span class="t-icon t-light">☀️</span>
+  </button>
+</nav>
+
+<!-- ==================== HOME ==================== -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="eyebrow">Almanca · A2 Seviyesi</div>
+    <h1>100 Temel<br><em>Fiil</em></h1>
+    <p>Zamanlar, çekim kuralları, düzenli & düzensiz fiiller — hepsini tek yerde öğren.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="n">100</div><div class="l">Temel Fiil</div></div>
+      <div class="stat"><div class="n">6</div><div class="l">Zaman Kipi</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Fiil Türü</div></div>
+      <div class="stat"><div class="n">200+</div><div class="l">Örnek Cümle</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sec-title">Neler Öğreneceksin?</div>
+    <div class="sec-sub">Her bölümü gezin, alıştırmayı deneyin</div>
+    <div class="grid2">
+      <div class="card" style="cursor:pointer" onclick="showPage('grammar',document.querySelectorAll('.nav-tabs button')[1])">
+        <div class="card-head"><div class="c-icon ic-g">📐</div><div><div class="card-title">Gramer Kuralları</div><div class="card-sub">Çekim, ekler, istisnalar</div></div></div>
+        <div class="card-body">
+          <div class="rb">Düzenli (schwach) fiil çekimi ve ek kuralları</div>
+          <div class="rb b">Düzensiz (stark) kök değişimleri</div>
+          <div class="rb g">Ayrılabilir fiiller (trennbar) ve modal fiiller</div>
+        </div>
+      </div>
+      <div class="card" style="cursor:pointer" onclick="showPage('tenses',document.querySelectorAll('.nav-tabs button')[2])">
+        <div class="card-head"><div class="c-icon ic-b">⏱</div><div><div class="card-title">6 Zaman Kipi</div><div class="card-sub">Ne zaman hangisi kullanılır?</div></div></div>
+        <div class="card-body">
+          <div class="rb b">Präsens · Perfekt · Präteritum</div>
+          <div class="rb">Futur I · Konjunktiv II · Imperativ</div>
+          <div class="rb g">Her zaman için formül + çekim tablosu</div>
+        </div>
+      </div>
+      <div class="card" style="cursor:pointer" onclick="showPage('verbs',document.querySelectorAll('.nav-tabs button')[3])">
+        <div class="card-head"><div class="c-icon ic-a">📚</div><div><div class="card-title">100 Fiil Sözlüğü</div><div class="card-sub">Tıkla, tüm zamanları gör</div></div></div>
+        <div class="card-body">
+          <div class="rb">Ada ve kategoriye göre filtrele</div>
+          <div class="rb b">Her fiilin tüm zaman çekimleri</div>
+          <div class="rb g">Türkçe · İngilizce · Partizip II</div>
+        </div>
+      </div>
+      <div class="card" style="cursor:pointer" onclick="showPage('quiz',document.querySelectorAll('.nav-tabs button')[4])">
+        <div class="card-head"><div class="c-icon ic-r">🎯</div><div><div class="card-title">Alıştırma</div><div class="card-sub">3 farklı quiz modu</div></div></div>
+        <div class="card-body">
+          <div class="rb r">Türkçe → Almanca çeviri</div>
+          <div class="rb">Partizip II / Präteritum tahmini</div>
+          <div class="rb b">Zaman kipi belirleme</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="sec-title">Hızlı Hatırlatma</div>
+    <div class="sec-sub">En sık yapılan hatalar ve kritik kurallar</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-r">⚠</div><div><div class="card-title">Haben vs. Sein (Perfekt)</div></div></div>
+        <div class="card-body">
+          <div class="rb r"><div class="rb-label">Sein ile — hareket & durum değişimi</div>gehen, kommen, fahren, fliegen, laufen, reisen<br>aufwachen, einschlafen, sterben, werden<br><br><em>Ich <strong style="color:var(--accent4)">bin</strong> gegangen.</em> ✓ &nbsp;<em>Ich <strong style="color:var(--accent4)">habe</strong> gegangen.</em> ✗</div>
+          <div class="rb g"><div class="rb-label">Haben ile — geçişli + diğer tüm fiiller</div><em>Ich <strong style="color:var(--accent3)">habe</strong> das Buch gelesen.</em> ✓</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-a">💡</div><div><div class="card-title">Kök Değişimi (du / er)</div></div></div>
+        <div class="card-body">
+          <div class="rb"><div class="rb-label">e → i / ie</div>sprechen → er <strong style="color:var(--accent)">spricht</strong> &nbsp;·&nbsp; sehen → er <strong style="color:var(--accent)">sieht</strong><br>essen → er <strong style="color:var(--accent)">isst</strong> &nbsp;·&nbsp; geben → er <strong style="color:var(--accent)">gibt</strong></div>
+          <div class="rb b"><div class="rb-label">a → ä</div>fahren → er <strong style="color:var(--accent2)">fährt</strong> &nbsp;·&nbsp; schlafen → er <strong style="color:var(--accent2)">schläft</strong><br>laufen → er <strong style="color:var(--accent2)">läuft</strong> &nbsp;·&nbsp; tragen → er <strong style="color:var(--accent2)">trägt</strong></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-b">✂</div><div><div class="card-title">Ayrılabilir Fiiller</div></div></div>
+        <div class="card-body">
+          <div class="rb b"><div class="rb-label">Präsens — ön ek sona gider</div><em>Ich <strong style="color:var(--accent)">stehe</strong> um 7 Uhr <strong style="color:var(--accent)">auf</strong>.</em> (aufstehen)</div>
+          <div class="rb"><div class="rb-label">Perfekt — ge- araya girer</div><em>Ich bin um 7 Uhr <strong style="color:var(--accent)">aufgestanden</strong>.</em></div>
+          <div class="rb g"><div class="rb-label">Sık Ön Ekler</div>auf- · an- · ab- · ein- · aus- · mit- · vor- · zurück-</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-g">M</div><div><div class="card-title">Modal Fiil Kuralı</div></div></div>
+        <div class="card-body">
+          <div class="rb g"><div class="rb-label">Kural</div>Modal fiil çekimlenir, asıl fiil infinitif olarak <strong>sona</strong> gider.</div>
+          <div class="rb"><div class="rb-label">Örnek</div><em>Ich <strong style="color:var(--accent)">kann</strong> gut Deutsch <strong style="color:var(--accent)">sprechen</strong>.</em><br><em>Du <strong style="color:var(--accent)">musst</strong> jetzt <strong style="color:var(--accent)">gehen</strong>.</em></div>
+          <div class="rb b"><div class="rb-label">Dikkat</div>ich kann = er kann (ich ve er/sie/es aynı!)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GRAMMAR ==================== -->
+<div id="page-grammar" class="page">
+  <div class="section">
+    <div class="sec-title">Gramer Kuralları</div>
+    <div class="sec-sub">A2 için gereken tüm fiil kuralları</div>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--accent3);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem"><span class="chip">Schwache Verben</span> Düzenli Fiiller</h3>
+    <div class="grid2" style="margin-bottom:2rem">
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-g">+</div><div><div class="card-title">Präsens Çekimi</div><div class="card-sub">lernen, machen, spielen…</div></div></div>
+        <div class="card-body">
+          <table class="tbl">
+            <tr><th>Şahıs</th><th>Kök + Ek</th><th>Türkçe</th></tr>
+            <tr><td class="pr">ich</td><td class="vf">lern<strong style="color:var(--accent3)">e</strong></td><td class="tr">öğreniyorum</td></tr>
+            <tr><td class="pr">du</td><td class="vf">lern<strong style="color:var(--accent3)">st</strong></td><td class="tr">öğreniyorsun</td></tr>
+            <tr><td class="pr">er/sie/es</td><td class="vf">lern<strong style="color:var(--accent3)">t</strong></td><td class="tr">öğreniyor</td></tr>
+            <tr><td class="pr">wir</td><td class="vf">lern<strong style="color:var(--accent3)">en</strong></td><td class="tr">öğreniyoruz</td></tr>
+            <tr><td class="pr">ihr</td><td class="vf">lern<strong style="color:var(--accent3)">t</strong></td><td class="tr">öğreniyorsunuz</td></tr>
+            <tr><td class="pr">sie/Sie</td><td class="vf">lern<strong style="color:var(--accent3)">en</strong></td><td class="tr">öğreniyorlar</td></tr>
+          </table>
+          <div class="rb" style="margin-top:.75rem"><div class="rb-label">-t/-d Sonu Kökleri</div>arbeiten → du arbeit<strong style="color:var(--accent)">e</strong>st · er arbeit<strong style="color:var(--accent)">e</strong>t</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-g">P2</div><div><div class="card-title">Partizip II Yapımı</div><div class="card-sub">Perfekt için gerekli</div></div></div>
+        <div class="card-body">
+          <div class="rb g"><div class="rb-label">Formül: ge- + kök + -t</div>lernen → <strong style="color:var(--accent)">ge</strong>lern<strong style="color:var(--accent)">t</strong><br>machen → <strong style="color:var(--accent)">ge</strong>mach<strong style="color:var(--accent)">t</strong><br>spielen → <strong style="color:var(--accent)">ge</strong>spiel<strong style="color:var(--accent)">t</strong></div>
+          <div class="rb b"><div class="rb-label">be-/ver-/er- ön ekli: ge- ALMAZ</div>besuchen → <strong style="color:var(--accent)">besucht</strong><br>vergessen → <strong style="color:var(--accent)">vergessen</strong><br>erklären → <strong style="color:var(--accent)">erklärt</strong></div>
+          <div class="rb r"><div class="rb-label">-ieren ile bitenler: ge- ALMAZ</div>studieren → <strong style="color:var(--accent)">studiert</strong><br>telefonieren → <strong style="color:var(--accent)">telefoniert</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--accent4);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem"><span class="chip" style="color:var(--accent4);border-color:rgba(224,123,123,.3)">Starke Verben</span> Düzensiz Fiiller</h3>
+    <div class="grid2" style="margin-bottom:2rem">
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-r">!</div><div><div class="card-title">Kök Değişimi (du / er)</div></div></div>
+        <div class="card-body">
+          <table class="tbl">
+            <tr><th>Kalıp</th><th>Fiil</th><th>du / er</th></tr>
+            <tr><td style="color:var(--accent2)">e→i</td><td class="vf">sprechen</td><td class="tr">sprichst / spricht</td></tr>
+            <tr><td style="color:var(--accent2)">e→ie</td><td class="vf">sehen</td><td class="tr">siehst / sieht</td></tr>
+            <tr><td style="color:var(--accent2)">a→ä</td><td class="vf">fahren</td><td class="tr">fährst / fährt</td></tr>
+            <tr><td style="color:var(--accent2)">au→äu</td><td class="vf">laufen</td><td class="tr">läufst / läuft</td></tr>
+            <tr><td style="color:var(--accent2)">ei→ei</td><td class="vf">heißen</td><td class="tr">heißt / heißt</td></tr>
+          </table>
+          <div class="rb r" style="margin-top:.75rem"><div class="rb-label">Dikkat!</div>Bu değişim sadece <strong>du</strong> ve <strong>er/sie/es</strong> içindir. ich/wir/sie değişmez.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-r">P2</div><div><div class="card-title">Düzensiz Partizip II</div><div class="card-sub">Ezberlemek gerekir</div></div></div>
+        <div class="card-body">
+          <table class="tbl">
+            <tr><th>Infinitiv</th><th>Partizip II</th><th>Türkçe</th></tr>
+            <tr><td class="pr">gehen</td><td class="vf">gegangen</td><td class="tr">gitmek</td></tr>
+            <tr><td class="pr">kommen</td><td class="vf">gekommen</td><td class="tr">gelmek</td></tr>
+            <tr><td class="pr">sehen</td><td class="vf">gesehen</td><td class="tr">görmek</td></tr>
+            <tr><td class="pr">schreiben</td><td class="vf">geschrieben</td><td class="tr">yazmak</td></tr>
+            <tr><td class="pr">trinken</td><td class="vf">getrunken</td><td class="tr">içmek</td></tr>
+            <tr><td class="pr">nehmen</td><td class="vf">genommen</td><td class="tr">almak</td></tr>
+            <tr><td class="pr">fahren</td><td class="vf">gefahren</td><td class="tr">gitmek/sürmek</td></tr>
+            <tr><td class="pr">lesen</td><td class="vf">gelesen</td><td class="tr">okumak</td></tr>
+            <tr><td class="pr">essen</td><td class="vf">gegessen</td><td class="tr">yemek</td></tr>
+            <tr><td class="pr">schlafen</td><td class="vf">geschlafen</td><td class="tr">uyumak</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem"><span class="chip">Modalverben</span> Modal Fiiller</h3>
+    <div class="grid2" style="margin-bottom:2rem">
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-a">M</div><div><div class="card-title">Modal Fiil Çekimi (Präsens)</div></div></div>
+        <div class="card-body">
+          <table class="tbl">
+            <tr><th></th><th style="color:var(--accent2)">können</th><th style="color:var(--accent3)">müssen</th><th style="color:var(--accent4)">dürfen</th><th style="color:var(--muted)">wollen</th><th style="color:var(--accent)">sollen</th></tr>
+            <tr><td class="pr">ich</td><td class="vf">kann</td><td class="vf" style="color:var(--accent3)">muss</td><td class="vf" style="color:var(--accent4)">darf</td><td class="vf" style="color:var(--muted)">will</td><td class="vf" style="color:var(--accent)">soll</td></tr>
+            <tr><td class="pr">du</td><td class="vf">kannst</td><td class="vf" style="color:var(--accent3)">musst</td><td class="vf" style="color:var(--accent4)">darfst</td><td class="vf" style="color:var(--muted)">willst</td><td class="vf" style="color:var(--accent)">sollst</td></tr>
+            <tr><td class="pr">er/sie</td><td class="vf">kann</td><td class="vf" style="color:var(--accent3)">muss</td><td class="vf" style="color:var(--accent4)">darf</td><td class="vf" style="color:var(--muted)">will</td><td class="vf" style="color:var(--accent)">soll</td></tr>
+            <tr><td class="pr">wir</td><td class="vf">können</td><td class="vf" style="color:var(--accent3)">müssen</td><td class="vf" style="color:var(--accent4)">dürfen</td><td class="vf" style="color:var(--muted)">wollen</td><td class="vf" style="color:var(--accent)">sollen</td></tr>
+            <tr><td class="pr">ihr</td><td class="vf">könnt</td><td class="vf" style="color:var(--accent3)">müsst</td><td class="vf" style="color:var(--accent4)">dürft</td><td class="vf" style="color:var(--muted)">wollt</td><td class="vf" style="color:var(--accent)">sollt</td></tr>
+            <tr><td class="pr">sie/Sie</td><td class="vf">können</td><td class="vf" style="color:var(--accent3)">müssen</td><td class="vf" style="color:var(--accent4)">dürfen</td><td class="vf" style="color:var(--muted)">wollen</td><td class="vf" style="color:var(--accent)">sollen</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-a">?</div><div><div class="card-title">Modal Fiil Anlamları</div></div></div>
+        <div class="card-body">
+          <div class="rb"><div class="rb-label">können</div>yapabilmek, olabilmek — <em>Ich kann schwimmen.</em></div>
+          <div class="rb r"><div class="rb-label">müssen</div>zorunda olmak — <em>Ich muss jetzt gehen.</em></div>
+          <div class="rb g"><div class="rb-label">dürfen</div>izni olmak — <em>Hier darf man nicht rauchen.</em></div>
+          <div class="rb b"><div class="rb-label">wollen</div>istemek — <em>Ich will Arzt werden.</em></div>
+          <div class="rb"><div class="rb-label">sollen</div>yapması gerekmek (dışarıdan) — <em>Du sollst pünktlich sein.</em></div>
+          <div class="rb"><div class="rb-label">möchten</div>istemek (kibarca) — <em>Ich möchte einen Kaffee.</em></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--accent2);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem"><span class="chip" style="color:var(--accent2);border-color:rgba(123,158,240,.3)">Trennbare Verben</span> Ayrılabilir Fiiller</h3>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-b">✂</div><div><div class="card-title">Cümledeki Yeri</div></div></div>
+        <div class="card-body">
+          <div class="rb b"><div class="rb-label">Präsens — ön ek sona</div><em>Ich <strong style="color:var(--accent)">rufe</strong> dich morgen <strong style="color:var(--accent)">an</strong>.</em> (anrufen)</div>
+          <div class="rb"><div class="rb-label">Perfekt — ge- araya</div><em>Ich habe dich <strong style="color:var(--accent)">angerufen</strong>.</em></div>
+          <div class="rb g"><div class="rb-label">Soru cümlesi</div><em><strong style="color:var(--accent)">Rufst</strong> du mich morgen <strong style="color:var(--accent)">an</strong>?</em></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="c-icon ic-b">📋</div><div><div class="card-title">Sık Ayrılabilir Fiiller</div></div></div>
+        <div class="card-body">
+          <table class="tbl">
+            <tr><th>Fiil</th><th>Türkçe</th><th>er-Formu</th></tr>
+            <tr><td class="vf">aufstehen</td><td class="tr">kalkmak</td><td style="color:var(--accent3)">steht auf</td></tr>
+            <tr><td class="vf">anfangen</td><td class="tr">başlamak</td><td style="color:var(--accent3)">fängt an</td></tr>
+            <tr><td class="vf">anrufen</td><td class="tr">aramak (tel)</td><td style="color:var(--accent3)">ruft an</td></tr>
+            <tr><td class="vf">einladen</td><td class="tr">davet etmek</td><td style="color:var(--accent3)">lädt ein</td></tr>
+            <tr><td class="vf">aufmachen</td><td class="tr">açmak</td><td style="color:var(--accent3)">macht auf</td></tr>
+            <tr><td class="vf">zurückkommen</td><td class="tr">geri dönmek</td><td style="color:var(--accent3)">kommt zurück</td></tr>
+            <tr><td class="vf">vorhaben</td><td class="tr">planlamak</td><td style="color:var(--accent3)">hat vor</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TENSES ==================== -->
+<div id="page-tenses" class="page">
+  <div class="section">
+    <div class="sec-title">6 Zaman Kipi</div>
+    <div class="sec-sub">Formül, kullanım alanı ve örneklerle</div>
+    <div class="tgrid">
+
+      <!-- Präsens -->
+      <div class="tcard">
+        <div class="tcard-h"><div class="tcard-name">Präsens</div><div class="tcard-tr">Şimdiki / Geniş Zaman</div></div>
+        <div class="tcard-b">
+          <div class="formula">kök + -e / -st / -t / -en / -t / -en</div>
+          <div class="tex"><div class="tex-de">Ich <strong>lerne</strong> Deutsch.</div><div class="tex-tr">Almanca öğreniyorum.</div></div>
+          <div class="tex"><div class="tex-de">Er <strong>arbeitet</strong> jeden Tag.</div><div class="tex-tr">Her gün çalışıyor.</div></div>
+          <div class="when-list"><div class="wl-label">Ne Zaman Kullanılır?</div>
+            <div class="wl-i">Şu anda olan eylemler</div>
+            <div class="wl-i">Genel gerçekler ve alışkanlıklar</div>
+            <div class="wl-i">Gelecek planlar (morgen, nächste Woche ile)</div>
+          </div>
+          <div class="cd-label">Çekim — machen</div>
+          <div class="cd-grid2">
+            <div class="cdr"><span class="cdp">ich</span><span class="cdv">mache</span></div>
+            <div class="cdr"><span class="cdp">wir</span><span class="cdv">machen</span></div>
+            <div class="cdr"><span class="cdp">du</span><span class="cdv">machst</span></div>
+            <div class="cdr"><span class="cdp">ihr</span><span class="cdv">macht</span></div>
+            <div class="cdr"><span class="cdp">er/sie</span><span class="cdv">macht</span></div>
+            <div class="cdr"><span class="cdp">sie/Sie</span><span class="cdv">machen</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Perfekt -->
+      <div class="tcard">
+        <div class="tcard-h"><div class="tcard-name">Perfekt</div><div class="tcard-tr">Geçmiş Zaman (Konuşma)</div></div>
+        <div class="tcard-b">
+          <div class="formula">haben / sein + Partizip II (sonda)</div>
+          <div class="tex"><div class="tex-de">Ich <strong>habe</strong> das Buch ge<strong>lesen</strong>.</div><div class="tex-tr">Kitabı okudum.</div></div>
+          <div class="tex"><div class="tex-de">Er <strong>ist</strong> nach Berlin ge<strong>fahren</strong>.</div><div class="tex-tr">Berlin'e gitti.</div></div>
+          <div class="when-list"><div class="wl-label">Ne Zaman Kullanılır?</div>
+            <div class="wl-i">Günlük konuşmada geçmiş olaylar</div>
+            <div class="wl-i">Tamamlanmış eylemler</div>
+            <div class="wl-i">Yazılı dilde de yaygın (Präteritum'dan fazla)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Präteritum -->
+      <div class="tcard">
+        <div class="tcard-h"><div class="tcard-name">Präteritum</div><div class="tcard-tr">Geçmiş Zaman (Yazı)</div></div>
+        <div class="tcard-b">
+          <div class="formula">Düzenli: kök + -te/-test/-te/-ten/-tet/-ten</div>
+          <div class="tex"><div class="tex-de">Ich <strong>lernte</strong> gestern viel.</div><div class="tex-tr">Dün çok öğrendim.</div></div>
+          <div class="tex"><div class="tex-de">Er <strong>war</strong> müde. / Sie <strong>hatte</strong> Hunger.</div><div class="tex-tr">Yorgundu. / Acıkmıştı.</div></div>
+          <div class="when-list"><div class="wl-label">Ne Zaman Kullanılır?</div>
+            <div class="wl-i">Yazılı metinler, haberler, romanlar</div>
+            <div class="wl-i">sein ve haben için konuşmada da kullanılır (war, hatte)</div>
+            <div class="wl-i">Modal fiillerin geçmişi için (konnte, musste…)</div>
+          </div>
+          <div class="cd-label">Düzensiz: sein / haben</div>
+          <div class="cd-grid2">
+            <div class="cdr"><span class="cdp">ich</span><span class="cdv">war / hatte</span></div>
+            <div class="cdr"><span class="cdp">wir</span><span class="cdv">waren / hatten</span></div>
+            <div class="cdr"><span class="cdp">du</span><span class="cdv">warst / hattest</span></div>
+            <div class="cdr"><span class="cdp">ihr</span><span class="cdv">wart / hattet</span></div>
+            <div class="cdr"><span class="cdp">er/sie</span><span class="cdv">war / hatte</span></div>
+            <div class="cdr"><span class="cdp">sie/Sie</span><span class="cdv">waren / hatten</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Futur I -->
+      <div class="tcard">
+        <div class="tcard-h"><div class="tcard-name">Futur I</div><div class="tcard-tr">Gelecek Zaman</div></div>
+        <div class="tcard-b">
+          <div class="formula">werden (çekimli) + Infinitiv (sonda)</div>
+          <div class="tex"><div class="tex-de">Ich <strong>werde</strong> morgen kommen.</div><div class="tex-tr">Yarın geleceğim.</div></div>
+          <div class="tex"><div class="tex-de">Es <strong>wird</strong> regnen.</div><div class="tex-tr">Yağmur yağacak.</div></div>
+          <div class="when-list"><div class="wl-label">Ne Zaman Kullanılır?</div>
+            <div class="wl-i">Kesin gelecek planlar (Präsens de kullanılabilir)</div>
+            <div class="wl-i">Tahmin, olasılık bildirme</div>
+            <div class="wl-i">Vaatler ve niyetler</div>
+          </div>
+          <div class="cd-label">werden çekimi</div>
+          <div class="cd-grid2">
+            <div class="cdr"><span class="cdp">ich</span><span class="cdv">werde</span></div>
+            <div class="cdr"><span class="cdp">wir</span><span class="cdv">werden</span></div>
+            <div class="cdr"><span class="cdp">du</span><span class="cdv">wirst</span></div>
+            <div class="cdr"><span class="cdp">ihr</span><span class="cdv">werdet</span></div>
+            <div class="cdr"><span class="cdp">er/sie</span><span class="cdv">wird</span></div>
+            <div class="cdr"><span class="cdp">sie/Sie</span><span class="cdv">werden</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konjunktiv II -->
+      <div class="tcard">
+        <div class="tcard-h"><div class="tcard-name">Konjunktiv II</div><div class="tcard-tr">Dilek / Koşul Kipi</div></div>
+        <div class="tcard-b">
+          <div class="formula">würde + Infinitiv &nbsp;|&nbsp; wäre / hätte / könnte…</div>
+          <div class="tex"><div class="tex-de">Ich <strong>würde</strong> gern reisen.</div><div class="tex-tr">Seyahat etmek isterdim.</div></div>
+          <div class="tex"><div class="tex-de">Wenn ich Zeit <strong>hätte</strong>, <strong>würde</strong> ich kommen.</div><div class="tex-tr">Zamanım olsaydı gelirdim.</div></div>
+          <div class="when-list"><div class="wl-label">Ne Zaman Kullanılır?</div>
+            <div class="wl-i">Gerçekleşmemiş / hayali durumlar</div>
+            <div class="wl-i">Kibarca rica (könnten Sie…? würden Sie…?)</div>
+            <div class="wl-i">Tavsiye (Ich würde… empfehlen.)</div>
+          </div>
+          <div class="rb b" style="margin-top:.8rem"><div class="rb-label">En Sık Kullanılanlar</div>wäre (sein) · hätte (haben) · könnte (können) · müsste (müssen) · dürfte (dürfen)</div>
+        </div>
+      </div>
+
+      <!-- Imperativ -->
+      <div class="tcard">
+        <div class="tcard-h"><div class="tcard-name">Imperativ</div><div class="tcard-tr">Emir Kipi</div></div>
+        <div class="tcard-b">
+          <div class="formula">du: kök(+e) &nbsp;|&nbsp; ihr: kök+t &nbsp;|&nbsp; Sie: Infinitiv + Sie</div>
+          <div class="tex"><div class="tex-de"><strong>Komm</strong> hier! / <strong>Kommt</strong> hier! / <strong>Kommen Sie</strong> hier!</div><div class="tex-tr">Gel! / Gelin (çoğul)! / Buyrun!</div></div>
+          <div class="tex"><div class="tex-de"><strong>Lies</strong> das Buch! (lesen → lies)</div><div class="tex-tr">Kitabı oku!</div></div>
+          <div class="when-list"><div class="wl-label">Dikkat</div>
+            <div class="wl-i">e→i/ie değişimli fiillerde du-formu bu değişimi korur</div>
+            <div class="wl-i">sein: Sei ruhig! / Seid ruhig! / Seien Sie ruhig!</div>
+            <div class="wl-i">Ayrılabilir: Steh auf! / Stehen Sie auf!</div>
+          </div>
+          <div class="cd-label">Örnek — gehen</div>
+          <div class="cd-grid2">
+            <div class="cdr"><span class="cdp">du</span><span class="cdv">Geh!</span></div>
+            <div class="cdr"><span class="cdp">ihr</span><span class="cdv">Geht!</span></div>
+            <div class="cdr"><span class="cdp">Sie</span><span class="cdv">Gehen Sie!</span></div>
+            <div class="cdr"><span class="cdp">wir</span><span class="cdv">Gehen wir!</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ==================== VERBS ==================== -->
+<div id="page-verbs" class="page">
+  <div class="section">
+    <div class="sec-title">100 Temel Fiil</div>
+    <div class="sec-sub">Tıkla → tüm zaman çekimlerini gör</div>
+    <div class="filter-bar">
+      <input class="f-input" id="v-search" placeholder="Fiil ara... (Türkçe veya Almanca)" oninput="filterVerbs()">
+      <div class="cat-btns" id="cat-btns"></div>
+      <span class="vcount" id="v-count"></span>
+    </div>
+    <div class="vgrid" id="vgrid"></div>
+  </div>
+</div>
+
+<!-- ==================== QUIZ ==================== -->
+<div id="page-quiz" class="page">
+  <div class="quiz-wrap">
+    <div class="sec-title" style="text-align:center;margin-bottom:.3rem">Alıştırma</div>
+    <div class="sec-sub" style="text-align:center;margin-bottom:1.5rem">Öğrendiklerini test et</div>
+    <div class="qbox">
+      <div class="qmode-tabs">
+        <button class="qmt on" onclick="setMode('tr-de',this)">TR → DE</button>
+        <button class="qmt" onclick="setMode('partizip',this)">Partizip II</button>
+        <button class="qmt" onclick="setMode('praeteritum',this)">Präteritum</button>
+      </div>
+      <div id="quiz-main">
+        <div class="qprog">
+          <span class="qprog-lbl" id="q-num">1/10</span>
+          <div class="qprog-bar"><div class="qprog-fill" id="q-bar" style="width:10%"></div></div>
+          <span class="qprog-lbl" id="q-score-live">0 ✓</span>
+        </div>
+        <div class="qq" id="q-q"></div>
+        <div class="qhint" id="q-hint"></div>
+        <div class="qopts" id="q-opts"></div>
+        <div class="qfb" id="q-fb"></div>
+        <button class="qnext" id="q-next" onclick="nextQ()">Sonraki →</button>
+      </div>
+      <div class="qscore" id="quiz-score">
+        <div class="qscore-n" id="q-score-n"></div>
+        <div class="qscore-l">doğru cevap</div>
+        <div id="q-score-msg" style="color:var(--muted);font-size:.85rem;margin-bottom:1.2rem;"></div>
+        <button class="qrestart" onclick="startQuiz()">Tekrar Dene</button>
+        <button class="qrestart" onclick="showPage('verbs',document.querySelectorAll('.nav-tabs button')[3])">Fililere Bak →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== THEME =====
+function toggleTheme(){const l=document.documentElement.classList.toggle('light');localStorage.setItem('theme',l?'light':'dark');}
+(function(){if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');})();
+
+// ===== NAV =====
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-tabs button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===== VERB DATA =====
+const VERBS = [
+  {n:1,de:'sein',en:'to be',tr:'olmak',type:'irr',cat:'Temel',p2:'gewesen',prae:'war',prae_er:'war',conj:{ich:'bin',du:'bist',er:'ist',wir:'sind',ihr:'seid',sie:'sind'},ex:[{de:'Ich bin müde.',tr:'Yorgunum.'},{de:'Er ist Lehrer.',tr:'O öğretmen.'}]},
+  {n:2,de:'haben',en:'to have',tr:'sahip olmak',type:'irr',cat:'Temel',p2:'gehabt',prae:'hatte',prae_er:'hatte',conj:{ich:'habe',du:'hast',er:'hat',wir:'haben',ihr:'habt',sie:'haben'},ex:[{de:'Ich habe Hunger.',tr:'Açım.'},{de:'Sie hat ein Auto.',tr:'Onun arabası var.'}]},
+  {n:3,de:'werden',en:'to become',tr:'olmak/olmaya başlamak',type:'irr',cat:'Temel',p2:'geworden',prae:'wurde',prae_er:'wurde',conj:{ich:'werde',du:'wirst',er:'wird',wir:'werden',ihr:'werdet',sie:'werden'},ex:[{de:'Er wird Arzt.',tr:'Doktor oluyor.'},{de:'Es wird kalt.',tr:'Soğuyor.'}]},
+  {n:4,de:'können',en:'can/to be able to',tr:'yapabilmek',type:'modal',cat:'Modal',p2:'gekonnt',prae:'konnte',prae_er:'konnte',conj:{ich:'kann',du:'kannst',er:'kann',wir:'können',ihr:'könnt',sie:'können'},ex:[{de:'Ich kann schwimmen.',tr:'Yüzebiliyorum.'},{de:'Kannst du mir helfen?',tr:'Bana yardım edebilir misin?'}]},
+  {n:5,de:'müssen',en:'must/to have to',tr:'zorunda olmak',type:'modal',cat:'Modal',p2:'gemusst',prae:'musste',prae_er:'musste',conj:{ich:'muss',du:'musst',er:'muss',wir:'müssen',ihr:'müsst',sie:'müssen'},ex:[{de:'Ich muss arbeiten.',tr:'Çalışmam gerekiyor.'},{de:'Sie muss früh aufstehen.',tr:'Erken kalkmak zorunda.'}]},
+  {n:6,de:'dürfen',en:'may/to be allowed to',tr:'izni olmak',type:'modal',cat:'Modal',p2:'gedurft',prae:'durfte',prae_er:'durfte',conj:{ich:'darf',du:'darfst',er:'darf',wir:'dürfen',ihr:'dürft',sie:'dürfen'},ex:[{de:'Hier darf man nicht rauchen.',tr:'Burada sigara içilmez.'},{de:'Darf ich fragen?',tr:'Sorabilir miyim?'}]},
+  {n:7,de:'wollen',en:'to want to',tr:'istemek',type:'modal',cat:'Modal',p2:'gewollt',prae:'wollte',prae_er:'wollte',conj:{ich:'will',du:'willst',er:'will',wir:'wollen',ihr:'wollt',sie:'wollen'},ex:[{de:'Ich will Kaffee.',tr:'Kahve istiyorum.'},{de:'Er will Pilot werden.',tr:'Pilot olmak istiyor.'}]},
+  {n:8,de:'sollen',en:'should/to be supposed to',tr:'yapması gerekmek',type:'modal',cat:'Modal',p2:'gesollt',prae:'sollte',prae_er:'sollte',conj:{ich:'soll',du:'sollst',er:'soll',wir:'sollen',ihr:'sollt',sie:'sollen'},ex:[{de:'Du sollst ehrlich sein.',tr:'Dürüst olmalısın.'},{de:'Er soll kommen.',tr:'Gelmesi gerekiyor.'}]},
+  {n:9,de:'mögen',en:'to like',tr:'sevmek/hoşlanmak',type:'modal',cat:'Modal',p2:'gemocht',prae:'mochte',prae_er:'mochte',conj:{ich:'mag',du:'magst',er:'mag',wir:'mögen',ihr:'mögt',sie:'mögen'},ex:[{de:'Ich mag Schokolade.',tr:'Çikolatayı severim.'},{de:'Möchten Sie Kaffee?',tr:'Kahve ister misiniz?'}]},
+  {n:10,de:'gehen',en:'to go',tr:'gitmek',type:'irr',cat:'Hareket',p2:'gegangen',prae:'ging',prae_er:'ging',conj:{ich:'gehe',du:'gehst',er:'geht',wir:'gehen',ihr:'geht',sie:'gehen'},ex:[{de:'Ich gehe in die Schule.',tr:'Okula gidiyorum.'},{de:'Wie geht es dir?',tr:'Nasılsın?'}]},
+  {n:11,de:'kommen',en:'to come',tr:'gelmek',type:'irr',cat:'Hareket',p2:'gekommen',prae:'kam',prae_er:'kam',conj:{ich:'komme',du:'kommst',er:'kommt',wir:'kommen',ihr:'kommt',sie:'kommen'},ex:[{de:'Er kommt aus der Türkei.',tr:'Türkiye\'den geliyor.'},{de:'Wann kommst du?',tr:'Ne zaman geliyorsun?'}]},
+  {n:12,de:'fahren',en:'to drive/travel',tr:'gitmek/sürmek',type:'irr',cat:'Hareket',p2:'gefahren',prae:'fuhr',prae_er:'fuhr',conj:{ich:'fahre',du:'fährst',er:'fährt',wir:'fahren',ihr:'fahrt',sie:'fahren'},ex:[{de:'Ich fahre mit dem Zug.',tr:'Trenle gidiyorum.'},{de:'Er fährt schnell.',tr:'Hızlı sürüyor.'}]},
+  {n:13,de:'fliegen',en:'to fly',tr:'uçmak',type:'irr',cat:'Hareket',p2:'geflogen',prae:'flog',prae_er:'flog',conj:{ich:'fliege',du:'fliegst',er:'fliegt',wir:'fliegen',ihr:'fliegt',sie:'fliegen'},ex:[{de:'Wir fliegen nach Berlin.',tr:'Berlin\'e uçuyoruz.'}]},
+  {n:14,de:'laufen',en:'to run/walk',tr:'koşmak/yürümek',type:'irr',cat:'Hareket',p2:'gelaufen',prae:'lief',prae_er:'lief',conj:{ich:'laufe',du:'läufst',er:'läuft',wir:'laufen',ihr:'lauft',sie:'laufen'},ex:[{de:'Ich laufe jeden Morgen.',tr:'Her sabah koşuyorum.'}]},
+  {n:15,de:'reisen',en:'to travel',tr:'seyahat etmek',type:'reg',cat:'Hareket',p2:'gereist',prae:'reiste',prae_er:'reiste',conj:{ich:'reise',du:'reist',er:'reist',wir:'reisen',ihr:'reist',sie:'reisen'},ex:[{de:'Ich reise gern.',tr:'Seyahati seviyorum.'}]},
+  {n:16,de:'machen',en:'to do/make',tr:'yapmak',type:'reg',cat:'Günlük',p2:'gemacht',prae:'machte',prae_er:'machte',conj:{ich:'mache',du:'machst',er:'macht',wir:'machen',ihr:'macht',sie:'machen'},ex:[{de:'Was machst du?',tr:'Ne yapıyorsun?'},{de:'Mach die Tür zu!',tr:'Kapıyı kapat!'}]},
+  {n:17,de:'sagen',en:'to say',tr:'söylemek',type:'reg',cat:'İletişim',p2:'gesagt',prae:'sagte',prae_er:'sagte',conj:{ich:'sage',du:'sagst',er:'sagt',wir:'sagen',ihr:'sagt',sie:'sagen'},ex:[{de:'Was hast du gesagt?',tr:'Ne dedin?'},{de:'Er sagt die Wahrheit.',tr:'Doğruyu söylüyor.'}]},
+  {n:18,de:'sprechen',en:'to speak',tr:'konuşmak',type:'irr',cat:'İletişim',p2:'gesprochen',prae:'sprach',prae_er:'sprach',conj:{ich:'spreche',du:'sprichst',er:'spricht',wir:'sprechen',ihr:'sprecht',sie:'sprechen'},ex:[{de:'Ich spreche Deutsch.',tr:'Almanca konuşuyorum.'}]},
+  {n:19,de:'fragen',en:'to ask',tr:'sormak',type:'reg',cat:'İletişim',p2:'gefragt',prae:'fragte',prae_er:'fragte',conj:{ich:'frage',du:'fragst',er:'fragt',wir:'fragen',ihr:'fragt',sie:'fragen'},ex:[{de:'Darf ich fragen?',tr:'Sorabilir miyim?'}]},
+  {n:20,de:'antworten',en:'to answer',tr:'cevaplamak',type:'reg',cat:'İletişim',p2:'geantwortet',prae:'antwortete',prae_er:'antwortete',conj:{ich:'antworte',du:'antwortest',er:'antwortet',wir:'antworten',ihr:'antwortet',sie:'antworten'},ex:[{de:'Bitte antworten Sie!',tr:'Lütfen cevap verin!'}]},
+  {n:21,de:'schreiben',en:'to write',tr:'yazmak',type:'irr',cat:'İletişim',p2:'geschrieben',prae:'schrieb',prae_er:'schrieb',conj:{ich:'schreibe',du:'schreibst',er:'schreibt',wir:'schreiben',ihr:'schreibt',sie:'schreiben'},ex:[{de:'Ich schreibe einen Brief.',tr:'Mektup yazıyorum.'}]},
+  {n:22,de:'lesen',en:'to read',tr:'okumak',type:'irr',cat:'Öğrenme',p2:'gelesen',prae:'las',prae_er:'las',conj:{ich:'lese',du:'liest',er:'liest',wir:'lesen',ihr:'lest',sie:'lesen'},ex:[{de:'Ich lese ein Buch.',tr:'Kitap okuyorum.'}]},
+  {n:23,de:'lernen',en:'to learn',tr:'öğrenmek',type:'reg',cat:'Öğrenme',p2:'gelernt',prae:'lernte',prae_er:'lernte',conj:{ich:'lerne',du:'lernst',er:'lernt',wir:'lernen',ihr:'lernt',sie:'lernen'},ex:[{de:'Ich lerne Deutsch.',tr:'Almanca öğreniyorum.'}]},
+  {n:24,de:'studieren',en:'to study',tr:'üniversitede okumak',type:'reg',cat:'Öğrenme',p2:'studiert',prae:'studierte',prae_er:'studierte',conj:{ich:'studiere',du:'studierst',er:'studiert',wir:'studieren',ihr:'studiert',sie:'studieren'},ex:[{de:'Er studiert Medizin.',tr:'Tıp okuyor.'}]},
+  {n:25,de:'erklären',en:'to explain',tr:'açıklamak',type:'reg',cat:'Öğrenme',p2:'erklärt',prae:'erklärte',prae_er:'erklärte',conj:{ich:'erkläre',du:'erklärst',er:'erklärt',wir:'erklären',ihr:'erklärt',sie:'erklären'},ex:[{de:'Kannst du das erklären?',tr:'Bunu açıklayabilir misin?'}]},
+  {n:26,de:'verstehen',en:'to understand',tr:'anlamak',type:'irr',cat:'Öğrenme',p2:'verstanden',prae:'verstand',prae_er:'verstand',conj:{ich:'verstehe',du:'verstehst',er:'versteht',wir:'verstehen',ihr:'versteht',sie:'verstehen'},ex:[{de:'Ich verstehe nicht.',tr:'Anlamıyorum.'}]},
+  {n:27,de:'wissen',en:'to know (a fact)',tr:'bilmek (bilgi)',type:'irr',cat:'Öğrenme',p2:'gewusst',prae:'wusste',prae_er:'wusste',conj:{ich:'weiß',du:'weißt',er:'weiß',wir:'wissen',ihr:'wisst',sie:'wissen'},ex:[{de:'Ich weiß es nicht.',tr:'Bilmiyorum.'}]},
+  {n:28,de:'kennen',en:'to know (a person)',tr:'tanımak',type:'irr',cat:'Öğrenme',p2:'gekannt',prae:'kannte',prae_er:'kannte',conj:{ich:'kenne',du:'kennst',er:'kennt',wir:'kennen',ihr:'kennt',sie:'kennen'},ex:[{de:'Ich kenne ihn gut.',tr:'Onu iyi tanıyorum.'}]},
+  {n:29,de:'essen',en:'to eat',tr:'yemek yemek',type:'irr',cat:'Yiyecek/İçecek',p2:'gegessen',prae:'aß',prae_er:'aß',conj:{ich:'esse',du:'isst',er:'isst',wir:'essen',ihr:'esst',sie:'essen'},ex:[{de:'Ich esse gern Pizza.',tr:'Pizza yemeyi severim.'}]},
+  {n:30,de:'trinken',en:'to drink',tr:'içmek',type:'irr',cat:'Yiyecek/İçecek',p2:'getrunken',prae:'trank',prae_er:'trank',conj:{ich:'trinke',du:'trinkst',er:'trinkt',wir:'trinken',ihr:'trinkt',sie:'trinken'},ex:[{de:'Er trinkt Kaffee.',tr:'Kahve içiyor.'}]},
+  {n:31,de:'kochen',en:'to cook',tr:'pişirmek',type:'reg',cat:'Yiyecek/İçecek',p2:'gekocht',prae:'kochte',prae_er:'kochte',conj:{ich:'koche',du:'kochst',er:'kocht',wir:'kochen',ihr:'kocht',sie:'kochen'},ex:[{de:'Ich koche heute.',tr:'Bugün pişiriyorum.'}]},
+  {n:32,de:'kaufen',en:'to buy',tr:'satın almak',type:'reg',cat:'Alışveriş',p2:'gekauft',prae:'kaufte',prae_er:'kaufte',conj:{ich:'kaufe',du:'kaufst',er:'kauft',wir:'kaufen',ihr:'kauft',sie:'kaufen'},ex:[{de:'Ich kaufe ein Buch.',tr:'Kitap satın alıyorum.'}]},
+  {n:33,de:'bezahlen',en:'to pay',tr:'ödemek',type:'reg',cat:'Alışveriş',p2:'bezahlt',prae:'bezahlte',prae_er:'bezahlte',conj:{ich:'bezahle',du:'bezahlst',er:'bezahlt',wir:'bezahlen',ihr:'bezahlt',sie:'bezahlen'},ex:[{de:'Wer bezahlt die Rechnung?',tr:'Hesabı kim ödüyor?'}]},
+  {n:34,de:'kosten',en:'to cost',tr:'fiyatı olmak',type:'reg',cat:'Alışveriş',p2:'gekostet',prae:'kostete',prae_er:'kostete',conj:{ich:'koste',du:'kostest',er:'kostet',wir:'kosten',ihr:'kostet',sie:'kosten'},ex:[{de:'Wie viel kostet das?',tr:'Bu ne kadar tutar?'}]},
+  {n:35,de:'nehmen',en:'to take',tr:'almak',type:'irr',cat:'Günlük',p2:'genommen',prae:'nahm',prae_er:'nahm',conj:{ich:'nehme',du:'nimmst',er:'nimmt',wir:'nehmen',ihr:'nehmt',sie:'nehmen'},ex:[{de:'Ich nehme den Bus.',tr:'Otobüsü alıyorum.'}]},
+  {n:36,de:'geben',en:'to give',tr:'vermek',type:'irr',cat:'Günlük',p2:'gegeben',prae:'gab',prae_er:'gab',conj:{ich:'gebe',du:'gibst',er:'gibt',wir:'geben',ihr:'gebt',sie:'geben'},ex:[{de:'Gib mir das Buch!',tr:'Kitabı ver bana!'}]},
+  {n:37,de:'bringen',en:'to bring',tr:'getirmek',type:'irr',cat:'Günlük',p2:'gebracht',prae:'brachte',prae_er:'brachte',conj:{ich:'bringe',du:'bringst',er:'bringt',wir:'bringen',ihr:'bringt',sie:'bringen'},ex:[{de:'Ich bringe dir Kaffee.',tr:'Sana kahve getiriyorum.'}]},
+  {n:38,de:'stellen',en:'to place/put (standing)',tr:'(dikerek) koymak',type:'reg',cat:'Günlük',p2:'gestellt',prae:'stellte',prae_er:'stellte',conj:{ich:'stelle',du:'stellst',er:'stellt',wir:'stellen',ihr:'stellt',sie:'stellen'},ex:[{de:'Stell das Glas auf den Tisch.',tr:'Bardağı masaya koy.'}]},
+  {n:39,de:'legen',en:'to lay/put (flat)',tr:'(yatırarak) koymak',type:'reg',cat:'Günlük',p2:'gelegt',prae:'legte',prae_er:'legte',conj:{ich:'lege',du:'legst',er:'legt',wir:'legen',ihr:'legt',sie:'legen'},ex:[{de:'Leg das Buch auf den Tisch.',tr:'Kitabı masaya koy.'}]},
+  {n:40,de:'sehen',en:'to see',tr:'görmek',type:'irr',cat:'Algı',p2:'gesehen',prae:'sah',prae_er:'sah',conj:{ich:'sehe',du:'siehst',er:'sieht',wir:'sehen',ihr:'seht',sie:'sehen'},ex:[{de:'Ich sehe einen Vogel.',tr:'Bir kuş görüyorum.'}]},
+  {n:41,de:'hören',en:'to hear',tr:'duymak',type:'reg',cat:'Algı',p2:'gehört',prae:'hörte',prae_er:'hörte',conj:{ich:'höre',du:'hörst',er:'hört',wir:'hören',ihr:'hört',sie:'hören'},ex:[{de:'Ich höre Musik.',tr:'Müzik dinliyorum.'}]},
+  {n:42,de:'fühlen',en:'to feel',tr:'hissetmek',type:'reg',cat:'Duygular',p2:'gefühlt',prae:'fühlte',prae_er:'fühlte',conj:{ich:'fühle',du:'fühlst',er:'fühlt',wir:'fühlen',ihr:'fühlt',sie:'fühlen'},ex:[{de:'Ich fühle mich gut.',tr:'Kendimi iyi hissediyorum.'}]},
+  {n:43,de:'denken',en:'to think',tr:'düşünmek',type:'irr',cat:'Düşünce',p2:'gedacht',prae:'dachte',prae_er:'dachte',conj:{ich:'denke',du:'denkst',er:'denkt',wir:'denken',ihr:'denkt',sie:'denken'},ex:[{de:'Was denkst du?',tr:'Ne düşünüyorsun?'}]},
+  {n:44,de:'glauben',en:'to believe/think',tr:'inanmak/sanmak',type:'reg',cat:'Düşünce',p2:'geglaubt',prae:'glaubte',prae_er:'glaubte',conj:{ich:'glaube',du:'glaubst',er:'glaubt',wir:'glauben',ihr:'glaubt',sie:'glauben'},ex:[{de:'Ich glaube, er kommt.',tr:'Gelineceğini sanıyorum.'}]},
+  {n:45,de:'finden',en:'to find/think',tr:'bulmak/düşünmek',type:'irr',cat:'Düşünce',p2:'gefunden',prae:'fand',prae_er:'fand',conj:{ich:'finde',du:'findest',er:'findet',wir:'finden',ihr:'findet',sie:'finden'},ex:[{de:'Ich finde das toll.',tr:'Bunu harika buluyorum.'}]},
+  {n:46,de:'arbeiten',en:'to work',tr:'çalışmak',type:'reg',cat:'İş',p2:'gearbeitet',prae:'arbeitete',prae_er:'arbeitete',conj:{ich:'arbeite',du:'arbeitest',er:'arbeitet',wir:'arbeiten',ihr:'arbeitet',sie:'arbeiten'},ex:[{de:'Ich arbeite bei Siemens.',tr:'Siemens\'te çalışıyorum.'}]},
+  {n:47,de:'helfen',en:'to help',tr:'yardım etmek',type:'irr',cat:'İş',p2:'geholfen',prae:'half',prae_er:'half',conj:{ich:'helfe',du:'hilfst',er:'hilft',wir:'helfen',ihr:'helft',sie:'helfen'},ex:[{de:'Kannst du mir helfen?',tr:'Bana yardım edebilir misin?'}]},
+  {n:48,de:'brauchen',en:'to need',tr:'ihtiyaç duymak',type:'reg',cat:'Günlük',p2:'gebraucht',prae:'brauchte',prae_er:'brauchte',conj:{ich:'brauche',du:'brauchst',er:'braucht',wir:'brauchen',ihr:'braucht',sie:'brauchen'},ex:[{de:'Ich brauche Hilfe.',tr:'Yardıma ihtiyacım var.'}]},
+  {n:49,de:'besuchen',en:'to visit',tr:'ziyaret etmek',type:'reg',cat:'Sosyal',p2:'besucht',prae:'besuchte',prae_er:'besuchte',conj:{ich:'besuche',du:'besuchst',er:'besucht',wir:'besuchen',ihr:'besucht',sie:'besuchen'},ex:[{de:'Ich besuche meine Eltern.',tr:'Ailemi ziyaret ediyorum.'}]},
+  {n:50,de:'treffen',en:'to meet',tr:'buluşmak',type:'irr',cat:'Sosyal',p2:'getroffen',prae:'traf',prae_er:'traf',conj:{ich:'treffe',du:'triffst',er:'trifft',wir:'treffen',ihr:'trefft',sie:'treffen'},ex:[{de:'Wir treffen uns um 3 Uhr.',tr:'Saat 3\'te buluşuyoruz.'}]},
+  {n:51,de:'spielen',en:'to play',tr:'oynamak',type:'reg',cat:'Freizeit',p2:'gespielt',prae:'spielte',prae_er:'spielte',conj:{ich:'spiele',du:'spielst',er:'spielt',wir:'spielen',ihr:'spielt',sie:'spielen'},ex:[{de:'Er spielt Fußball.',tr:'Futbol oynuyor.'}]},
+  {n:52,de:'schlafen',en:'to sleep',tr:'uyumak',type:'irr',cat:'Günlük',p2:'geschlafen',prae:'schlief',prae_er:'schlief',conj:{ich:'schlafe',du:'schläfst',er:'schläft',wir:'schlafen',ihr:'schlaft',sie:'schlafen'},ex:[{de:'Ich schlafe 8 Stunden.',tr:'8 saat uyuyorum.'}]},
+  {n:53,de:'aufwachen',en:'to wake up',tr:'uyanmak',type:'sep',cat:'Günlük',p2:'aufgewacht',prae:'wachte auf',prae_er:'wachte auf',conj:{ich:'wache auf',du:'wachst auf',er:'wacht auf',wir:'wachen auf',ihr:'wacht auf',sie:'wachen auf'},ex:[{de:'Ich wache um 7 auf.',tr:'Saat 7\'de uyanıyorum.'}]},
+  {n:54,de:'aufstehen',en:'to get up',tr:'kalkmak',type:'sep',cat:'Günlük',p2:'aufgestanden',prae:'stand auf',prae_er:'stand auf',conj:{ich:'stehe auf',du:'stehst auf',er:'steht auf',wir:'stehen auf',ihr:'steht auf',sie:'stehen auf'},ex:[{de:'Ich stehe früh auf.',tr:'Erken kalkıyorum.'}]},
+  {n:55,de:'anfangen',en:'to start/begin',tr:'başlamak',type:'sep',cat:'Günlük',p2:'angefangen',prae:'fing an',prae_er:'fing an',conj:{ich:'fange an',du:'fängst an',er:'fängt an',wir:'fangen an',ihr:'fangt an',sie:'fangen an'},ex:[{de:'Wann fängt der Film an?',tr:'Film ne zaman başlıyor?'}]},
+  {n:56,de:'aufhören',en:'to stop/finish',tr:'bırakmak/durmak',type:'sep',cat:'Günlük',p2:'aufgehört',prae:'hörte auf',prae_er:'hörte auf',conj:{ich:'höre auf',du:'hörst auf',er:'hört auf',wir:'hören auf',ihr:'hört auf',sie:'hören auf'},ex:[{de:'Hör auf zu rauchen!',tr:'Sigara içmeyi bırak!'}]},
+  {n:57,de:'anrufen',en:'to call (phone)',tr:'aramak (telefon)',type:'sep',cat:'İletişim',p2:'angerufen',prae:'rief an',prae_er:'rief an',conj:{ich:'rufe an',du:'rufst an',er:'ruft an',wir:'rufen an',ihr:'ruft an',sie:'rufen an'},ex:[{de:'Ich rufe dich morgen an.',tr:'Yarın seni ararım.'}]},
+  {n:58,de:'einladen',en:'to invite',tr:'davet etmek',type:'sep',cat:'Sosyal',p2:'eingeladen',prae:'lud ein',prae_er:'lud ein',conj:{ich:'lade ein',du:'lädst ein',er:'lädt ein',wir:'laden ein',ihr:'ladet ein',sie:'laden ein'},ex:[{de:'Ich lade dich ein.',tr:'Seni davet ediyorum.'}]},
+  {n:59,de:'zurückkommen',en:'to come back',tr:'geri gelmek/dönmek',type:'sep',cat:'Hareket',p2:'zurückgekommen',prae:'kam zurück',prae_er:'kam zurück',conj:{ich:'komme zurück',du:'kommst zurück',er:'kommt zurück',wir:'kommen zurück',ihr:'kommt zurück',sie:'kommen zurück'},ex:[{de:'Wann kommst du zurück?',tr:'Ne zaman geri geliyorsun?'}]},
+  {n:60,de:'mitbringen',en:'to bring along',tr:'yanında getirmek',type:'sep',cat:'Günlük',p2:'mitgebracht',prae:'brachte mit',prae_er:'brachte mit',conj:{ich:'bringe mit',du:'bringst mit',er:'bringt mit',wir:'bringen mit',ihr:'bringt mit',sie:'bringen mit'},ex:[{de:'Ich bringe Wein mit.',tr:'Şarap getiriyorum.'}]},
+  {n:61,de:'wohnen',en:'to live/reside',tr:'oturmak/yaşamak',type:'reg',cat:'Yaşam',p2:'gewohnt',prae:'wohnte',prae_er:'wohnte',conj:{ich:'wohne',du:'wohnst',er:'wohnt',wir:'wohnen',ihr:'wohnt',sie:'wohnen'},ex:[{de:'Ich wohne in Berlin.',tr:'Berlin\'de oturuyorum.'}]},
+  {n:62,de:'leben',en:'to live',tr:'yaşamak',type:'reg',cat:'Yaşam',p2:'gelebt',prae:'lebte',prae_er:'lebte',conj:{ich:'lebe',du:'lebst',er:'lebt',wir:'leben',ihr:'lebt',sie:'leben'},ex:[{de:'Er lebt in der Stadt.',tr:'Şehirde yaşıyor.'}]},
+  {n:63,de:'heißen',en:'to be called',tr:'adı olmak',type:'irr',cat:'Temel',p2:'geheißen',prae:'hieß',prae_er:'hieß',conj:{ich:'heiße',du:'heißt',er:'heißt',wir:'heißen',ihr:'heißt',sie:'heißen'},ex:[{de:'Wie heißt du?',tr:'Adın ne?'}]},
+  {n:64,de:'suchen',en:'to search/look for',tr:'aramak',type:'reg',cat:'Günlük',p2:'gesucht',prae:'suchte',prae_er:'suchte',conj:{ich:'suche',du:'suchst',er:'sucht',wir:'suchen',ihr:'sucht',sie:'suchen'},ex:[{de:'Ich suche meine Schlüssel.',tr:'Anahtarlarımı arıyorum.'}]},
+  {n:65,de:'öffnen',en:'to open',tr:'açmak',type:'reg',cat:'Günlük',p2:'geöffnet',prae:'öffnete',prae_er:'öffnete',conj:{ich:'öffne',du:'öffnest',er:'öffnet',wir:'öffnen',ihr:'öffnet',sie:'öffnen'},ex:[{de:'Öffne bitte die Tür.',tr:'Lütfen kapıyı aç.'}]},
+  {n:66,de:'schließen',en:'to close',tr:'kapatmak',type:'irr',cat:'Günlük',p2:'geschlossen',prae:'schloss',prae_er:'schloss',conj:{ich:'schließe',du:'schließt',er:'schließt',wir:'schließen',ihr:'schließt',sie:'schließen'},ex:[{de:'Schließ das Fenster!',tr:'Pencereyi kapat!'}]},
+  {n:67,de:'warten',en:'to wait',tr:'beklemek',type:'reg',cat:'Günlük',p2:'gewartet',prae:'wartete',prae_er:'wartete',conj:{ich:'warte',du:'wartest',er:'wartet',wir:'warten',ihr:'wartet',sie:'warten'},ex:[{de:'Ich warte auf dich.',tr:'Seni bekliyorum.'}]},
+  {n:68,de:'beginnen',en:'to begin',tr:'başlamak',type:'irr',cat:'Günlük',p2:'begonnen',prae:'begann',prae_er:'begann',conj:{ich:'beginne',du:'beginnst',er:'beginnt',wir:'beginnen',ihr:'beginnt',sie:'beginnen'},ex:[{de:'Die Schule beginnt um 8.',tr:'Okul 8\'de başlıyor.'}]},
+  {n:69,de:'enden',en:'to end',tr:'bitmek/sona ermek',type:'reg',cat:'Günlük',p2:'geendet',prae:'endete',prae_er:'endete',conj:{ich:'ende',du:'endest',er:'endet',wir:'enden',ihr:'endet',sie:'enden'},ex:[{de:'Der Film endet um 22 Uhr.',tr:'Film saat 22\'de bitiyor.'}]},
+  {n:70,de:'bleiben',en:'to stay/remain',tr:'kalmak',type:'irr',cat:'Hareket',p2:'geblieben',prae:'blieb',prae_er:'blieb',conj:{ich:'bleibe',du:'bleibst',er:'bleibt',wir:'bleiben',ihr:'bleibt',sie:'bleiben'},ex:[{de:'Ich bleibe zu Hause.',tr:'Evde kalıyorum.'}]},
+  {n:71,de:'steigen',en:'to climb/rise',tr:'çıkmak/binmek',type:'irr',cat:'Hareket',p2:'gestiegen',prae:'stieg',prae_er:'stieg',conj:{ich:'steige',du:'steigst',er:'steigt',wir:'steigen',ihr:'steigt',sie:'steigen'},ex:[{de:'Ich steige in den Bus.',tr:'Otobüse biniyorum.'}]},
+  {n:72,de:'fallen',en:'to fall',tr:'düşmek',type:'irr',cat:'Hareket',p2:'gefallen',prae:'fiel',prae_er:'fiel',conj:{ich:'falle',du:'fällst',er:'fällt',wir:'fallen',ihr:'fallt',sie:'fallen'},ex:[{de:'Er fällt vom Stuhl.',tr:'Sandalyeden düşüyor.'}]},
+  {n:73,de:'tragen',en:'to carry/wear',tr:'taşımak/giymek',type:'irr',cat:'Günlük',p2:'getragen',prae:'trug',prae_er:'trug',conj:{ich:'trage',du:'trägst',er:'trägt',wir:'tragen',ihr:'tragt',sie:'tragen'},ex:[{de:'Sie trägt ein rotes Kleid.',tr:'Kırmızı elbise giyiyor.'}]},
+  {n:74,de:'waschen',en:'to wash',tr:'yıkamak',type:'irr',cat:'Günlük',p2:'gewaschen',prae:'wusch',prae_er:'wusch',conj:{ich:'wasche',du:'wäschst',er:'wäscht',wir:'waschen',ihr:'wascht',sie:'waschen'},ex:[{de:'Ich wasche mir die Hände.',tr:'Ellerimi yıkıyorum.'}]},
+  {n:75,de:'putzen',en:'to clean',tr:'temizlemek',type:'reg',cat:'Ev',p2:'geputzt',prae:'putzte',prae_er:'putzte',conj:{ich:'putze',du:'putzt',er:'putzt',wir:'putzen',ihr:'putzt',sie:'putzen'},ex:[{de:'Ich putze die Zähne.',tr:'Dişlerimi fırçalıyorum.'}]},
+  {n:76,de:'aufräumen',en:'to tidy up',tr:'toplamak/düzenlemek',type:'sep',cat:'Ev',p2:'aufgeräumt',prae:'räumte auf',prae_er:'räumte auf',conj:{ich:'räume auf',du:'räumst auf',er:'räumt auf',wir:'räumen auf',ihr:'räumt auf',sie:'räumen auf'},ex:[{de:'Räum bitte dein Zimmer auf!',tr:'Lütfen odanı topla!'}]},
+  {n:77,de:'einschlafen',en:'to fall asleep',tr:'uykuya dalmak',type:'sep',cat:'Günlük',p2:'eingeschlafen',prae:'schlief ein',prae_er:'schlief ein',conj:{ich:'schlafe ein',du:'schläfst ein',er:'schläft ein',wir:'schlafen ein',ihr:'schlaft ein',sie:'schlafen ein'},ex:[{de:'Das Kind schläft schnell ein.',tr:'Çocuk çabuk uyuyor.'}]},
+  {n:78,de:'aussehen',en:'to look like/appear',tr:'görünmek',type:'sep',cat:'Algı',p2:'ausgesehen',prae:'sah aus',prae_er:'sah aus',conj:{ich:'sehe aus',du:'siehst aus',er:'sieht aus',wir:'sehen aus',ihr:'seht aus',sie:'sehen aus'},ex:[{de:'Du siehst müde aus.',tr:'Yorgun görünüyorsun.'}]},
+  {n:79,de:'vorhaben',en:'to plan/intend',tr:'planlamak/niyetinde olmak',type:'sep',cat:'Planlama',p2:'vorgehabt',prae:'hatte vor',prae_er:'hatte vor',conj:{ich:'habe vor',du:'hast vor',er:'hat vor',wir:'haben vor',ihr:'habt vor',sie:'haben vor'},ex:[{de:'Was hast du vor?',tr:'Ne planladın?'}]},
+  {n:80,de:'versuchen',en:'to try',tr:'denemek',type:'reg',cat:'Günlük',p2:'versucht',prae:'versuchte',prae_er:'versuchte',conj:{ich:'versuche',du:'versuchst',er:'versucht',wir:'versuchen',ihr:'versucht',sie:'versuchen'},ex:[{de:'Ich versuche es.',tr:'Deniyorum.'}]},
+  {n:81,de:'vergessen',en:'to forget',tr:'unutmak',type:'irr',cat:'Düşünce',p2:'vergessen',prae:'vergaß',prae_er:'vergaß',conj:{ich:'vergesse',du:'vergisst',er:'vergisst',wir:'vergessen',ihr:'vergesst',sie:'vergessen'},ex:[{de:'Ich habe meinen Schlüssel vergessen.',tr:'Anahtarımı unuttum.'}]},
+  {n:82,de:'erinnern',en:'to remember',tr:'hatırlamak',type:'reg',cat:'Düşünce',p2:'erinnert',prae:'erinnerte',prae_er:'erinnerte',conj:{ich:'erinnere',du:'erinnerst',er:'erinnert',wir:'erinnern',ihr:'erinnert',sie:'erinnern'},ex:[{de:'Ich erinnere mich daran.',tr:'Bunu hatırlıyorum.'}]},
+  {n:83,de:'freuen',en:'to be happy about',tr:'sevinmek',type:'reg',cat:'Duygular',p2:'gefreut',prae:'freute',prae_er:'freute',conj:{ich:'freue',du:'freust',er:'freut',wir:'freuen',ihr:'freut',sie:'freuen'},ex:[{de:'Ich freue mich auf das Wochenende.',tr:'Hafta sonunu sabırsızlıkla bekliyorum.'}]},
+  {n:84,de:'ärgern',en:'to annoy/be annoyed',tr:'kızdırmak/sinirlendinmek',type:'reg',cat:'Duygular',p2:'geärgert',prae:'ärgerte',prae_er:'ärgerte',conj:{ich:'ärgere',du:'ärgerst',er:'ärgert',wir:'ärgern',ihr:'ärgert',sie:'ärgern'},ex:[{de:'Ich ärgere mich.',tr:'Sinirleniyorum.'}]},
+  {n:85,de:'interessieren',en:'to interest',tr:'ilgilendirmek',type:'reg',cat:'Duygular',p2:'interessiert',prae:'interessierte',prae_er:'interessierte',conj:{ich:'interessiere',du:'interessierst',er:'interessiert',wir:'interessieren',ihr:'interessiert',sie:'interessieren'},ex:[{de:'Das interessiert mich.',tr:'Bu beni ilgilendiriyor.'}]},
+  {n:86,de:'passen',en:'to fit/suit',tr:'uymak',type:'reg',cat:'Günlük',p2:'gepasst',prae:'passte',prae_er:'passte',conj:{ich:'passe',du:'passt',er:'passt',wir:'passen',ihr:'passt',sie:'passen'},ex:[{de:'Das passt mir gut.',tr:'Bu bana çok uyuyor.'}]},
+  {n:87,de:'bedeuten',en:'to mean',tr:'anlamına gelmek',type:'reg',cat:'İletişim',p2:'bedeutet',prae:'bedeutete',prae_er:'bedeutete',conj:{ich:'bedeute',du:'bedeutest',er:'bedeutet',wir:'bedeuten',ihr:'bedeutet',sie:'bedeuten'},ex:[{de:'Was bedeutet das?',tr:'Bu ne anlama geliyor?'}]},
+  {n:88,de:'funktionieren',en:'to work/function',tr:'çalışmak (alet)',type:'reg',cat:'Günlük',p2:'funktioniert',prae:'funktionierte',prae_er:'funktionierte',conj:{ich:'funktioniere',du:'funktionierst',er:'funktioniert',wir:'funktionieren',ihr:'funktioniert',sie:'funktionieren'},ex:[{de:'Das Handy funktioniert nicht.',tr:'Telefon çalışmıyor.'}]},
+  {n:89,de:'zeigen',en:'to show',tr:'göstermek',type:'reg',cat:'İletişim',p2:'gezeigt',prae:'zeigte',prae_er:'zeigte',conj:{ich:'zeige',du:'zeigst',er:'zeigt',wir:'zeigen',ihr:'zeigt',sie:'zeigen'},ex:[{de:'Zeig mir den Weg!',tr:'Bana yolu göster!'}]},
+  {n:90,de:'empfehlen',en:'to recommend',tr:'tavsiye etmek',type:'irr',cat:'İletişim',p2:'empfohlen',prae:'empfahl',prae_er:'empfahl',conj:{ich:'empfehle',du:'empfiehlst',er:'empfiehlt',wir:'empfehlen',ihr:'empfehlt',sie:'empfehlen'},ex:[{de:'Ich empfehle dieses Restaurant.',tr:'Bu restoranı tavsiye ederim.'}]},
+  {n:91,de:'unterschreiben',en:'to sign',tr:'imzalamak',type:'irr',cat:'İş',p2:'unterschrieben',prae:'unterschrieb',prae_er:'unterschrieb',conj:{ich:'unterschreibe',du:'unterschreibst',er:'unterschreibt',wir:'unterschreiben',ihr:'unterschreibt',sie:'unterschreiben'},ex:[{de:'Bitte unterschreiben Sie hier.',tr:'Lütfen buraya imzalayın.'}]},
+  {n:92,de:'mieten',en:'to rent',tr:'kiralamak',type:'reg',cat:'Yaşam',p2:'gemietet',prae:'mietete',prae_er:'mietete',conj:{ich:'miete',du:'mietest',er:'mietet',wir:'mieten',ihr:'mietet',sie:'mieten'},ex:[{de:'Ich miete eine Wohnung.',tr:'Bir daire kiralıyorum.'}]},
+  {n:93,de:'umziehen',en:'to move (house)',tr:'taşınmak',type:'sep',cat:'Yaşam',p2:'umgezogen',prae:'zog um',prae_er:'zog um',conj:{ich:'ziehe um',du:'ziehst um',er:'zieht um',wir:'ziehen um',ihr:'zieht um',sie:'ziehen um'},ex:[{de:'Ich ziehe nach München um.',tr:'Münih\'e taşınıyorum.'}]},
+  {n:94,de:'bewerben',en:'to apply (for a job)',tr:'başvurmak',type:'irr',cat:'İş',p2:'beworben',prae:'bewarb',prae_er:'bewarb',conj:{ich:'bewerbe',du:'bewirbst',er:'bewirbt',wir:'bewerben',ihr:'bewerbt',sie:'bewerben'},ex:[{de:'Ich bewerbe mich um die Stelle.',tr:'Bu pozisyona başvuruyorum.'}]},
+  {n:95,de:'verdienen',en:'to earn',tr:'kazanmak',type:'reg',cat:'İş',p2:'verdient',prae:'verdiente',prae_er:'verdiente',conj:{ich:'verdiene',du:'verdienst',er:'verdient',wir:'verdienen',ihr:'verdient',sie:'verdienen'},ex:[{de:'Er verdient gut.',tr:'İyi kazanıyor.'}]},
+  {n:96,de:'mögen',en:'to like',tr:'sevmek (möchten ile fark)',type:'modal',cat:'Duygular',p2:'gemocht',prae:'mochte',prae_er:'mochte',conj:{ich:'mag',du:'magst',er:'mag',wir:'mögen',ihr:'mögt',sie:'mögen'},ex:[{de:'Ich mag keine Zwiebeln.',tr:'Soğanı sevmiyorum.'}]},
+  {n:97,de:'passieren',en:'to happen',tr:'olmak/gerçekleşmek',type:'reg',cat:'Günlük',p2:'passiert',prae:'passierte',prae_er:'passierte',conj:{ich:'passiere',du:'passierst',er:'passiert',wir:'passieren',ihr:'passiert',sie:'passieren'},ex:[{de:'Was ist passiert?',tr:'Ne oldu?'}]},
+  {n:98,de:'gefallen',en:'to like (something pleases)',tr:'beğenmek/hoşuna gitmek',type:'irr',cat:'Duygular',p2:'gefallen',prae:'gefiel',prae_er:'gefiel',conj:{ich:'gefalle',du:'gefällst',er:'gefällt',wir:'gefallen',ihr:'gefallt',sie:'gefallen'},ex:[{de:'Das gefällt mir.',tr:'Bu hoşuma gidiyor.'}]},
+  {n:99,de:'schaffen',en:'to manage/create',tr:'başarmak/yaratmak',type:'reg',cat:'İş',p2:'geschafft',prae:'schaffte',prae_er:'schaffte',conj:{ich:'schaffe',du:'schaffst',er:'schafft',wir:'schaffen',ihr:'schafft',sie:'schaffen'},ex:[{de:'Ich schaffe das!',tr:'Bunu başarabilirim!'}]},
+  {n:100,de:'aufpassen',en:'to pay attention/watch out',tr:'dikkat etmek',type:'sep',cat:'Günlük',p2:'aufgepasst',prae:'passte auf',prae_er:'passte auf',conj:{ich:'passe auf',du:'passt auf',er:'passt auf',wir:'passen auf',ihr:'passt auf',sie:'passen auf'},ex:[{de:'Pass auf!',tr:'Dikkat et!'}]},
+];
+
+// ===== VERB LIST =====
+const CATS = [...new Set(VERBS.map(v=>v.cat))];
+let activeCat = 'Tümü';
+let openCard = null;
+
+function renderCatBtns(){
+  const c = document.getElementById('cat-btns');
+  const all = ['Tümü',...CATS];
+  c.innerHTML = all.map(cat=>`<button class="cb${cat===activeCat?' on':''}" onclick="setCat('${cat}')">${cat}</button>`).join('');
+}
+
+function setCat(cat){activeCat=cat;renderCatBtns();filterVerbs();}
+
+function filterVerbs(){
+  const q = document.getElementById('v-search').value.toLowerCase();
+  const filtered = VERBS.filter(v=>{
+    const matchCat = activeCat==='Tümü'||v.cat===activeCat;
+    const matchQ = !q||v.de.toLowerCase().includes(q)||v.tr.toLowerCase().includes(q)||v.en.toLowerCase().includes(q);
+    return matchCat&&matchQ;
+  });
+  document.getElementById('v-count').textContent = filtered.length+' fiil';
+  renderVerbs(filtered);
+}
+
+function typeLabel(t){
+  const m={reg:'Düzenli',irr:'Düzensiz',sep:'Ayrılabilir',modal:'Modal'};
+  const c={reg:'vt-r',irr:'vt-i',sep:'vt-s',modal:'vt-m'};
+  return `<span class="vtype ${c[t]}">${m[t]}</span>`;
+}
+
+function renderVerbs(list){
+  const g = document.getElementById('vgrid');
+  g.innerHTML = list.map(v=>`
+    <div class="vc" id="vc-${v.n}" onclick="toggleCard(${v.n})">
+      <div class="vc-h">
+        <span class="vc-num">${String(v.n).padStart(2,'0')}</span>
+        <div class="vc-inf">
+          <div class="vc-de">${v.de}</div>
+          <div class="vc-en">${v.en}</div>
+          <div class="vc-tr">${v.tr}</div>
+        </div>
+        <div class="vc-badges">${typeLabel(v.type)}<span class="vcat">${v.cat}</span></div>
+      </div>
+      <div class="vc-body">
+        <div class="pz-row">
+          <div class="pz"><span class="pz-l">Partizip II</span><span class="pz-v">${v.p2}</span></div>
+          <div class="pz"><span class="pz-l">Präteritum (er)</span><span class="pz-v">${v.prae_er}</span></div>
+        </div>
+        <div class="et-tabs">
+          <button class="et on" onclick="event.stopPropagation();switchET(${v.n},'pres',this)">Präsens</button>
+          <button class="et" onclick="event.stopPropagation();switchET(${v.n},'perf',this)">Perfekt</button>
+          <button class="et" onclick="event.stopPropagation();switchET(${v.n},'prae',this)">Präteritum</button>
+          <button class="et" onclick="event.stopPropagation();switchET(${v.n},'ex',this)">Örnekler</button>
+        </div>
+        <div class="mini-s on" id="ms-${v.n}-pres">
+          <table class="mini-tbl">
+            ${['ich','du','er/sie/es','wir','ihr','sie/Sie'].map((p,i)=>{
+              const keys=['ich','du','er','wir','ihr','sie'];
+              return `<tr><td class="p">${p}</td><td class="v">${v.conj[keys[i]]}</td></tr>`;
+            }).join('')}
+          </table>
+        </div>
+        <div class="mini-s" id="ms-${v.n}-perf">
+          ${['ich','du','er/sie/es','wir','ihr','sie/Sie'].map((p,i)=>{
+            const keys=['ich','du','er','wir','ihr','sie'];
+            const aux = ['gehen','kommen','fahren','fliegen','laufen','reisen','bleiben','steigen','fallen','einschlafen','aufwachen','aufstehen','zurückkommen','umziehen'].includes(v.de)?'sein':'haben';
+            const auxC = {ich:aux==='sein'?'bin':'habe',du:aux==='sein'?'bist':'hast',er:aux==='sein'?'ist':'hat',wir:aux==='sein'?'sind':'haben',ihr:aux==='sein'?'seid':'habt',sie:aux==='sein'?'sind':'haben'};
+            return `<tr style="display:flex;gap:.4rem;padding:.26rem .45rem;font-size:.76rem;border-bottom:.5px solid var(--border)"><span style="color:var(--muted);min-width:55px">${p}</span><span style="color:var(--accent2)">${auxC[keys[i]]}</span><span style="color:var(--accent)">${v.p2}</span></tr>`;
+          }).join('')}
+        </div>
+        <div class="mini-s" id="ms-${v.n}-prae">
+          <table class="mini-tbl">
+            ${['ich','du','er/sie/es','wir','ihr','sie/Sie'].map(p=>{
+              return `<tr><td class="p">${p}</td><td class="v">${v.prae}</td></tr>`;
+            }).join('')}
+          </table>
+          <div style="font-size:.7rem;color:var(--muted);margin-top:.3rem">* Düzenli fiiller için tüm şahıslar benzer çekilir. Düzensiz fiiller ezberlenmelidir.</div>
+        </div>
+        <div class="mini-s" id="ms-${v.n}-ex">
+          ${v.ex.map(e=>`<div class="ex-l"><strong>${e.de.replace(new RegExp(v.de,'gi'),m=>`<strong>${m}</strong>`)}</strong></div><div class="ex-tr">${e.tr}</div><br>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleCard(n){
+  const card = document.getElementById('vc-'+n);
+  if(card.classList.contains('open')){card.classList.remove('open');}
+  else{document.querySelectorAll('.vc.open').forEach(c=>c.classList.remove('open'));card.classList.add('open');}
+}
+
+function switchET(n,tab,btn){
+  const body = document.getElementById('vc-'+n).querySelector('.vc-body');
+  body.querySelectorAll('.mini-s').forEach(s=>s.classList.remove('on'));
+  body.querySelectorAll('.et').forEach(b=>b.classList.remove('on'));
+  document.getElementById('ms-'+n+'-'+tab).classList.add('on');
+  btn.classList.add('on');
+}
+
+// ===== QUIZ =====
+let qMode='tr-de', qData=[], qIdx=0, qScore=0, qAnswered=false;
+
+function setMode(m,btn){
+  qMode=m;
+  document.querySelectorAll('.qmt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  startQuiz();
+}
+
+function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
+
+function buildQuestions(){
+  const pool = shuffle(VERBS).slice(0,10);
+  return pool.map(v=>{
+    if(qMode==='tr-de'){
+      const wrong = shuffle(VERBS.filter(x=>x.de!==v.de)).slice(0,3).map(x=>x.de);
+      return {q:`"${v.tr}" kelimesinin Almancası nedir?`,hint:'Infinitiv form',correct:v.de,opts:shuffle([v.de,...wrong]),exp:`${v.de} = ${v.tr} (${v.en})`};
+    } else if(qMode==='partizip'){
+      const wrong = shuffle(VERBS.filter(x=>x.p2!==v.p2)).slice(0,3).map(x=>x.p2);
+      return {q:`"${v.de}" fiilinin Partizip II hali?`,hint:`Türkçe: ${v.tr}`,correct:v.p2,opts:shuffle([v.p2,...wrong]),exp:`${v.de} → ${v.p2} (Perfekt: ${['gehen','kommen','fahren','fliegen','laufen','reisen','bleiben','steigen','fallen'].includes(v.de)?'sein':'haben'} + ${v.p2})`};
+    } else {
+      const wrong = shuffle(VERBS.filter(x=>x.prae_er!==v.prae_er)).slice(0,3).map(x=>x.prae_er);
+      return {q:`"${v.de}" fiilinin Präteritum (er/sie) hali?`,hint:`Türkçe: ${v.tr}`,correct:v.prae_er,opts:shuffle([v.prae_er,...wrong]),exp:`${v.de} → er ${v.prae_er} (Präteritum)`};
+    }
+  });
+}
+
+function startQuiz(){
+  qData=buildQuestions(); qIdx=0; qScore=0; qAnswered=false;
+  document.getElementById('quiz-main').style.display='block';
+  document.getElementById('quiz-score').style.display='none';
+  loadQ();
+}
+
+function loadQ(){
+  qAnswered=false;
+  const q=qData[qIdx];
+  document.getElementById('q-num').textContent=`${qIdx+1}/10`;
+  document.getElementById('q-bar').style.width=`${(qIdx/10)*100}%`;
+  document.getElementById('q-score-live').textContent=`${qScore} ✓`;
+  document.getElementById('q-q').textContent=q.q;
+  document.getElementById('q-hint').textContent=q.hint;
+  document.getElementById('q-fb').textContent='';
+  document.getElementById('q-next').style.display='none';
+  const opts=document.getElementById('q-opts');
+  opts.innerHTML='';
+  q.opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='qo';b.textContent=o;
+    b.onclick=()=>checkA(o,q);
+    opts.appendChild(b);
+  });
+}
+
+function checkA(sel,q){
+  if(qAnswered)return; qAnswered=true;
+  document.querySelectorAll('.qo').forEach(b=>{
+    if(b.textContent===q.correct)b.classList.add('correct');
+    else if(b.textContent===sel&&sel!==q.correct)b.classList.add('wrong');
+    b.onclick=null;b.style.cursor='default';
+  });
+  if(sel===q.correct)qScore++;
+  const fb=document.getElementById('q-fb');
+  fb.innerHTML=sel===q.correct?`<span style="color:var(--accent3)">Doğru! </span>${q.exp}`:`<span style="color:var(--accent4)">Yanlış. </span>Doğru: <strong style="color:var(--accent)">${q.correct}</strong>. ${q.exp}`;
+  document.getElementById('q-next').style.display='inline-block';
+}
+
+function nextQ(){
+  qIdx++;
+  if(qIdx>=qData.length){showScore();}else{loadQ();}
+}
+
+function showScore(){
+  document.getElementById('quiz-main').style.display='none';
+  const s=document.getElementById('quiz-score');
+  s.style.display='block';
+  document.getElementById('q-score-n').textContent=`${qScore}/10`;
+  const msgs=['Devam et, pratik şart!','İyi başlangıç! Tekrar dene.','Fena değil! Zorlanıyorsun ama ilerliyorsun.','Oldukça iyi!','Harika! Neredeyse mükemmel.','Mükemmel! Tebrikler!'];
+  document.getElementById('q-score-msg').textContent=msgs[Math.min(Math.floor(qScore/2),5)];
+}
+
+// ===== INIT =====
+renderCatBtns();
+filterVerbs();
+startQuiz();
+</script>
+</body>
+</html>
