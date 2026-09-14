@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Londra Aile Gezi Rehberi (24-30 Haziran) - İnteraktif Pano & Fiyat Rehberi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #da291c;
+      --navy-blue: #0019a8;
+      --accent-yellow: #ffc72c;
+      --accent-teal: #00a499;
+      --accent-purple: #702082;
+      --bg-cream: #f4f6fa;
+      --card-white: #ffffff;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --radius: 18px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* ÜST BAŞLIK & HERO */
+    .hero-card {
+      background: linear-gradient(135deg, #0019a8 0%, #1e3a8a 50%, #da291c 100%);
+      border-radius: var(--radius);
+      color: white;
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .hero-card h1 {
+      font-family: 'Fredoka', cursive;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card p {
+      font-size: 1.05rem;
+      max-width: 820px;
+      opacity: 0.95;
+    }
+
+    /* PROFİL ROZETLERİ */
+    .profile-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .profile-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* STRATEJİ / HIZLI BİLGİ KARTLARI */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .strategy-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border-left: 5px solid var(--accent-teal);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .strategy-card:nth-child(2) { border-left-color: var(--primary-red); }
+    .strategy-card:nth-child(3) { border-left-color: var(--accent-yellow); }
+    .strategy-card:nth-child(4) { border-left-color: var(--accent-purple); }
+
+    .strategy-card h3 {
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .strategy-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* GÜN & SAYFA SEKMELERİ */
+    .tabs-wrapper {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .tab-btn {
+      background: white;
+      border: 2px solid transparent;
+      padding: 11px 16px;
+      border-radius: var(--radius);
+      font-family: 'Fredoka', cursive;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: var(--shadow);
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-2px);
+      color: var(--navy-blue);
+    }
+
+    .tab-btn.active {
+      background: var(--navy-blue);
+      color: white;
+      border-color: var(--navy-blue);
+      box-shadow: 0 10px 20px -3px rgba(0, 25, 168, 0.35);
+    }
+
+    .tab-btn.tab-highlight {
+      border: 2px dashed #f59e0b;
+    }
+
+    .tab-btn.active.tab-highlight {
+      background: #b45309;
+      border-color: #b45309;
+      color: white;
+    }
+
+    .tab-btn.tab-purple {
+      border: 2px dashed #9333ea;
+    }
+
+    .tab-btn.active.tab-purple {
+      background: #7e22ce;
+      border-color: #7e22ce;
+      color: white;
+    }
+
+    .tab-btn.active .day-tag {
+      background: var(--accent-yellow);
+      color: var(--text-dark);
+    }
+
+    .day-tag {
+      background: #e2e8f0;
+      color: var(--text-dark);
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+    }
+
+    /* İÇERİK ALANI */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .day-header {
+      background: white;
+      border-radius: var(--radius);
+      padding: 22px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .day-header-info h2 {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.55rem;
+      color: var(--navy-blue);
+    }
+
+    .day-header-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* ZAMAN TÜNELİ (TIMELINE) */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 28px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      bottom: 20px;
+      width: 4px;
+      background: #cbd5e1;
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -36px;
+      top: 18px;
+      width: 32px;
+      height: 32px;
+      background: white;
+      border: 3px solid var(--navy-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .time-badge {
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .interest-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .tag-teen {
+      background: #fdf2f8;
+      color: #be185d;
+      border: 1px solid #fbcfe8;
+    }
+
+    .tag-kid {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    .tag-family {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .card h4 {
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    .card-footer-tip {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: #334155;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      border-left: 3px solid var(--accent-yellow);
+    }
+
+    /* FİYAT & SAAT DETAY TABLOLARI */
+    .pricing-table-container {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .custom-table th {
+      background: #f1f5f9;
+      color: var(--navy-blue);
+      padding: 12px 14px;
+      font-weight: 800;
+      border-bottom: 2px solid #cbd5e1;
+      white-space: nowrap;
+    }
+
+    .custom-table td {
+      padding: 14px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+
+    .custom-table tr:hover {
+      background: #f8fafc;
+    }
+
+    .free-pill {
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 50px;
+      display: inline-block;
+      font-size: 0.8rem;
+    }
+
+    .price-bold {
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .price-total {
+      font-weight: 800;
+      color: #b91c1c;
+      background: #fee2e2;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .pricing-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .summary-icon {
+      font-size: 2.2rem;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 14px;
+    }
+
+    .summary-info h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .summary-info p {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--navy-blue);
+    }
+
+    /* ÖNERİ & PÜF NOKTALARI TABLOSU */
+    .pro-tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .pro-tip-box {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .pro-tip-box h4 {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.15rem;
+      color: var(--navy-blue);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pro-tip-box ul {
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    .pro-tip-box li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 14px; }
+      .hero-card h1 { font-size: 1.6rem; }
+      .timeline { padding-left: 28px; }
+      .timeline-dot { left: -28px; width: 28px; height: 28px; font-size: 0.8rem; }
+      .tab-btn { padding: 9px 12px; font-size: 0.85rem; }
+      .custom-table th, .custom-table td { padding: 10px 8px; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HERO HEADER -->
+    <div class="hero-card">
+      <span class="hero-badge">📍 24 - 30 Haziran Londra Seyahati • LHR Havalimanı & SW14 Konaklama</span>
+      <h1>🇬🇧 Londra İnteraktif Aile Gezi & Bilet Portalı</h1>
+      <p>2 Yetişkin, 14 yaş genç kız ve 8 yaş erkek çocuk için 7 günlük adım adım gezi rotası; hafta sonu pazarları, hava durumu opsiyonları ve resmi yaş kademelerine göre güncel bilet rehberi.</p>
+
+      <div class="profile-bar">
+        <div class="profile-pill">👨‍👩‍👧‍👦 4 Kişilik Aile (2 Yetişkin, 14y, 8y)</div>
+        <div class="profile-pill">✈️ Geliş: 24 Haz 15:10 LHR | Dönüş: 30 Haz 12:20 LHR</div>
+        <div class="profile-pill">🏡 Konaklama: SW14 8QY (Mortlake / East Sheen)</div>
+        <div class="profile-pill">🎟️ National Rail 2FOR1 & Ücretsiz Müzeler</div>
+      </div>
+    </div>
+
+    <!-- STRATEJİ & HIZLI TÜYOLAR -->
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <h3>✈️ Heathrow (LHR) Avantajı</h3>
+        <p>Heathrow, SW14'e Gatwick'ten çok daha yakındır (yaklaşık 14 mil). Uber/taksi ile 30-40 dk, metro+tren ile ~50 dakikadır.</p>
+      </div>
+      <div class="strategy-card">
+        <h3>🛍️ Hafta Sonu Pazarları</h3>
+        <p>Cumartesi Notting Hill & Portobello Pazarı'nın en canlı günüdür. Pazar günü ise tarihi Borough Market ve nehir kıyısı mükemmeldir.</p>
+      </div>
+      <div class="strategy-card">
+        <h3>🏛️ Dev Müzeler Tamamen Ücretsiz</h3>
+        <p>Natural History, Science Museum ve British Museum ücretsizdir; yalnızca önceden online saat rezervasyonu yapılması gerekir.</p>
+      </div>
+      <div class="strategy-card">
+        <h3>🚌 Çocuklar İçin Toplu Taşıma</h3>
+        <p>8 yaşındaki çocuk TfL metro ve otobüslerinde refakatçiyle ÜCRETSİZDİR; 14 yaş ise indirimli seyahat eder.</p>
+      </div>
+    </div>
+
+    <!-- GÜN & SAYFA SEKMELERİ (9 ADET SEKME) -->
+    <div class="tabs-wrapper">
+      <button class="tab-btn active" onclick="switchTab('day-1', this)">
+        <span class="day-tag">24 Haz</span> 🛬 Varış & Richmond
+      </button>
+      <button class="tab-btn" onclick="switchTab('day-2', this)">
+        <span class="day-tag">25 Haz</span> 🌊 Klasikler & Thames
+      </button>
+      <button class="tab-btn" onclick="switchTab('day-3', this)">
+        <span class="day-tag">26 Haz Cts</span> 🎨 Notting Hill & Müze
+      </button>
+      <button class="tab-btn" onclick="switchTab('day-4', this)">
+        <span class="day-tag">27 Haz Paz</span> 👑 Saray, Kale & Pazar
+      </button>
+      <button class="tab-btn" onclick="switchTab('day-5', this)">
+        <span class="day-tag">28 Haz</span> 🦖 Dinozorlar & Harrods
+      </button>
+      <button class="tab-btn" onclick="switchTab('day-6', this)">
+        <span class="day-tag">29 Haz</span> ⚡ Harry Potter & Oyuncak
+      </button>
+      <button class="tab-btn" onclick="switchTab('day-7', this)">
+        <span class="day-tag">30 Haz</span> 🛫 LHR Dönüş Planı
+      </button>
+      <button class="tab-btn tab-purple" onclick="switchTab('options-tab', this)">
+        <span class="day-tag">🎭 Opsiyon</span> Alternatifler & Yağmur
+      </button>
+      <button class="tab-btn tab-highlight" onclick="switchTab('pricing-tab', this)">
+        <span class="day-tag">💰 Bütçe</span> Bilet Fiyatları & Saatler
+      </button>
+    </div>
+
+    <!-- 1. GÜN: 24 HAZİRAN (GELİŞ & RICHMOND PARK) -->
+    <div id="day-1" class="tab-content active">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>1. Gün: Londra'ya Varış, Eve Yerleşme & Richmond Park Gün Batımı</h2>
+          <p>15:10 Heathrow inişi, SW14'e pratik transfer ve serbest gezen geyiklerle huzurlu bir ilk akşam.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">✈️</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 15:10 – 16:30</span>
+              <div class="interest-tags"><span class="tag tag-family">LHR Varış</span></div>
+            </div>
+            <h4>Heathrow Havalimanı (LHR) İniş & Pasaport Kontrolü</h4>
+            <p>13:15 İstanbul çıkışlı uçağınız 15:10'da Heathrow'a varır. Pasaport kontrolü ve bagaj alımı tamamlanır.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🚕</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 16:30 – 17:30</span>
+              <div class="interest-tags"><span class="tag tag-family">Transfer</span></div>
+            </div>
+            <h4>LHR ➔ SW14 8QY (East Sheen / Mortlake) Ulaşımı</h4>
+            <p><strong>En Rahat Seçenek (Önerilen):</strong> 4 kişi ve bavullarla Uber XL veya havaalanı özel transferi (~£35–£48, 30–40 dk sürer).<br>
+            <strong>Toplu Taşıma:</strong> Heathrow Terminalinden Piccadilly metro hattına binip Acton Town'da inip otobüs/tren bağlantısı veya Feltham üzerinden tren (~50–60 dk).</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">☕</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 17:30 – 18:45</span>
+              <div class="interest-tags"><span class="tag tag-family">Dinlenme</span></div>
+            </div>
+            <h4>Eve Giriş, Bavulları Bırakma & Kahve Molası</h4>
+            <p>SW14'teki konaklama noktanıza yerleşme, yol yorgunluğunu atma ve hafif bir akşamüstü atıştırması.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🦌</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 18:45 – 21:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-family">🌿 Doğal Yaşam</span>
+                <span class="tag tag-teen">📸 Gün Batımı Fotoğrafları</span>
+                <span class="tag tag-kid">🦌 Serbest Geyikler</span>
+              </div>
+            </div>
+            <h4>Evin Yanındaki Richmond Park'ta Gün Batımı Yürüyüşü</h4>
+            <p>Haziran ayında Londra'da hava 21:30'a kadar aydınlıktır! Evin hemen yanındaki kraliyet parkında serbestçe otlayan yüzlerce kızıl geyik sürüsünü izleyip tertemiz havada akşam yürüyüşü yapabilirsiniz.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. GÜN: 25 HAZİRAN (KLASİKLER & THAMES) -->
+    <div id="day-2" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>2. Gün: Londra'nın Kalbi, Big Ben & Nehir Heyecanı</h2>
+          <p>Westminster Köprüsü, London Eye, South Bank sokak gösterileri ve Uber Boat ile nehir yolculuğu.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">🚆</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 09:30 – 10:00</span>
+              <div class="interest-tags"><span class="tag tag-family">Tren Yolculuğu</span></div>
+            </div>
+            <h4>Mortlake ➔ London Waterloo (22 dk)</h4>
+            <p>SW14'ten trene binerek 22 dakikada Londra'nın merkezine ulaşıyorsunuz. Waterloo İstasyonu'ndan nehir kıyısına yürüyüş sadece 5 dakikadır.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">📸</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 10:00 – 11:30</span>
+              <div class="interest-tags">
+                <span class="tag tag-teen">📸 14 Yaş İçin Trend</span>
+                <span class="tag tag-family">İkonik Fotoğraflar</span>
+              </div>
+            </div>
+            <h4>Big Ben & Westminster Köprüsü</h4>
+            <p>Yenilenen yüzüyle altın detaylı Big Ben kulesi, Parlamento Binası ve köprü üzerinde aile fotoğrafları çekimi.</p>
+            <div class="card-footer-tip">💡 <strong>İpucu:</strong> Köprünün alt kemerinden Big Ben kadrajı 14 yaşındaki kızınızın Instagram/TikTok paylaşımları için en popüler açıdır.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🎡</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 11:30 – 13:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">✨ 8 Yaş Zirvesi</span>
+                <span class="tag tag-family">360° Şehir Manzarası</span>
+              </div>
+            </div>
+            <h4>London Eye ile 135 Metre Gökyüzü</h4>
+            <p>Dev cam kapsüllerde 30 dakikalık yavaş ve büyüleyici bir tur. Tüm Londra simgeleri kuş bakışı karşınızda.</p>
+            <div class="card-footer-tip">🎟️ <strong>Tasarruf:</strong> Gişe fiyatı pahalıdır (£39 yetişkin), internetten veya 2FOR1 kampanyası ile alınması tavsiye edilir.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🍔</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 13:00 – 14:30</span>
+              <div class="interest-tags"><span class="tag tag-family">Öğle Yemeği</span></div>
+            </div>
+            <h4>South Bank Sokak Lezzetleri & Gurme Pazar</h4>
+            <p>Southbank Centre arkasındaki yemek pazarında sokak lezzetleri veya nehir kenarındaki kafelerde keyifli bir mola.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">⛴️</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 15:30 – 17:30</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">🚢 Katamaran Tekne</span>
+                <span class="tag tag-teen">🌉 Tower Bridge</span>
+              </div>
+            </div>
+            <h4>Uber Boat (Thames Clippers) ile Tower Bridge Yolculuğu</h4>
+            <p>London Eye iskelesinden binip Tower Bridge iskelesine kadar su üstünde yolculuk. Köprünün altından geçerken açık güvertede rüzgar eşliğinde harika kareler yakalanır.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. GÜN: 26 HAZİRAN CUMARTESİ (NOTTING HILL & BRITISH MUSEUM) -->
+    <div id="day-3" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>3. Gün (Cumartesi): Notting Hill, Renkli Evler & British Museum</h2>
+          <p>Cumartesi pazarının canlı atmosferi, vintage butikler, pastel sokaklar ve dünya tarihinin hazineleri.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">🎨</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 10:00 – 13:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-teen">💖 Pastel Evler & Vintage</span>
+                <span class="tag tag-kid">🍿 Sokak Atıştırmalıkları</span>
+                <span class="tag tag-family">Cumartesi Pazarı</span>
+              </div>
+            </div>
+            <h4>Notting Hill & Portobello Road Pazarı</h4>
+            <p>Cumartesi günü bu pazarın en coşkulu, en renkli günüdür! Pembe, turkuaz boyalı Viktorya dönemi evleri, antika tezgahları, sokak müzisyenleri ve butik fırınlar (özellikle pastel sokak fotoğrafları 14 yaş için harikadır).</p>
+            <div class="card-footer-tip">📸 <strong>Fotoğraf Noktası:</strong> Lancaster Road ve St. Luke's Mews sokaklarındaki rengarenk evlerin önü Londra'nın en ikonik fotoğraf noktalarındandır.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">☕</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 13:00 – 14:15</span>
+              <div class="interest-tags"><span class="tag tag-family">Öğle Yemeği Molası</span></div>
+            </div>
+            <h4>Notting Hill Şirin Kafelerinde Mola</h4>
+            <p>Portobello'daki artisan fırınlarda taze sandviçler, falafel ve meşhur çilekli waffle tadımı.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🏛️</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 15:00 – 17:30</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">⚰️ Antik Mısır Mumyaları</span>
+                <span class="tag tag-family">Dünya Mirası</span>
+              </div>
+            </div>
+            <h4>British Museum (İngiliz Müzesi)</h4>
+            <p>Dünyanın en büyük müzelerinden biri. Dev cam tavanlı Great Court avlusu, gerçek Mısır mumyaları ve tarihi Rosetta Taşı. Giriş tamamen ücretsizdir!</p>
+            <div class="card-footer-tip">🎟️ <strong>Rezervasyon:</strong> Giriş ücretsizdir fakat resmi siteden saatlik ücretsiz bilet alınması sıra beklemeyi önler.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🍕</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 18:00 – 19:30</span>
+              <div class="interest-tags"><span class="tag tag-family">Akşam Yemeği</span></div>
+            </div>
+            <h4>Bloomsbury / Russell Square Çevresinde Akşam Yemeği</h4>
+            <p>Müze çıkışında Bloomsbury bölgesindeki samimi İtalyan restoranlarında keyifli bir akşam yemeği.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. GÜN: 27 HAZİRAN PAZAR (SARAY, KALE & BOROUGH MARKET) -->
+    <div id="day-4" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>4. Gün (Pazar): Kraliyet Merasimi, Londra Kalesi & Borough Market</h2>
+          <p>Buckingham Sarayı, yeşil parklar, taç mücevherleri ve Londra'nın en meşhur tarihi yemek pazarı.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">👑</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 10:15 – 11:45</span>
+              <div class="interest-tags">
+                <span class="tag tag-family">Kraliyet Merasimi</span>
+                <span class="tag tag-kid">🦆 Pelikanlar & Sincaplar</span>
+              </div>
+            </div>
+            <h4>Buckingham Sarayı & St. James's Park</h4>
+            <p>Kraliyet Sarayı önündeki anıtsal Victoria Anıtı, saray kapıları ve hemen yanındaki göllü St. James's Park'ta pelikanları izleme.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🏰</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 12:30 – 15:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-teen">💎 Gerçek Taç Mücevherleri</span>
+                <span class="tag tag-kid">⚔️ Zırhlar & Efsanevi Kuzgunlar</span>
+              </div>
+            </div>
+            <h4>Tower of London (Londra Kalesi) & Tower Bridge</h4>
+            <p>Bin yıllık zindanlar, dev kuleler, efsanevi kuzgunlar ve paha biçilemez kraliyet hazinesi (Crown Jewels). Kale çıkışında Tower Bridge köprüsünde fotoğraf çekimi.</p>
+            <div class="card-footer-tip">🎟️ <strong>Bilet:</strong> 14 yaş ve 8 yaş çocuk biletine tabidir. Mortlake tren biletiyle National Rail 2FOR1 kampanyası geçerlidir.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🥘</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 15:15 – 17:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-family">Pazar Gurme Şöleni</span>
+                <span class="tag tag-teen">🍓 Çikolatalı Çilek Trendi</span>
+              </div>
+            </div>
+            <h4>Borough Market Lezzet Şöleni</h4>
+            <p>Londra'nın en ünlü tarihi yemek pazarında taze eritilmiş çikolatalı sıcak çilekler, peynirli tostlar ve dünya mutfakları lezzetleri.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. GÜN: 28 HAZİRAN PAZARTESİ (DİNOZORLAR & HARRODS) -->
+    <div id="day-5" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>5. Gün: Hareketli Dinozorlar, Bilim, Macera Parkı & Harrods</h2>
+          <p>Kensington müzeler vadisi, dev T-Rex, Hyde Park macera alanı ve dünyanın en ünlü lüks mağazası.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">🦖</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 10:15 – 12:30</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">🦕 Hareketli T-Rex</span>
+                <span class="tag tag-teen">🏛️ Büyüleyici Mimari</span>
+              </div>
+            </div>
+            <h4>Natural History Museum (Doğa Tarihi Müzesi)</h4>
+            <p>Dev hareketli T-Rex animatroniği, deprem simülatörü, göktaşları ve tavandan sarkan devasa mavi balina iskeleti (Hope). Giriş tamamen ücretsizdir.</p>
+            <div class="card-footer-tip">🎟️ <strong>Giriş:</strong> Ücretsizdir ancak resmi siteden ücretsiz saat aralığı ayırtılmalıdır.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🚀</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 13:30 – 15:30</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">🧪 İnteraktif Deneyler</span>
+                <span class="tag tag-family">Uzay & Havacılık</span>
+              </div>
+            </div>
+            <h4>Science Museum (Bilim Müzesi)</h4>
+            <p>Hemen yan binada Apollo uzay kapsülleri, dev buharlı trenler ve dokunarak öğrenilen bilim galerileri. Ana müze ücretsizdir.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🏴‍☠️</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 15:30 – 17:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">🪵 Dev Ahşap Gemi</span>
+                <span class="tag tag-family">Parkta Kahve Molası</span>
+              </div>
+            </div>
+            <h4>Hyde Park & Diana Memorial Macera Parkı</h4>
+            <p>Dev korsan gemisi temalı kumlu macera parkında tırmanış ve oyun alanı. Yetişkinler için çimenlerde kahve ve sincap izleme molası.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🛍️</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 17:00 – 19:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-teen">✨ Trend Kozmetik & Çikolata</span>
+                <span class="tag tag-kid">🧸 Oyuncak Katı</span>
+              </div>
+            </div>
+            <h4>Knightsbridge & Harrods Deneyimi</h4>
+            <p>Efsanevi lüks mağazanın 4. katındaki rüya gibi oyuncak reyonları ve zemin kattaki dev gurme lezzet salonu (Food Hall).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. GÜN: 29 HAZİRAN SALI (HARRY POTTER & OYUNCAK) -->
+    <div id="day-6" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>6. Gün: Dev Oyuncak Dünyası, Harry Potter & Regent Caddesi</h2>
+          <p>Lego Store, dev çikolata dünyası, 7 katlı tarihi Hamleys ve King's Cross Platform 9¾.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">🧱</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 10:00 – 12:00</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">🏎️ Gerçek Boyutlu Lego Araba</span>
+                <span class="tag tag-teen">🍬 M&M's Fotoğraf Köşeleri</span>
+              </div>
+            </div>
+            <h4>Leicester Square: Lego Store & M&M's World</h4>
+            <p>Dünyanın en büyük Lego mağazasında dev Aston Martin araba, Big Ben heykeli ve karşısındaki 4 katlı rengarenk çikolata sarayı.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🎪</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 12:00 – 13:30</span>
+              <div class="interest-tags"><span class="tag tag-family">Sokak Şovları</span></div>
+            </div>
+            <h4>Covent Garden Pazar Yeri & Şovlar</h4>
+            <p>Tarihi pazar meydanında dünya standartlarında akrobatlar, illüzyonistler ve butik dondurmacılar.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🧸</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 14:30 – 16:30</span>
+              <div class="interest-tags">
+                <span class="tag tag-kid">🚀 7 Katlı Oyuncak Cenneti</span>
+                <span class="tag tag-family">Canlı Sihir Şovları</span>
+              </div>
+            </div>
+            <h4>Hamleys (Regent Street)</h4>
+            <p>1760 yılından beri açık olan 7 katlı efsane oyuncak mağazası. Kat personellerinin canlı ürün gösterileri tam bir karnaval havasındadır.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">⚡</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 17:00 – 18:45</span>
+              <div class="interest-tags">
+                <span class="tag tag-teen">🧙‍♀️ 14 Yaş Zirvesi</span>
+                <span class="tag tag-family">Büyücülük Dünyası</span>
+              </div>
+            </div>
+            <h4>King's Cross: Platform 9 ¾</h4>
+            <p>Duvara gömülü bavul arabası, okul atkısıyla ikonik zıplama fotoğrafı ve resmi Harry Potter mağazası.</p>
+            <div class="card-footer-tip">📷 <strong>İpucu:</strong> Kendi telefonunuzla çekim yapmak tamamen ücretsizdir; profesyonel baskı isterseniz ücretlidir (~£15).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. GÜN: 30 HAZİRAN ÇARŞAMBA (DÖNÜŞ GÜNÜ) -->
+    <div id="day-7" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>7. Gün: Heathrow Havalimanı Dönüş Planı (Uçuş: 12:20)</h2>
+          <p>İstanbul uçağı için sabah evden çıkış, havalimanı ulaşımı ve uçuş hazırlığı adımları.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">🥐</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 07:15 – 08:15</span>
+              <div class="interest-tags"><span class="tag tag-family">Hazırlık</span></div>
+            </div>
+            <h4>Sabah Kahvaltısı & Bavulların Kapatılması</h4>
+            <p>Evde son kontroller, pasaportların ve biletlerin çantaya alınması.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🚪</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 08:20</span>
+              <div class="interest-tags"><span class="tag tag-family">Evden Çıkış Zamanı</span></div>
+            </div>
+            <h4>Evden Çıkış (SW14 8QY)</h4>
+            <p>Uçuşunuz 12:20'de olduğu için uluslararası uçuş kuralı gereği <strong>en geç 09:20 – 09:40</strong> arasında Heathrow'da olmalısınız.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🚕</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 08:30 – 09:25</span>
+              <div class="interest-tags"><span class="tag tag-family">Havalimanı Ulaşımı</span></div>
+            </div>
+            <h4>SW14 ➔ Heathrow (LHR) Transferi</h4>
+            <p><strong>Tavsiye Edilen Seçenek (Uber XL / Ön Rezervasyonlu Taksi):</strong> Kapıdan kapıya 35–45 dakika sürer. Aile ve bavullarla en stressiz yöntemdir (~£38–£50).<br>
+            <strong>Toplu Taşıma:</strong> Mortlake istasyonundan Richmond'a, oradan tren veya metro bağlantısıyla Heathrow'a geçiş (~55–65 dk).</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot">🛫</div>
+          <div class="card">
+            <div class="card-top">
+              <span class="time-badge">⏰ 09:30 – 12:20</span>
+              <div class="interest-tags"><span class="tag tag-family">Uçuş & Güvenlik</span></div>
+            </div>
+            <h4>Heathrow Terminali: Bagaj Teslim & Uçuş (12:20)</h4>
+            <p>Bagaj teslimi, pasaport/güvenlik kontrolü, Free-Shop gezisi ve 12:20 uçağıyla İstanbul'a hareket (18:25 İstanbul varış).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. SEKME: ALTERNATİFLER VE YAĞMURLU HAVA OPSİYONLARI -->
+    <div id="options-tab" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>🎭 Alternatif Gezi Opsiyonları & Yağmurlu Hava Planları</h2>
+          <p>Hava durumuna veya ailenizin özel ilgi alanlarına göre rotaya eklenebilecek en popüler yedek alternatifler.</p>
+        </div>
+      </div>
+
+      <div class="strategy-grid">
+        <div class="strategy-card" style="border-left-color: #9333ea;">
+          <h3>🧙 Warner Bros. Harry Potter Stüdyo Turu</h3>
+          <p>Gerçek film setleri, Büyük Salon ve Hogwarts Ekspresi. Londra merkezinden trenle Watford Junction'a gidilir. <strong>Not:</strong> Biletler haftalar öncesinden tükenir; kesinlikle erkenden resmi sitesinden alınmalıdır (~£53/kişi).</p>
+        </div>
+
+        <div class="strategy-card" style="border-left-color: #0284c7;">
+          <h3>🦁 West End Müzikali (The Lion King / Wicked)</h3>
+          <p>Covent Garden / Leicester Square bölgesindeki tiyatrolarda dünyaca ünlü müzikaller. 8 ve 14 yaş için özellikle <em>The Lion King (Aslan Kral)</em> hayat boyu unutulmayacak görsel bir şölendir.</p>
+        </div>
+
+        <div class="strategy-card" style="border-left-color: #ea580c;">
+          <h3>🌧️ Yağmurlu Hava 1: Madame Tussauds</h3>
+          <p>Eğer bir gün yoğun yağmur olursa tamamen kapalı alanda balmumu heykeller, Marvel 4D sinema salonu ve Londra taksi simülasyonu (Baker Street durağı).</p>
+        </div>
+
+        <div class="strategy-card" style="border-left-color: #16a34a;">
+          <h3>🌧️ Yağmurlu Hava 2: Shrek's Adventure & Akvaryum</h3>
+          <p>London Eye'ın hemen dibinde tamamen kapalı alanda dev Londra Akvaryumu (Sea Life) ve interaktif Shrek macera turu. 8 yaşındaki çocuk için çok eğlencelidir.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. SEKME: BİLET FİYATLARI VE ÇALIŞMA SAATLERİ -->
+    <div id="pricing-tab" class="tab-content">
+      <div class="day-header">
+        <div class="day-header-info">
+          <h2>💰 Etkinlik Bilet Fiyatları, Çalışma Saatleri & Bütçe Analizi</h2>
+          <p>2 Yetişkin, 14 yaş genç ve 8 yaş çocuk için güncel giriş şartları, resmi yaş kademeleri ve aile maliyeti.</p>
+        </div>
+      </div>
+
+      <!-- ÖZET BÜTÇE KARTLARI -->
+      <div class="pricing-summary-grid">
+        <div class="summary-card">
+          <div class="summary-icon">🏛️</div>
+          <div class="summary-info">
+            <h4>Ücretsiz Gezilen Yerler</h4>
+            <p>8 Önemli Nokta</p>
+            <small style="color:var(--text-muted);">Doğa Tarihi, Bilim Müzesi, British Museum, Parklar, Pazarlar</small>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon">🎟️</div>
+          <div class="summary-info">
+            <h4>Biletli Ana Atraksiyonlar</h4>
+            <p>3 Ücretli Yer</p>
+            <small style="color:var(--text-muted);">London Eye, Uber Boat, Tower of London</small>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon">💡</div>
+          <div class="summary-info">
+            <h4>4 Kişilik Aile Bütçesi</h4>
+            <p>~£180 – £215</p>
+            <small style="color:var(--text-muted);">(Online / 2FOR1 indirimleriyle)</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANA TABLO -->
+      <div class="pricing-table-container">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Etkinlik / Nokta</th>
+              <th>Çalışma Saatleri</th>
+              <th>Yetişkin (Kişi Başı)</th>
+              <th>14 Yaş Genç</th>
+              <th>8 Yaş Çocuk</th>
+              <th>4 Kişilik Aile Toplamı</th>
+              <th>Önemli Not / Rezervasyon</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>🎡 London Eye</strong><br><small>Waterloo / South Bank</small></td>
+              <td>10:00 – 18:00 (Hafta sonu 20:30)</td>
+              <td>£29.00 – £39.00</td>
+              <td>£26.00 – £35.00</td>
+              <td>£26.00 – £35.00</td>
+              <td><span class="price-total">£110 – £148</span><br><small>2FOR1 ile ~£68</small></td>
+              <td>Online erkenden alınırsa %25 ucuzdur. Kapıda biletler çok pahalıdır.</td>
+            </tr>
+            <tr>
+              <td><strong>⛴️ Uber Boat (Thames Clippers)</strong><br><small>Central Zone (Waterloo ➔ Tower)</small></td>
+              <td>Hafta içi 06:00 – 23:00<br>Hafta sonu 09:00 – 23:00</td>
+              <td>£9.50 – £11.70</td>
+              <td>£4.75 – £5.85<br><small>(5-15 yaş %50)</small></td>
+              <td>£4.75 – £5.85<br><small>(5-15 yaş %50)</small></td>
+              <td><span class="price-total">~£28.50 – £35.00</span></td>
+              <td>Oyster veya Contactless ile doğrudan turnikeden geçilebilir. Çocuklar için Family bilet seçeneği de vardır.</td>
+            </tr>
+            <tr>
+              <td><strong>🏰 Tower of London (Londra Kalesi)</strong><br><small>Taç Mücevherleri & Beyaz Kule</small></td>
+              <td>09:00 – 17:30<br><small>(Son giriş: 15:30)</small></td>
+              <td>£34.80</td>
+              <td>£17.40<br><small>(5-15 yaş)</small></td>
+              <td>£17.40<br><small>(5-15 yaş)</small></td>
+              <td><span class="price-total">£104.40</span><br><small>2FOR1 ile ~£69.60</small></td>
+              <td>Taç Mücevherleri bilete dahildir. Mortlake tren biletiyle "National Rail 2FOR1" indiriminde en karlı yerdir.</td>
+            </tr>
+            <tr>
+              <td><strong>🏛️ British Museum</strong><br><small>Büyük Mahkeme & Mumyalar</small></td>
+              <td>10:00 – 17:00 (Cuma 20:30'a kadar)</td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="price-bold">£0.00</span></td>
+              <td>Giriş ücretsizdir; ancak kapıdaki uzun kuyruğa takılmamak için siteden saatlik ücretsiz bilet şarttır.</td>
+            </tr>
+            <tr>
+              <td><strong>🦖 Natural History Museum</strong><br><small>Doğa Tarihi Müzesi</small></td>
+              <td>10:00 – 17:50<br><small>(Son giriş: 17:00)</small></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="price-bold">£0.00</span></td>
+              <td>Giriş ücretsizdir; kapıda kuyruk beklememek için resmi siteden ücretsiz saat rezervasyonu şarttır.</td>
+            </tr>
+            <tr>
+              <td><strong>🚀 Science Museum</strong><br><small>Bilim Müzesi</small></td>
+              <td>10:00 – 18:00<br><small>(Son giriş: 17:15)</small></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="price-bold">£0.00</span></td>
+              <td>Ana sergiler tamamen ücretsizdir. Özel Wonderlab deney galerisi girilmek istenirse kişi başı ~£9-11'dir.</td>
+            </tr>
+            <tr>
+              <td><strong>🎨 Notting Hill & Portobello Road</strong></td>
+              <td>Cumartesi ana gün: 09:00 – 18:00</td>
+              <td><span class="free-pill">Giriş Serbest</span></td>
+              <td><span class="free-pill">Giriş Serbest</span></td>
+              <td><span class="free-pill">Giriş Serbest</span></td>
+              <td><span class="price-bold">£0.00</span></td>
+              <td>Sokakta yürümek ücretsizdir; hediyelik eşya ve sokak atıştırmalıkları harcaması isteğe bağlıdır.</td>
+            </tr>
+            <tr>
+              <td><strong>🥘 Borough Market</strong></td>
+              <td>Salı – Cumartesi 10:00 – 17:00<br>(Pazar 10:00 – 16:00)</td>
+              <td><span class="free-pill">Giriş Ücretsiz</span></td>
+              <td><span class="free-pill">Giriş Ücretsiz</span></td>
+              <td><span class="free-pill">Giriş Ücretsiz</span></td>
+              <td><span class="price-bold">Tadım Harcaması</span></td>
+              <td>Sokak yemekleri porsiyon başı £8–£14 arasındadır. Çikolatalı çilek meşhurdur (£8.50).</td>
+            </tr>
+            <tr>
+              <td><strong>🧸 Hamleys & Lego Store</strong></td>
+              <td>10:00 – 21:00 (Pazar 12:00–18:00)</td>
+              <td><span class="free-pill">Giriş Serbest</span></td>
+              <td><span class="free-pill">Giriş Serbest</span></td>
+              <td><span class="free-pill">Giriş Serbest</span></td>
+              <td><span class="price-bold">Alışverişe Bağlı</span></td>
+              <td>7 kat boyunca sihirbazlık şovları ve Lego heykelleri ücretsiz sergilenir.</td>
+            </tr>
+            <tr>
+              <td><strong>⚡ King's Cross Platform 9 ¾</strong></td>
+              <td>08:00 – 20:00 (Pazar 09:00–20:00)</td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="price-bold">£0.00</span></td>
+              <td>Kendi telefonunuzla çekim ücretsizdir. Resmi mağaza profesyonel fotoğraf baskısı istenirse ~£15'tir.</td>
+            </tr>
+            <tr>
+              <td><strong>🦌 Richmond Park & Diana Oyun Parkı</strong></td>
+              <td>24 Saat Açık / 10:00 – 18:45</td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="free-pill">ÜCRETSİZ</span></td>
+              <td><span class="price-bold">£0.00</span></td>
+              <td>Evinize yürüme mesafesinde. Parktaki geyikleri izlemek ve korsan gemisinde oynamak ücretsizdir.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- BİLET ALIM REHBERİ KUTULARI -->
+      <div class="pro-tips-grid" style="margin-top: 10px;">
+        <div class="pro-tip-box">
+          <h4>💡 National Rail 2FOR1 Nasıl Kullanılır?</h4>
+          <ul>
+            <li>Mortlake istasyonundan merkeze (Waterloo) aldığınız basılı kağıt tren biletlerini atmayın.</li>
+            <li><strong>daysoutguide.co.uk</strong> sitesinden ücretsiz kupon oluşturup bilet gişesinde gösterdiğinizde 1 yetişkin biletine 2. bilet hediye edilir.</li>
+            <li>London Eye ve Tower of London'da aileye <strong>£50–£70 arası net tasarruf</strong> sağlar.</li>
+          </ul>
+        </div>
+
+        <div class="pro-tip-box">
+          <h4>👶 Çocuk ve Genç Bilet Kademeleri (Özet)</h4>
+          <ul>
+            <li><strong>8 Yaş (11 Yaş Altı):</strong> Londra metrosunda, banliyö trenlerinde ve kırmızı otobüslerde yanınızda tamamen ÜCRETSİZDİR. Müze ve şovlarda çocuk tarifesi alır.</li>
+            <li><strong>14 Yaş (11–15 Yaş):</strong> TfL toplu taşımada Young Visitor indirimiyle %50 indirimli seyahat eder. Atraksiyonlarda çocuk biletine tabidir (yetişkin sayılmaz).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PÜF NOKTALARI VE TAVSİYELER KUTULARI (GENEL) -->
+    <div class="pro-tips-grid">
+      <div class="pro-tip-box">
+        <h4>🎒 Aile Konfor Tavsiyeleri</h4>
+        <ul>
+          <li><strong>Günde 12.000–15.000 adım:</strong> Tüm aile için rahat spor ayakkabı şarttır.</li>
+          <li><strong>Yedek Güç Kaynağı:</strong> Genç kızın fotoğraf çekimi ve telefon haritaları için bir powerbank taşıyın.</li>
+          <li><strong>Hava Durumu:</strong> Gün içinde anlık yaz yağmurları için çantada bir adet kompakt şemsiye bulundurmak yeterlidir.</li>
+        </ul>
+      </div>
+
+      <div class="pro-tip-box">
+        <h4>🎫 Bilet & Bütçe İpuçları</h4>
+        <ul>
+          <li><strong>Müze Rezervasyonları:</strong> Natural History, Science Museum ve British Museum sitelerinden gitmeden önce ücretsiz zaman dilimi seçin.</li>
+          <li><strong>LHR Ulaşımı:</strong> 30 Haziran'da 12:20 uçuşu için evden en geç 08:20'de çıkıp Uber XL ile geçmek en pratik yoldur.</li>
+          <li><strong>Ulaşım:</strong> 8 yaş metro/otobüste refakatçi ile tamamen ücretsizdir.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(targetId, btnElement) {
+      // Tüm sekme butonlarını pasif yap
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Tıklanan butonu aktif yap
+      if (btnElement) {
+        btnElement.classList.add('active');
+      }
+
+      // Tüm içerik panellerini gizle
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      // Hedef içeriği göster
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
