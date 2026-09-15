@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="neon">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Alltagsdeutsch — Konuşma Dili Akademisi</title>
+<style>
+/* ============================================================
+   TOKENS — 4 theme presets, swapped via [data-theme] on <html>
+   ============================================================ */
+:root{
+  --radius-s:10px; --radius-m:16px; --radius-l:24px;
+  --font-head:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+html[data-theme="neon"]{
+  --bg:#080B14; --bg-grad:radial-gradient(120% 90% at 15% -10%,#151B33 0%,#080B14 55%);
+  --surface:#101526; --surface-2:#171E35; --surface-border:#242C4A;
+  --text:#EEF1FC; --muted:#8991AE; --muted-2:#5D6485;
+  --de-a:#5865F2; --de-b:#8C3AF2; --tr-a:#C6FF3D; --tr-b:#7ED957;
+  --accent:#C6FF3D; --accent-ink:#0B1400;
+  --warn:#FF5D7A; --warn-ink:#2A0008;
+  --gold:#FFC93D;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  --chip-bg:#171E35; --chip-border:#2A3358;
+}
+html[data-theme="gunduz"]{
+  --bg:#F4F5F9; --bg-grad:radial-gradient(120% 90% at 15% -10%,#FFFFFF 0%,#EDEFF7 60%);
+  --surface:#FFFFFF; --surface-2:#F1F2F9; --surface-border:#E2E4F0;
+  --text:#171A2B; --muted:#5B5F79; --muted-2:#8A8DA3;
+  --de-a:#4A5BE0; --de-b:#7B3FE4; --tr-a:#0E9A6E; --tr-b:#12B886;
+  --accent:#0E9A6E; --accent-ink:#FFFFFF;
+  --warn:#E23A5D; --warn-ink:#FFFFFF;
+  --gold:#C6841A;
+  --shadow:0 20px 50px -25px rgba(30,35,70,.25);
+  --chip-bg:#FFFFFF; --chip-border:#DDDFEE;
+}
+html[data-theme="okyanus"]{
+  --bg:#061420; --bg-grad:radial-gradient(120% 90% at 15% -10%,#0C2436 0%,#061420 55%);
+  --surface:#0B1E2E; --surface-2:#103048; --surface-border:#1B4260;
+  --text:#E7F5FA; --muted:#7FA3B5; --muted-2:#4F7387;
+  --de-a:#2CC9D0; --de-b:#1E7FE0; --tr-a:#FFC93D; --tr-b:#FF9F3D;
+  --accent:#2CC9D0; --accent-ink:#00201F;
+  --warn:#FF6B6B; --warn-ink:#2A0000;
+  --gold:#FFC93D;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  --chip-bg:#103048; --chip-border:#1B4260;
+}
+html[data-theme="batim"]{
+  --bg:#180C14; --bg-grad:radial-gradient(120% 90% at 15% -10%,#301226 0%,#180C14 55%);
+  --surface:#22111D; --surface-2:#2D1526; --surface-border:#472138;
+  --text:#FBEEF2; --muted:#C79AAC; --muted-2:#8C6577;
+  --de-a:#FF5D7A; --de-b:#FF9040; --tr-a:#FFD23D; --tr-b:#FF8A3D;
+  --accent:#FF9040; --accent-ink:#2A0F00;
+  --warn:#FF4D6D; --warn-ink:#2A0008;
+  --gold:#FFD23D;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  --chip-bg:#2D1526; --chip-border:#472138;
+}
+
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  margin:0; background:var(--bg-grad),var(--bg); color:var(--text);
+  font-family:var(--font-body); overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+}
+button, input{font-family:inherit; color:inherit;}
+::selection{background:var(--accent); color:var(--accent-ink);}
+
+.app{
+  max-width:480px; margin:0 auto; min-height:100vh;
+  display:flex; flex-direction:column;
+  position:relative;
+}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky; top:0; z-index:40;
+  padding:calc(14px + var(--safe-top)) 18px 12px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:linear-gradient(180deg, var(--bg) 65%, transparent);
+  backdrop-filter:blur(6px);
+}
+.brand{display:flex; align-items:center; gap:10px;}
+.brand-mark{
+  width:34px; height:34px; border-radius:10px;
+  background:linear-gradient(135deg,var(--de-a),var(--de-b));
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:15px; color:#fff; font-family:var(--font-head);
+  box-shadow:0 6px 16px -4px rgba(88,101,242,.55);
+  flex-shrink:0;
+}
+.brand-text h1{
+  font-family:var(--font-head); font-size:16px; font-weight:800;
+  margin:0; letter-spacing:-0.01em; line-height:1.1;
+}
+.brand-text p{margin:1px 0 0; font-size:11.5px; color:var(--muted);}
+.top-actions{display:flex; align-items:center; gap:8px;}
+.streak-pill{
+  display:flex; align-items:center; gap:5px;
+  background:var(--surface); border:1px solid var(--surface-border);
+  border-radius:100px; padding:6px 11px 6px 9px; font-size:13px; font-weight:700;
+}
+.icon-btn{
+  width:34px; height:34px; border-radius:11px; border:1px solid var(--surface-border);
+  background:var(--surface); display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.icon-btn svg{width:17px; height:17px;}
+
+/* ---------- Main scroll area ---------- */
+.screen{ padding:4px 18px calc(108px + var(--safe-bottom)); flex:1; }
+.view{ display:none; }
+.view.active{ display:block; animation:viewIn .28s ease; }
+@keyframes viewIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+
+.section-head{ margin:10px 0 14px; }
+.section-head h2{ font-family:var(--font-head); font-size:22px; font-weight:800; letter-spacing:-0.02em; margin:0 0 4px; }
+.section-head p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.5; }
+
+/* ---------- Chapter chips ---------- */
+.chip-row{ display:flex; gap:8px; overflow-x:auto; padding:2px 0 14px; scrollbar-width:none; }
+.chip-row::-webkit-scrollbar{display:none;}
+.chip{
+  flex:0 0 auto; padding:9px 14px; border-radius:100px; font-size:13px; font-weight:600;
+  background:var(--chip-bg); border:1px solid var(--chip-border); color:var(--muted); cursor:pointer;
+  white-space:nowrap; transition:transform .15s ease;
+}
+.chip.active{ background:var(--accent); color:var(--accent-ink); border-color:transparent; }
+.chip:active{ transform:scale(.95); }
+
+/* ---------- Progress bar ---------- */
+.progress-track{ height:7px; border-radius:100px; background:var(--surface-2); overflow:hidden; margin-bottom:16px; }
+.progress-fill{ height:100%; border-radius:100px; background:linear-gradient(90deg,var(--tr-a),var(--tr-b)); transition:width .4s cubic-bezier(.4,0,.2,1); }
+
+/* ---------- Flashcard stack ---------- */
+.card-stage{
+  position:relative; height:340px; margin:6px 0 18px; perspective:1400px;
+}
+.stack-deco{
+  position:absolute; inset:0; border-radius:var(--radius-l);
+  background:var(--surface-2); border:1px solid var(--surface-border);
+}
+.stack-deco.d1{ transform:scale(.94) translateY(14px); opacity:.7; }
+.stack-deco.d2{ transform:scale(.88) translateY(26px); opacity:.4; }
+
+.flashcard{
+  position:absolute; inset:0; border-radius:var(--radius-l);
+  cursor:pointer; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.4,.1,.2,1);
+  touch-action:pan-y;
+}
+.flashcard.flipped{ transform:rotateY(180deg); }
+.flashcard.dragging{ transition:none; }
+.face{
+  position:absolute; inset:0; border-radius:var(--radius-l);
+  -webkit-backface-visibility:hidden; backface-visibility:hidden;
+  display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+  padding:30px 26px; box-shadow:var(--shadow); overflow:hidden;
+}
+.face .bubble-label{
+  font-size:11.5px; font-weight:700; opacity:.85; margin-bottom:14px;
+  display:flex; align-items:center; gap:6px;
+}
+.face .bubble-text{ font-family:var(--font-head); font-size:26px; font-weight:800; line-height:1.28; letter-spacing:-0.01em; }
+.face.front{ background:linear-gradient(150deg,var(--de-a),var(--de-b)); color:#fff; }
+.face.back{ background:linear-gradient(150deg,var(--tr-a),var(--tr-b)); color:#0B1400; transform:rotateY(180deg); }
+html[data-theme="gunduz"] .face.back, html[data-theme="okyanus"] .face.back{ color:#04231A; }
+html[data-theme="batim"] .face.back{ color:#2A1400; }
+.face .tap-hint{ position:absolute; bottom:20px; right:24px; font-size:11px; opacity:.75; font-weight:600; }
+.face .speak-btn{
+  position:absolute; top:22px; right:22px; width:38px; height:38px; border-radius:50%;
+  background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.3);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.face .speak-btn svg{ width:17px; height:17px; }
+.face .status-dot{
+  position:absolute; top:24px; left:24px; width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.4);
+}
+.face .status-dot.known{ background:#fff; box-shadow:0 0 0 3px rgba(255,255,255,.35); }
+
+.swipe-tag{
+  position:absolute; top:22px; padding:6px 14px; border-radius:100px; font-weight:800; font-size:12.5px;
+  border:2px solid #fff; color:#fff; opacity:0; transform:scale(.8); pointer-events:none; letter-spacing:.02em;
+}
+.swipe-tag.left{ left:22px; transform:rotate(-12deg) scale(.8); }
+.swipe-tag.right{ right:22px; transform:rotate(12deg) scale(.8); }
+
+.card-controls{ display:flex; gap:10px; margin-bottom:6px; }
+.ctrl-btn{
+  flex:1; padding:14px 8px; border-radius:16px; border:1px solid var(--surface-border);
+  background:var(--surface); font-weight:700; font-size:13.5px; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+}
+.ctrl-btn svg{ width:19px; height:19px; }
+.ctrl-btn.again{ color:var(--warn); }
+.ctrl-btn.shuffle{ color:var(--muted); flex:0 0 56px; }
+.ctrl-btn.good{ color:var(--accent); }
+.ctrl-btn:active{ transform:scale(.96); }
+
+/* ---------- Quiz ---------- */
+.quiz-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-size:12.5px; color:var(--muted); font-weight:600; }
+.quiz-card{
+  background:var(--surface); border:1px solid var(--surface-border); border-radius:var(--radius-l);
+  padding:26px 22px; margin-bottom:16px; box-shadow:var(--shadow);
+}
+.quiz-eyebrow{ font-size:12px; color:var(--muted); font-weight:600; margin-bottom:10px; }
+.quiz-q{ font-family:var(--font-head); font-size:23px; font-weight:800; letter-spacing:-0.01em; line-height:1.3; }
+.quiz-q .speak-inline{
+  display:inline-flex; vertical-align:middle; margin-left:8px; width:30px; height:30px; border-radius:50%;
+  background:var(--surface-2); align-items:center; justify-content:center; cursor:pointer; border:1px solid var(--surface-border);
+}
+.quiz-q .speak-inline svg{ width:14px; height:14px; }
+.options{ display:flex; flex-direction:column; gap:10px; }
+.opt{
+  text-align:left; padding:15px 16px; border-radius:14px; border:1.5px solid var(--surface-border);
+  background:var(--surface); font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px;
+}
+.opt:active{ transform:scale(.985); }
+.opt.correct{ border-color:var(--accent); background:color-mix(in srgb, var(--accent) 16%, var(--surface)); }
+.opt.wrong{ border-color:var(--warn); background:color-mix(in srgb, var(--warn) 16%, var(--surface)); }
+.opt.dim{ opacity:.45; }
+.opt .mark{ font-weight:800; font-size:15px; }
+.quiz-footer{ margin-top:14px; display:flex; justify-content:flex-end; }
+.next-btn{
+  padding:12px 20px; border-radius:14px; border:none; background:var(--accent); color:var(--accent-ink);
+  font-weight:800; font-size:14px; cursor:pointer; display:none;
+}
+.next-btn.show{ display:inline-block; animation:popIn .25s ease; }
+@keyframes popIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+
+.result-card{ text-align:center; padding:40px 20px; background:var(--surface); border:1px solid var(--surface-border); border-radius:var(--radius-l); }
+.result-card .big-num{ font-family:var(--font-head); font-size:52px; font-weight:800; letter-spacing:-0.02em; background:linear-gradient(135deg,var(--de-a),var(--tr-a)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.result-card p{ color:var(--muted); margin:6px 0 22px; }
+.primary-btn{ padding:13px 26px; border-radius:14px; border:none; background:var(--accent); color:var(--accent-ink); font-weight:800; font-size:14.5px; cursor:pointer; }
+
+/* ---------- Match game ---------- */
+.match-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:13px; font-weight:700; color:var(--muted); }
+.match-top b{ color:var(--text); }
+.match-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; }
+.match-cell{
+  min-height:78px; border-radius:14px; border:1.5px solid var(--surface-border); background:var(--surface);
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:10px 8px;
+  font-size:13.5px; font-weight:700; cursor:pointer; line-height:1.3;
+}
+.match-cell.de{ border-left:4px solid var(--de-a); }
+.match-cell.tr{ border-left:4px solid var(--tr-a); }
+.match-cell.selected{ background:var(--surface-2); border-color:var(--gold); }
+.match-cell.matched{ opacity:0; pointer-events:none; transform:scale(.7); transition:opacity .3s, transform .3s; }
+.match-cell.shake{ animation:shake .35s; }
+@keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
+.match-done{ text-align:center; padding:50px 16px; }
+.match-done .emoji{ font-size:44px; margin-bottom:8px; }
+
+/* ---------- Browse / list ---------- */
+.search-wrap{ position:relative; margin-bottom:12px; }
+.search-wrap input{
+  width:100%; padding:13px 16px 13px 42px; border-radius:14px; border:1px solid var(--surface-border);
+  background:var(--surface); font-size:14.5px; outline:none;
+}
+.search-wrap input:focus{ border-color:var(--accent); }
+.search-wrap svg{ position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--muted); }
+.filter-row{ display:flex; gap:8px; margin-bottom:14px; overflow-x:auto; scrollbar-width:none; }
+.filter-row::-webkit-scrollbar{display:none;}
+.list-item{
+  display:flex; align-items:center; gap:12px; padding:13px 4px; border-bottom:1px solid var(--surface-border);
+  cursor:pointer;
+}
+.list-dot{ width:8px; height:8px; border-radius:50%; background:var(--muted-2); flex-shrink:0; }
+.list-dot.known{ background:var(--accent); }
+.list-dot.learning{ background:var(--gold); }
+.list-text{ flex:1; min-width:0; }
+.list-text .de{ font-weight:700; font-size:14.5px; }
+.list-text .tr{ color:var(--muted); font-size:12.5px; margin-top:1px; }
+.list-star{ width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; }
+.list-star svg{ width:16px; height:16px; color:var(--muted-2); }
+.list-star.fav svg{ color:var(--gold); }
+.chapter-heading{ font-size:11.5px; font-weight:800; color:var(--muted); text-transform:none; letter-spacing:.01em; margin:20px 0 4px; }
+.empty-state{ text-align:center; padding:60px 20px; color:var(--muted); }
+
+/* ---------- Stats ---------- */
+.stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-bottom:20px; }
+.stat-box{ background:var(--surface); border:1px solid var(--surface-border); border-radius:16px; padding:16px 10px; text-align:center; }
+.stat-box .num{ font-family:var(--font-head); font-size:24px; font-weight:800; letter-spacing:-0.02em; }
+.stat-box .lab{ font-size:11px; color:var(--muted); margin-top:2px; font-weight:600; }
+.bar-row{ margin-bottom:12px; }
+.bar-row .bar-label{ display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-bottom:6px; }
+.bar-row .bar-label span:last-child{ color:var(--muted); font-weight:600; font-size:12px; }
+.bar-bg{ height:9px; border-radius:100px; background:var(--surface-2); overflow:hidden; }
+.bar-fg{ height:100%; border-radius:100px; background:linear-gradient(90deg,var(--de-a),var(--tr-a)); transition:width .5s ease; }
+.streak-card{
+  border-radius:var(--radius-l); padding:20px 22px; margin-bottom:20px; color:#fff;
+  background:linear-gradient(135deg,var(--de-a),var(--de-b));
+  display:flex; align-items:center; justify-content:space-between;
+}
+.streak-card .n{ font-family:var(--font-head); font-size:34px; font-weight:800; }
+.streak-card .l{ font-size:12.5px; opacity:.9; }
+.reset-link{ text-align:center; margin-top:6px; }
+.reset-link button{ background:none; border:none; color:var(--warn); font-size:13px; font-weight:700; cursor:pointer; padding:10px; }
+
+/* ---------- Bottom nav ---------- */
+.tabbar{
+  position:fixed; left:50%; transform:translateX(-50%); bottom:calc(14px + var(--safe-bottom)); z-index:50;
+  width:calc(100% - 28px); max-width:452px;
+  background:var(--surface); border:1px solid var(--surface-border); border-radius:22px;
+  display:flex; padding:7px; box-shadow:var(--shadow); backdrop-filter:blur(14px);
+}
+.tab-btn{
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:9px 2px 7px;
+  border-radius:16px; background:none; border:none; cursor:pointer; color:var(--muted-2);
+}
+.tab-btn svg{ width:20px; height:20px; }
+.tab-btn span{ font-size:10px; font-weight:700; }
+.tab-btn.active{ color:var(--accent-ink); background:var(--accent); }
+.tab-btn.active svg{ transform:translateY(-1px); }
+
+/* ---------- Theme modal ---------- */
+.modal-overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:100; display:none;
+  align-items:flex-end; justify-content:center;
+}
+.modal-overlay.show{ display:flex; animation:fadeIn .2s ease; }
+@keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+.modal-sheet{
+  width:100%; max-width:480px; background:var(--surface); border-radius:26px 26px 0 0;
+  padding:10px 22px calc(28px + var(--safe-bottom)); animation:sheetUp .3s cubic-bezier(.3,.9,.4,1);
+}
+@keyframes sheetUp{ from{transform:translateY(100%);} to{transform:translateY(0);} }
+.sheet-handle{ width:38px; height:4px; border-radius:4px; background:var(--surface-border); margin:8px auto 16px; }
+.sheet-title{ font-family:var(--font-head); font-weight:800; font-size:18px; margin-bottom:16px; }
+.theme-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.theme-swatch{
+  border-radius:16px; padding:16px 14px; cursor:pointer; border:2px solid transparent; position:relative;
+}
+.theme-swatch.active{ border-color:var(--accent); }
+.theme-swatch .dots{ display:flex; gap:5px; margin-bottom:10px; }
+.theme-swatch .dots i{ width:16px; height:16px; border-radius:50%; display:block; }
+.theme-swatch .tname{ font-size:13px; font-weight:700; }
+.sw-neon{ background:#101526; } .sw-neon .tname{color:#EEF1FC;}
+.sw-gunduz{ background:#FFFFFF; border:1px solid #E2E4F0;} .sw-gunduz .tname{color:#171A2B;}
+.sw-okyanus{ background:#0B1E2E; } .sw-okyanus .tname{color:#E7F5FA;}
+.sw-batim{ background:#22111D; } .sw-batim .tname{color:#FBEEF2;}
+
+.dir-toggle{ display:flex; gap:8px; background:var(--surface-2); padding:5px; border-radius:14px; margin-bottom:16px; }
+.dir-btn{ flex:1; padding:9px; border-radius:10px; border:none; background:none; font-size:12.5px; font-weight:700; color:var(--muted); cursor:pointer; }
+.dir-btn.active{ background:var(--surface); color:var(--text); box-shadow:0 2px 8px rgba(0,0,0,.15); }
+
+/* ---------- Toast (mini haptic-style feedback) ---------- */
+.toast{
+  position:fixed; top:calc(10px + var(--safe-top)); left:50%; transform:translateX(-50%) translateY(-60px);
+  background:var(--surface); border:1px solid var(--surface-border); color:var(--text);
+  padding:11px 18px; border-radius:100px; font-size:13px; font-weight:700; z-index:200;
+  transition:transform .3s cubic-bezier(.3,.9,.4,1); box-shadow:var(--shadow); display:flex; align-items:center; gap:8px;
+}
+.toast.show{ transform:translateX(-50%) translateY(0); }
+
+@media (min-width:481px){
+  body{ background:var(--bg); }
+  .app{ box-shadow:0 0 0 1px var(--surface-border), 0 40px 100px -30px rgba(0,0,0,.7); min-height:100vh; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">AD</div>
+      <div class="brand-text">
+        <h1>Alltagsdeutsch</h1>
+        <p>Konuşma dili akademisi · TR ↔ DE</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="streak-pill">🔥 <span id="streakTop">0</span></div>
+      <button class="icon-btn" id="themeBtn" aria-label="Tema">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="screen">
+
+    <!-- ============= FLASHCARDS ============= -->
+    <section class="view active" id="view-cards">
+      <div class="section-head">
+        <h2>Kartlarla öğren</h2>
+        <p>Karta dokun, çevrilsin. Sağa kaydır: biliyorum · sola kaydır: tekrar edeyim.</p>
+      </div>
+      <div class="chip-row" id="chipRowCards"></div>
+      <div class="progress-track"><div class="progress-fill" id="cardsProgress" style="width:0%"></div></div>
+
+      <div class="card-stage" id="cardStage">
+        <div class="stack-deco d2"></div>
+        <div class="stack-deco d1"></div>
+        <div class="flashcard" id="flashcard">
+          <div class="face front" id="faceFront">
+            <div class="status-dot" id="statusDot"></div>
+            <button class="speak-btn" id="speakBtn" aria-label="Seslendir">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <div class="bubble-label">🇩🇪 Almanca</div>
+            <div class="bubble-text" id="cardFrontText">—</div>
+            <div class="tap-hint">çevirmek için dokun ↻</div>
+          </div>
+          <div class="face back">
+            <div class="bubble-label">🇹🇷 Türkçe karşılığı</div>
+            <div class="bubble-text" id="cardBackText">—</div>
+          </div>
+        </div>
+        <div class="swipe-tag left" id="tagLeft">TEKRAR ET</div>
+        <div class="swipe-tag right" id="tagRight">BİLİYORUM</div>
+      </div>
+
+      <div class="card-controls">
+        <button class="ctrl-btn again" id="btnAgain">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></svg>
+          Tekrar et
+        </button>
+        <button class="ctrl-btn shuffle" id="btnShuffle" aria-label="Karıştır">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+        </button>
+        <button class="ctrl-btn good" id="btnGood">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Biliyorum
+        </button>
+      </div>
+    </section>
+
+    <!-- ============= QUIZ ============= -->
+    <section class="view" id="view-quiz">
+      <div class="section-head">
+        <h2>Hızlı quiz</h2>
+        <p>Her turda 10 soru. Yeni ve öğrenilmekte olan ifadeler daha sık çıkar.</p>
+      </div>
+      <div class="chip-row" id="chipRowQuiz"></div>
+      <div id="quizArea"></div>
+    </section>
+
+    <!-- ============= MATCH ============= -->
+    <section class="view" id="view-match">
+      <div class="section-head">
+        <h2>Eşleştirme oyunu</h2>
+        <p>Almanca ifadeyi Türkçe karşılığıyla eşleştir, süreni gör.</p>
+      </div>
+      <div class="chip-row" id="chipRowMatch"></div>
+      <div class="match-top">
+        <span>Süre: <b id="matchTime">00:00</b></span>
+        <span>Eşleşme: <b id="matchScore">0/6</b></span>
+      </div>
+      <div id="matchArea"></div>
+    </section>
+
+    <!-- ============= BROWSE / LIST ============= -->
+    <section class="view" id="view-list">
+      <div class="section-head">
+        <h2>Tüm ifadeler</h2>
+        <p>352 kalıbı ara, filtrele, favorilerine ekle.</p>
+      </div>
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Almanca ya da Türkçe ara…" autocomplete="off">
+      </div>
+      <div class="filter-row" id="filterRow"></div>
+      <div id="listArea"></div>
+    </section>
+
+    <!-- ============= STATS ============= -->
+    <section class="view" id="view-stats">
+      <div class="section-head">
+        <h2>İlerlemen</h2>
+        <p>Günlük seri, bölüm bazlı hakimiyet ve genel özet.</p>
+      </div>
+      <div class="streak-card">
+        <div>
+          <div class="n" id="streakNum">0 gün</div>
+          <div class="l">üst üste çalışma serisi</div>
+        </div>
+        <div style="font-size:34px;">🔥</div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="num" id="statKnown">0</div><div class="lab">Biliniyor</div></div>
+        <div class="stat-box"><div class="num" id="statLearning">0</div><div class="lab">Öğreniliyor</div></div>
+        <div class="stat-box"><div class="num" id="statNew">0</div><div class="lab">Yeni</div></div>
+      </div>
+      <div id="chapterBars"></div>
+      <div class="reset-link"><button id="resetBtn">İlerlemeyi sıfırla</button></div>
+    </section>
+
+  </div>
+
+  <div class="tabbar">
+    <button class="tab-btn active" data-view="cards">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="18" rx="2" transform="rotate(-8 10 14)"/><rect x="7" y="3" width="14" height="18" rx="2"/></svg>
+      <span>Kartlar</span>
+    </button>
+    <button class="tab-btn" data-view="quiz">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-1 .5-1.5 1-1.5 2.2"/><path d="M12 17h.01"/></svg>
+      <span>Quiz</span>
+    </button>
+    <button class="tab-btn" data-view="match">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4M6.5 10v4M17.5 14v-4M14 17.5h4"/></svg>
+      <span>Eşleştir</span>
+    </button>
+    <button class="tab-btn" data-view="list">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      <span>Liste</span>
+    </button>
+    <button class="tab-btn" data-view="stats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+      <span>İstatistik</span>
+    </button>
+  </div>
+</div>
+
+<!-- Theme + settings sheet -->
+<div class="modal-overlay" id="themeModal">
+  <div class="modal-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Görünüm</div>
+    <div class="theme-grid" id="themeGrid">
+      <div class="theme-swatch sw-neon" data-theme="neon">
+        <div class="dots"><i style="background:#5865F2"></i><i style="background:#C6FF3D"></i></div>
+        <div class="tname">Neon Gece</div>
+      </div>
+      <div class="theme-swatch sw-gunduz" data-theme="gunduz">
+        <div class="dots"><i style="background:#4A5BE0"></i><i style="background:#0E9A6E"></i></div>
+        <div class="tname">Gündüz</div>
+      </div>
+      <div class="theme-swatch sw-okyanus" data-theme="okyanus">
+        <div class="dots"><i style="background:#2CC9D0"></i><i style="background:#FFC93D"></i></div>
+        <div class="tname">Okyanus</div>
+      </div>
+      <div class="theme-swatch sw-batim" data-theme="batim">
+        <div class="dots"><i style="background:#FF5D7A"></i><i style="background:#FFD23D"></i></div>
+        <div class="tname">Gün Batımı</div>
+      </div>
+    </div>
+    <div class="sheet-title" style="margin-top:22px;">Kart yönü</div>
+    <div class="dir-toggle">
+      <button class="dir-btn active" data-dir="de-tr">Almanca → Türkçe</button>
+      <button class="dir-btn" data-dir="tr-de">Türkçe → Almanca</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const DATA = [{"de": "Was geht ab?", "tr": "N’aber?", "i": 0, "c": "c1"}, {"de": "Dicker, Alter", "tr": "Kanka, abi", "i": 1, "c": "c1"}, {"de": "Freund, Kumpel", "tr": "Dostum", "i": 2, "c": "c1"}, {"de": "Krass", "tr": "İnanılmaz", "i": 3, "c": "c1"}, {"de": "Wahnsinn!", "tr": "Vay canına!", "i": 4, "c": "c1"}, {"de": "Bock haben", "tr": "Hevesli olmak", "i": 5, "c": "c1"}, {"de": "Hammer!", "tr": "Harika, süper", "i": 6, "c": "c1"}, {"de": "Geil!", "tr": "Çok iyi, havalı", "i": 7, "c": "c1"}, {"de": "Quatsch!", "tr": "Saçmalama!", "i": 8, "c": "c1"}, {"de": "Spaß, oder?", "tr": "Şaka mı yapıyorsun?", "i": 9, "c": "c1"}, {"de": "Echt jetzt?", "tr": "Gerçekten mi?", "i": 10, "c": "c1"}, {"de": "Wie bitte?", "tr": "Ne diyorsun? / Efendim?", "i": 11, "c": "c1"}, {"de": "Wie meinst du das?", "tr": "Nasıl yani?", "i": 12, "c": "c1"}, {"de": "Was ist los?", "tr": "Ne oldu?", "i": 13, "c": "c1"}, {"de": "Alles klar?", "tr": "Ne var ne yok? / Her şey yolunda mı?", "i": 14, "c": "c1"}, {"de": "Alles gut?", "tr": "İyi misin? / Sıkıntı var mı?", "i": 15, "c": "c1"}, {"de": "Mir geht’s gut, und dir?", "tr": "İyiyim, ya sen?", "i": 16, "c": "c1"}, {"de": "Lange nicht gesehen!", "tr": "Uzun zaman oldu!", "i": 17, "c": "c1"}, {"de": "Mach’s gut!", "tr": "Görüşürüz! / Kendine iyi bak!", "i": 18, "c": "c1"}, {"de": "Pass auf dich auf!", "tr": "Kendine dikkat et!", "i": 19, "c": "c1"}, {"de": "Los, uns gehen!", "tr": "Hadi gidelim", "i": 20, "c": "c1"}, {"de": "Na los!", "tr": "Hadi ama! / Hadi ya!", "i": 21, "c": "c1"}, {"de": "Warte mal!", "tr": "Bekle!", "i": 22, "c": "c1"}, {"de": "Beeil dich!", "tr": "Acele et!", "i": 23, "c": "c1"}, {"de": "Viel Erfolg!", "tr": "Kolay gelsin! / Başarılar!", "i": 24, "c": "c1"}, {"de": "Viel Glück!", "tr": "İyi şanslar!", "i": 25, "c": "c1"}, {"de": "Kein Problem!", "tr": "Sorun değil!", "i": 26, "c": "c1"}, {"de": "Macht nichts!", "tr": "Önemli değil!", "i": 27, "c": "c1"}, {"de": "Vergiss es!", "tr": "Boş ver! / Unut gitsin!", "i": 28, "c": "c1"}, {"de": "Egal!", "tr": "Umrumda değil / Fark etmez", "i": 29, "c": "c1"}, {"de": "Ist mir egal", "tr": "Bana göre fark etmez", "i": 30, "c": "c1"}, {"de": "Geit mich nichts an", "tr": "Beni ilgilendirmez", "i": 31, "c": "c1"}, {"de": "Was auch immer", "tr": "Ne olursa olsun", "i": 32, "c": "c1"}, {"de": "Klar, doch!", "tr": "Elbette!", "i": 33, "c": "c1"}, {"de": "Natürlich!", "tr": "Tabii ki!", "i": 34, "c": "c1"}, {"de": "Auf jeden Fall!", "tr": "Kesinlikle!", "i": 35, "c": "c1"}, {"de": "Ich bin sicher", "tr": "Eminim", "i": 36, "c": "c1"}, {"de": "Ich glaube nicht", "tr": "Sanmıyorum", "i": 37, "c": "c1"}, {"de": "Wahrscheinlich", "tr": "Herhalde / Muhtemelen", "i": 38, "c": "c1"}, {"de": "Vielleicht", "tr": "Belki", "i": 39, "c": "c1"}, {"de": "Sicher", "tr": "Kesin", "i": 40, "c": "c1"}, {"de": "Stimmt", "tr": "Doğru", "i": 41, "c": "c1"}, {"de": "Falsch", "tr": "Yanlış", "i": 42, "c": "c1"}, {"de": "Ich verstehe", "tr": "Anladım", "i": 43, "c": "c1"}, {"de": "Ich verstehe nicht", "tr": "Anlamadım", "i": 44, "c": "c2"}, {"de": "Ich weiß nicht", "tr": "Bilmiyorum", "i": 45, "c": "c2"}, {"de": "Ich erinnere mich nicht", "tr": "Hatırlamıyorum", "i": 46, "c": "c2"}, {"de": "Ich habe vergessen", "tr": "Unuttum", "i": 47, "c": "c2"}, {"de": "Hilf mir!", "tr": "Yardım et!", "i": 48, "c": "c2"}, {"de": "Kannst du mir helfen?", "tr": "Bana yardım eder misin?", "i": 49, "c": "c2"}, {"de": "Bitte", "tr": "Lütfen", "i": 50, "c": "c2"}, {"de": "Danke", "tr": "Teşekkürler", "i": 51, "c": "c2"}, {"de": "Vielen Dank!", "tr": "Çok teşekkürler!", "i": 52, "c": "c2"}, {"de": "Bitte schön", "tr": "Rica ederim", "i": 53, "c": "c2"}, {"de": "Es tut mir leid", "tr": "Özür dilerim", "i": 54, "c": "c2"}, {"de": "Entschuldigung", "tr": "Affedersin", "i": 55, "c": "c2"}, {"de": "Gute Idee", "tr": "İyi fikir", "i": 56, "c": "c2"}, {"de": "Schlechte Idee", "tr": "Kötü fikir", "i": 57, "c": "c2"}, {"de": "Ich stimme zu", "tr": "Katılıyorum", "i": 58, "c": "c2"}, {"de": "Ich stimme nicht zu", "tr": "Katılmıyorum", "i": 59, "c": "c2"}, {"de": "Macht Sinn", "tr": "Mantıklı", "i": 60, "c": "c2"}, {"de": "Macht keinen Sinn", "tr": "Mantıklı değil", "i": 61, "c": "c2"}, {"de": "Da bin ich dabei", "tr": "Kesinlikle katılıyorum / Ben de varım", "i": 62, "c": "c2"}, {"de": "Auf keinen Fall", "tr": "Kesinlikle katılmıyorum / Asla", "i": 63, "c": "c2"}, {"de": "Wann?", "tr": "Ne zaman?", "i": 64, "c": "c2"}, {"de": "Wo?", "tr": "Nerede?", "i": 65, "c": "c2"}, {"de": "Warum?", "tr": "Neden?", "i": 66, "c": "c2"}, {"de": "Wie?", "tr": "Nasıl?", "i": 67, "c": "c2"}, {"de": "Wie viele?", "tr": "Kaç tane?", "i": 68, "c": "c2"}, {"de": "Wie alt bist du?", "tr": "Kaç yaşındasın?", "i": 69, "c": "c2"}, {"de": "Wie heißt du?", "tr": "Adın ne?", "i": 70, "c": "c2"}, {"de": "Ich heiße …", "tr": "Benim adım …", "i": 71, "c": "c2"}, {"de": "Woher kommst du?", "tr": "Nerelisin?", "i": 72, "c": "c2"}, {"de": "Ich wohne hier", "tr": "Burada yaşıyorum", "i": 73, "c": "c2"}, {"de": "Ich wohne in Deutschland", "tr": "Almanya’da yaşıyorum", "i": 74, "c": "c2"}, {"de": "Was machst du?", "tr": "Ne iş yapıyorsun? / Ne yapıyorsun?", "i": 75, "c": "c2"}, {"de": "Ich arbeite", "tr": "Çalışıyorum", "i": 76, "c": "c2"}, {"de": "Ich studiere", "tr": "Okuyorum", "i": 77, "c": "c2"}, {"de": "Ich habe Freizeit", "tr": "Boş zamanım var", "i": 78, "c": "c2"}, {"de": "heute", "tr": "Bugün", "i": 79, "c": "c2"}, {"de": "morgen", "tr": "Yarın", "i": 80, "c": "c2"}, {"de": "gestern", "tr": "Dün", "i": 81, "c": "c2"}, {"de": "jetzt", "tr": "Şimdi", "i": 82, "c": "c2"}, {"de": "später", "tr": "Sonra", "i": 83, "c": "c2"}, {"de": "danach", "tr": "Daha sonra", "i": 84, "c": "c2"}, {"de": "sofort", "tr": "Hemen", "i": 85, "c": "c2"}, {"de": "ein bisschen", "tr": "Biraz / Birazcık", "i": 86, "c": "c2"}, {"de": "sehr", "tr": "Çok", "i": 87, "c": "c2"}, {"de": "zu viel", "tr": "Çok fazla", "i": 88, "c": "c3"}, {"de": "wenig", "tr": "Çok az / Az", "i": 89, "c": "c3"}, {"de": "genug", "tr": "Yeterli", "i": 90, "c": "c3"}, {"de": "mehr", "tr": "Daha fazla", "i": 91, "c": "c3"}, {"de": "weniger", "tr": "Daha az", "i": 92, "c": "c3"}, {"de": "schön", "tr": "Güzel", "i": 93, "c": "c3"}, {"de": "Tschüss", "tr": "Hoşçakal", "i": 94, "c": "c3"}, {"de": "Spaß beiseite.", "tr": "Şaka bir yana.", "i": 95, "c": "c3"}, {"de": "Unter uns gesagt.", "tr": "Laf aramızda.", "i": 96, "c": "c3"}, {"de": "Das bleibt unter uns.", "tr": "Aramızda kalsın.", "i": 97, "c": "c3"}, {"de": "Ist mir rausgerutscht.", "tr": "Ağzımdan kaçtı.", "i": 98, "c": "c3"}, {"de": "Rede nicht um den heißen Brei herum.", "tr": "Lafı dolandırma.", "i": 99, "c": "c3"}, {"de": "Zurück zum Thema.", "tr": "Konuya dönelim.", "i": 100, "c": "c3"}, {"de": "Komm auf den Punkt.", "tr": "Sadede gel.", "i": 101, "c": "c3"}, {"de": "Lass mich ausreden.", "tr": "Sözümü kesme.", "i": 102, "c": "c3"}, {"de": "Kurz gesagt.", "tr": "Kısacası.", "i": 103, "c": "c3"}, {"de": "Mir fällt was ein.", "tr": "Aklıma bir şey geldi.", "i": 104, "c": "c3"}, {"de": "Es liegt mir auf der Zunge.", "tr": "Dilimin ucunda.", "i": 105, "c": "c3"}, {"de": "Ich komme gerade nicht drauf.", "tr": "Şu an aklıma gelmiyor.", "i": 106, "c": "c3"}, {"de": "Ich bin völlig durcheinander.", "tr": "Kafam allak bullak.", "i": 107, "c": "c3"}, {"de": "Ich hab den Kopf voll.", "tr": "Kafam dolu.", "i": 108, "c": "c3"}, {"de": "Ich muss darüber nachdenken.", "tr": "Düşünmem lazım.", "i": 109, "c": "c3"}, {"de": "Ich schlaf mal drüber. / Ich muss da nochmal drüber schlafen.", "tr": "Bir gece düşüneyim.", "i": 110, "c": "c3"}, {"de": "Ich kann mich nicht entscheiden.", "tr": "Karar veremiyorum.", "i": 111, "c": "c3"}, {"de": "Ich hab's mir anders überlegt.", "tr": "Fikrimi değiştirdim.", "i": 112, "c": "c3"}, {"de": "Ich hab kein gutes Gefühl dabei.", "tr": "İçime sinmiyor.", "i": 113, "c": "c3"}, {"de": "Mein Bauchgefühl sagt das.", "tr": "İçimden bir ses öyle diyor.", "i": 114, "c": "c3"}, {"de": "Ich riskiere es.", "tr": "Risk alıyorum.", "i": 115, "c": "c3"}, {"de": "Einen Versuch ist es wert.", "tr": "Denemeye değer.", "i": 116, "c": "c3"}, {"de": "Was haben wir zu verlieren?", "tr": "Kaybedecek neyimiz var?", "i": 117, "c": "c3"}, {"de": "Vielleicht klappt's ja?", "tr": "Ya tutarsa?", "i": 118, "c": "c3"}, {"de": "Ich tu, was ich kann.", "tr": "Elimden geleni yaparım.", "i": 119, "c": "c3"}, {"de": "Ich can nichts versprechen.", "tr": "Söz veremem.", "i": 120, "c": "c3"}, {"de": "Versprochen.", "tr": "Söz veriyorum.", "i": 121, "c": "c3"}, {"de": "Du kannst auf mich zählen.", "tr": "Bana güvenebilirsin.", "i": 122, "c": "c3"}, {"de": "Ich lass dich nicht hängen.", "tr": "Seni yarı yolda bırakmam.", "i": 123, "c": "c3"}, {"de": "Ich bin für dich da. / Ich bin da.", "tr": "Yanındayım.", "i": 124, "c": "c3"}, {"de": "Das bedeutet mir viel.", "tr": "Bu benim için çok değerli.", "i": 125, "c": "c3"}, {"de": "Lieb von dir.", "tr": "Çok naziksin.", "i": 126, "c": "c3"}, {"de": "Tust du mir einen Gefallen?", "tr": "Bana bir iyilik yapar mısın?", "i": 127, "c": "c3"}, {"de": "Ich hab was gutzumachen.", "tr": "Bana bir iyilik borçlusun.", "i": 128, "c": "c3"}, {"de": "Ich bin stolz auf dich.", "tr": "Seninle gurur duyuyorum.", "i": 129, "c": "c3"}, {"de": "Ich freu mich für dich.", "tr": "Senin adına sevindim.", "i": 130, "c": "c3"}, {"de": "Ich drück dir die Daumen!", "tr": "Şansın bol olsun! / Sana şans diliyorum.", "i": 131, "c": "c3"}, {"de": "Da bin ich erleichtert.", "tr": "İçim rahatladı.", "i": 132, "c": "c4"}, {"de": "Mir fällt ein Stein vom Herzen.", "tr": "Üzerimden yük kalktı.", "i": 133, "c": "c4"}, {"de": "Das war knapp!", "tr": "Az kalsın! / Kıl payıydı!", "i": 134, "c": "c4"}, {"de": "Da haben wir Glück gehabt.", "tr": "Ucuz atlattık.", "i": 135, "c": "c4"}, {"de": "Das ist mir entfallen.", "tr": "Aklımdan çıkmış.", "i": 136, "c": "c4"}, {"de": "Hab ich übersehen. / Das ist mir durchgerutscht.", "tr": "Gözümden kaçmış.", "i": 137, "c": "c4"}, {"de": "Hab ich nicht bemerkt.", "tr": "Fark etmedim.", "i": 138, "c": "c4"}, {"de": "Da lag ich falsch. / Ich hab mich vertan.", "tr": "Yanılmışım.", "i": 139, "c": "c4"}, {"de": "Da fragst du den Falschen.", "tr": "Yanlış kişiye sordun.", "i": 140, "c": "c4"}, {"de": "Zieh mich da nicht rein.", "tr": "Beni buna karıştırma.", "i": 141, "c": "c4"}, {"de": "Ich hab damit nichts zu tun.", "tr": "Benimle ilgisi yok.", "i": 142, "c": "c4"}, {"de": "Schieb's nicht auf mich.", "tr": "Suçu bana atma.", "i": 143, "c": "c4"}, {"de": "Ich hab kein Netz.", "tr": "İnternet çekmiyor.", "i": 144, "c": "c4"}, {"de": "Mein Akku ist gleich leer.", "tr": "Şarjım bitmek üzere.", "i": 145, "c": "c4"}, {"de": "Mein Handy ist ausgegangen.", "tr": "Telefonum kapandı.", "i": 146, "c": "c4"}, {"de": "Deine Stimme kommt abgehackt.", "tr": "Sesin kesiliyor.", "i": 147, "c": "c4"}, {"de": "Ich hör dich nicht.", "tr": "Seni duyamıyorum.", "i": 148, "c": "c4"}, {"de": "Dein Bild ist eingefroren.", "tr": "Dondun, görüntün dondu.", "i": 149, "c": "c4"}, {"de": "Schick mir deinen Standort.", "tr": "Konumunu atsana.", "i": 150, "c": "c4"}, {"de": "Schickst du mir den Link?", "tr": "Linki yollar mısın?", "i": 151, "c": "c4"}, {"de": "Deine Nachricht kam nicht an.", "tr": "Mesajın gelmedi.", "i": 152, "c": "c4"}, {"de": "Ich hab aus Versehen draufgedrückt.", "tr": "Yanlışlıkla bastım.", "i": 153, "c": "c4"}, {"de": "Ich hab mich ausgesperrt.", "tr": "Kapıda kaldım.", "i": 154, "c": "c4"}, {"de": "Ich find meinen Schlüssel nicht.", "tr": "Anahtarımı bulamıyorum.", "i": 155, "c": "c4"}, {"de": "Klingel mal.", "tr": "Zile bassana.", "i": 156, "c": "c4"}, {"de": "Hältst du die Tür auf?", "tr": "Kapıyı açık tutar mısın?", "i": 157, "c": "c4"}, {"de": "Zieh die Schuhe aus.", "tr": "Ayakkabılarını çıkar.", "i": 158, "c": "c4"}, {"de": "Mach mal leiser.", "tr": "Sesi biraz kıs.", "i": 159, "c": "c4"}, {"de": "Mach mal lauter.", "tr": "Sesi biraz aç.", "i": 160, "c": "c4"}, {"de": "Lass uns aufräumen.", "tr": "Ortalığı toparlayalım.", "i": 161, "c": "c4"}, {"de": "Bringst du den Müll raus?", "tr": "Çöpü çıkarır mısın?", "i": 162, "c": "c4"}, {"de": "Die Milch ist alle.", "tr": "Süt bitmiş.", "i": 163, "c": "c4"}, {"de": "Das ist schlecht geworden.", "tr": "Bozulmuş bu.", "i": 164, "c": "c4"}, {"de": "Das schmeckt irgendwie komisch.", "tr": "Tadı bir garip.", "i": 165, "c": "c4"}, {"de": "Das riecht richtig gut.", "tr": "Mis gibi kokuyor.", "i": 166, "c": "c4"}, {"de": "Darf ich mal abbeißen?", "tr": "Bir lokma alabilir miyim?", "i": 167, "c": "c4"}, {"de": "Lass mir was übrig.", "tr": "Bana biraz bırak.", "i": 168, "c": "c4"}, {"de": "Stimmt so.", "tr": "Üstü kalsın.", "i": 169, "c": "c4"}, {"de": "Geht auch mit Karte?", "tr": "Kartla olur mu?", "i": 170, "c": "c4"}, {"de": "Ich hab kein Bargeld dabei.", "tr": "Yanımda nakit yok.", "i": 171, "c": "c4"}, {"de": "Das ist mir zu eng.", "tr": "Bana dar geliyor.", "i": 172, "c": "c4"}, {"de": "Gibt’s das eine Nummer größer?", "tr": "Bir beden büyüğü var mı?", "i": 173, "c": "c4"}, {"de": "Das steht dir richtig gut.", "tr": "Sana çok yakışmış.", "i": 174, "c": "c4"}, {"de": "Das passt mir nicht.", "tr": "Üstüme olmadı.", "i": 175, "c": "c4"}, {"de": "Ich schau mich nur um.", "tr": "Biraz dolaşıyorum sadece.", "i": 176, "c": "c5"}, {"de": "Was ist damit los?", "tr": "Bunun nesi var?", "i": 177, "c": "c5"}, {"de": "Hab ich was verpasst?", "tr": "Bir şey mi kaçırdım?", "i": 178, "c": "c5"}, {"de": "Planänderung.", "tr": "Plan değişikliği.", "i": 179, "c": "c5"}, {"de": "Er hat kurzfristig abgesagt.", "tr": "Son anda iptal etti.", "i": 180, "c": "c5"}, {"de": "Er hat mich versetzt.", "tr": "Beni ekti.", "i": 181, "c": "c5"}, {"de": "Ich hab umsonst gewartet.", "tr": "Boşuna bekledim.", "i": 182, "c": "c5"}, {"de": "Ich bin falsch eingestiegen.", "tr": "Yanlış bindim.", "i": 183, "c": "c5"}, {"de": "Ich hab die Haltestelle verpasst.", "tr": "Durağı kaçırdım.", "i": 184, "c": "c5"}, {"de": "Ich steh im Stau.", "tr": "Trafiğe takıldım.", "i": 185, "c": "c5"}, {"de": "Ich bin nicht von hier.", "tr": "Buralara yabancıyım.", "i": 186, "c": "c5"}, {"de": "Kann du mich mitnehmen?", "tr": "Beni de alır mısın?", "i": 187, "c": "c5"}, {"de": "Ich hab mich verlaufen.", "tr": "Yolumu kaybettim.", "i": 188, "c": "c5"}, {"de": "Ich geh kurz an die frische Luft.", "tr": "Biraz hava alacağım.", "i": 189, "c": "c5"}, {"de": "Ich muss den Kopf freikriegen.", "tr": "Kafamı dağıtmam lazım.", "i": 190, "c": "c5"}, {"de": "Ich hab kein Auge zugemacht.", "tr": "Hiç uyuyamadım.", "i": 191, "c": "c5"}, {"de": "Ich bin eingeschlafen.", "tr": "Uyuyakalmışım.", "i": 192, "c": "c5"}, {"de": "Ich muss morgen früh raus.", "tr": "Yarın erken kalkacağım.", "i": 193, "c": "c5"}, {"de": "Das haut mich nicht um.", "tr": "Beni pek etkilemedi.", "i": 194, "c": "c5"}, {"de": "Jetzt mal im Ernst.", "tr": "Şimdi ciddi konuşalım.", "i": 195, "c": "c5"}, {"de": "Da bin ich raus.", "tr": "Ben buna yokum.", "i": 196, "c": "c5"}, {"de": "Kommt gar nicht infrage.", "tr": "Kesinlikle söz konusu olamaz.", "i": 197, "c": "c5"}, {"de": "Lass dich nicht verrückt machen.", "tr": "Kendine stres sokma.", "i": 198, "c": "c5"}, {"de": "Ich blick da nicht durch.", "tr": "Bundan hiçbir şey anlamıyorum.", "i": 199, "c": "c5"}, {"de": "Das geht auf mich. / Ich geb dir einen aus.", "tr": "Bunu ben ısmarlıyorum.", "i": 200, "c": "c5"}, {"de": "Da ist was dran.", "tr": "Bunda doğruluk payı var.", "i": 201, "c": "c5"}, {"de": "Das ist nicht ohne.", "tr": "Bu hafife alınacak bir şey değil.", "i": 202, "c": "c5"}, {"de": "Ich bin völlig fertig. / Ich bin total platt. / Ich bin fix und fertig.", "tr": "Tamamen bitmiş tükendim.", "i": 203, "c": "c5"}, {"de": "Das nehme ich dir nicht ab.", "tr": "Buna inanmıyorum.", "i": 204, "c": "c5"}, {"de": "Jetzt reicht's aber.", "tr": "Artık yeter.", "i": 205, "c": "c5"}, {"de": "Mach kein Drama draus.", "tr": "Bunu büyütme.", "i": 206, "c": "c5"}, {"de": "Ich komm nicht hinterher.", "tr": "Yetişemiyorum.", "i": 207, "c": "c5"}, {"de": "Das liegt an dir.", "tr": "Bu sana bağlı.", "i": 208, "c": "c5"}, {"de": "Das kannste vergessen.", "tr": "Onu unut (mümkün değil).", "i": 209, "c": "c5"}, {"de": "Was soll's?", "tr": "Ne yapalım artık?", "i": 210, "c": "c5"}, {"de": "Du meinst es nur gut.", "tr": "Sadece iyi niyetle söylüyorsun.", "i": 211, "c": "c5"}, {"de": "Sei nicht so hart zu dir. / Sei nicht so streng.", "tr": "Kendine bu kadar yüklenme.", "i": 212, "c": "c5"}, {"de": "Das ergibt keinen Sinn.", "tr": "Bunun bir anlamı yok.", "i": 213, "c": "c5"}, {"de": "Ich hab keinen Plan.", "tr": "Hiçbir planım yok.", "i": 214, "c": "c5"}, {"de": "Das ist mir zu blöd.", "tr": "Bu bana çok saçma geliyor.", "i": 215, "c": "c5"}, {"de": "Ich lass das mal so stehen.", "tr": "Şimdilik böyle bırakalım.", "i": 216, "c": "c5"}, {"de": "Das ist eine andere Baustelle.", "tr": "Bu ayrı bir konu.", "i": 217, "c": "c5"}, {"de": "Das ist leichter gesagt als getan.", "tr": "Söylemesi kolay, yapması zor.", "i": 218, "c": "c5"}, {"de": "Ich bin da eher skeptisch.", "tr": "Bu konuda biraz şüpheliyim.", "i": 219, "c": "c5"}, {"de": "Das ist nicht mein Ernst.", "tr": "Bunu ciddiye alma.", "i": 220, "c": "c6"}, {"de": "Ich hab da so ein Gefühl.", "tr": "İçimde böyle bir his var.", "i": 221, "c": "c6"}, {"de": "Das kann gut sein.", "tr": "Bu doğru olabilir.", "i": 222, "c": "c6"}, {"de": "Ich halte dich auf dem Laufenden.", "tr": "Seni haberdar ederim.", "i": 223, "c": "c6"}, {"de": "Darauf hab ich keinen Bock.", "tr": "Buna hiç hevesim yok.", "i": 224, "c": "c6"}, {"de": "Das ist mir zu riskant.", "tr": "Bu benim için fazla riskli.", "i": 225, "c": "c6"}, {"de": "Ich steh da nicht so drauf.", "tr": "Ben pek sevmem.", "i": 226, "c": "c6"}, {"de": "Das ist nicht so mein Stil.", "tr": "Bu benim tarzım değil.", "i": 227, "c": "c6"}, {"de": "Ich fühl mich dabei nicht wohl.", "tr": "Bu konuda rahat hissetmiyorum.", "i": 228, "c": "c6"}, {"de": "Das passt nicht in meinen Plan.", "tr": "Bu planıma uymuyor.", "i": 229, "c": "c6"}, {"de": "Ich hab gerade viel um die Ohren.", "tr": "Şu ara çok yoğunum.", "i": 230, "c": "c6"}, {"de": "Das zieht sich.", "tr": "Bu uzayıp gidiyor.", "i": 231, "c": "c6"}, {"de": "Ich must das erstmal sacken lassen.", "tr": "Bunu önce sindirmem gerek.", "i": 232, "c": "c6"}, {"de": "Das war keine Absicht. / Das war nicht meine Absicht.", "tr": "Kasten değildi / Niyetim bu değildi.", "i": 233, "c": "c6"}, {"de": "Ich hab's im Gefühl.", "tr": "İçime doğuyor.", "i": 234, "c": "c6"}, {"de": "Das ist nicht so einfach.", "tr": "O kadar kolay değil.", "i": 235, "c": "c6"}, {"de": "Ich mach mir da keine Hoffnung.", "tr": "Bu konuda umutlanmıyorum.", "i": 236, "c": "c6"}, {"de": "Das steht noch in den Sternen.", "tr": "Bu henüz belli değil.", "i": 237, "c": "c6"}, {"de": "Ich muss mich erstmal um mich kümmern.", "tr": "Önce kendimle ilgilenmem gerek.", "i": 238, "c": "c6"}, {"de": "Das hat seine Vor- und Nachteile.", "tr": "Bunun iyi ve kötü yönleri var.", "i": 239, "c": "c6"}, {"de": "Da muss ich passen.", "tr": "Bu sefer pas geçiyorum.", "i": 240, "c": "c6"}, {"de": "Das ist echt nicht fair.", "tr": "Bu gerçekten adil değil.", "i": 241, "c": "c6"}, {"de": "Ich bin platt.", "tr": "Bitkinim.", "i": 242, "c": "c6"}, {"de": "Das ist echt praktisch.", "tr": "Bu gerçekten pratik.", "i": 243, "c": "c6"}, {"de": "Widerlich!", "tr": "İğrenç!", "i": 244, "c": "c6"}, {"de": "Ich kann nicht mehr.", "tr": "Artık dayanamıyorum.", "i": 245, "c": "c6"}, {"de": "Lass uns los.", "tr": "Hadi gidelim.", "i": 246, "c": "c6"}, {"de": "Bist du sicher?", "tr": "Emin misin?", "i": 247, "c": "c6"}, {"de": "Ich hab dich lieb.", "tr": "Seni seviyorum.", "i": 248, "c": "c6"}, {"de": "Das ist doch egal.", "tr": "Bu önemli değil.", "i": 249, "c": "c6"}, {"de": "Du schaffst das!", "tr": "Bunu başarabilirsin!", "i": 250, "c": "c6"}, {"de": "Sei vorsichtig.", "tr": "Dikkatli ol.", "i": 251, "c": "c6"}, {"de": "Das dauert ewig.", "tr": "Bu biraz daha sürer.", "i": 252, "c": "c6"}, {"de": "Ich hab gerade keine Zeit.", "tr": "Şu an vaktim yok.", "i": 253, "c": "c6"}, {"de": "Kein Thema.", "tr": "Mesele değil.", "i": 254, "c": "c6"}, {"de": "Hauptsache, es geht dir gut.", "tr": "Önemli olan senin iyi olman.", "i": 255, "c": "c6"}, {"de": "Das finde ich super.", "tr": "Bunu harika buluyorum.", "i": 256, "c": "c6"}, {"de": "Lass uns ehrlich sein.", "tr": "Dürüst olalım.", "i": 257, "c": "c6"}, {"de": "Das kann doch nicht wahr sein.", "tr": "Bu gerçek olamaz.", "i": 258, "c": "c6"}, {"de": "Ich hab dich vermisst.", "tr": "Seni özledim.", "i": 259, "c": "c6"}, {"de": "Erzähl mal!", "tr": "Anlat bakalım!", "i": 260, "c": "c6"}, {"de": "Das ist typisch.", "tr": "Bu çok tipik.", "i": 261, "c": "c6"}, {"de": "Das klingt gut.", "tr": "Kulağa iyi geliyor.", "i": 262, "c": "c6"}, {"de": "Mach langsam.", "tr": "Yavaş ol.", "i": 263, "c": "c6"}, {"de": "Ich muss das noch klären.", "tr": "Bunu hâlâ netleştirmem lazım.", "i": 264, "c": "c7"}, {"de": "Das ist mir zu viel.", "tr": "Bu bana fazla.", "i": 265, "c": "c7"}, {"de": "Ich bin müde.", "tr": "Yorgunum.", "i": 266, "c": "c7"}, {"de": "Lass uns sparen.", "tr": "Biraz tasarruf edelim.", "i": 267, "c": "c7"}, {"de": "Ich hab Hunger.", "tr": "Açım.", "i": 268, "c": "c7"}, {"de": "Ich hab Durst.", "tr": "Susadım.", "i": 269, "c": "c7"}, {"de": "Das ist lecker!", "tr": "Bu çok lezzetli!", "i": 270, "c": "c7"}, {"de": "Ich bin gleich fertig.", "tr": "Hemen bitiriyorum.", "i": 271, "c": "c7"}, {"de": "Wo genau?", "tr": "Tam olarak nerede?", "i": 272, "c": "c7"}, {"de": "Das ist eine lange Geschichte.", "tr": "Bu uzun bir hikâye.", "i": 273, "c": "c7"}, {"de": "Darüber reden wir später.", "tr": "Bunu sonra konuşuruz.", "i": 274, "c": "c7"}, {"de": "Ich gönn dir das.", "tr": "Bunu sana gerçekten gönülden diliyorum.", "i": 275, "c": "c7"}, {"de": "Ich geb mein Bestes.", "tr": "Elimden gelenin en iyisini yaparım.", "i": 276, "c": "c7"}, {"de": "Wir bleiben in Kontakt.", "tr": "İletişimde kalalım.", "i": 277, "c": "c7"}, {"de": "Danke, dass du fragst.", "tr": "Sorduğun için teşekkürler.", "i": 278, "c": "c7"}, {"de": "Das ist wirklich interessant.", "tr": "Bu gerçekten ilginç.", "i": 279, "c": "c7"}, {"de": "Auf bald!", "tr": "Yakında görüşürüz!", "i": 280, "c": "c7"}, {"de": "Na, alles klar?", "tr": "Ne haber?", "i": 281, "c": "c7"}, {"de": "Was geht?", "tr": "Ne var ne yok?", "i": 282, "c": "c7"}, {"de": "Wie läuft's?", "tr": "Nasıl gidiyor?", "i": 283, "c": "c7"}, {"de": "Kann nicht klagen.", "tr": "Şikayetim yok.", "i": 284, "c": "c7"}, {"de": "Muss ja.", "tr": "İdare ediyoruz işte.", "i": 285, "c": "c7"}, {"de": "Und bei dir?", "tr": "Ya sende?", "i": 286, "c": "c7"}, {"de": "Man sieht sich!", "tr": "Görüşürüz!", "i": 287, "c": "c7"}, {"de": "Bis dann!", "tr": "Sonra görüşürüz!", "i": 288, "c": "c7"}, {"de": "Hau rein!", "tr": "Hadi, kendine iyi bak!", "i": 289, "c": "c7"}, {"de": "Ich muss los.", "tr": "Gitmem lazım.", "i": 290, "c": "c7"}, {"de": "Bis gleich!", "tr": "Birazdan görüşürüz!", "i": 291, "c": "c7"}, {"de": "Bis später!", "tr": "Sonra görüşürüz!", "i": 292, "c": "c7"}, {"de": "Schönen Feierabend!", "tr": "İyi akşamlar, iş çıkışı iyi dinlenmeler!", "i": 293, "c": "c7"}, {"de": "Grüß die anderen!", "tr": "Diğerlerine selam söyle!", "i": 294, "c": "c7"}, {"de": "Meld dich!", "tr": "Haber ver!", "i": 295, "c": "c7"}, {"de": "Wir hören voneinander.", "tr": "Haberleşiriz.", "i": 296, "c": "c7"}, {"de": "Kein Ding!", "tr": "Sorun değil!", "i": 297, "c": "c7"}, {"de": "Kein Stress!", "tr": "Aceleye gerek yok!", "i": 298, "c": "c7"}, {"de": "Passt schon.", "tr": "Böyle iyi.", "i": 299, "c": "c7"}, {"de": "Geht klar!", "tr": "Tamamdır!", "i": 300, "c": "c7"}, {"de": "Mach ich!", "tr": "Yaparım!", "i": 301, "c": "c7"}, {"de": "Kriegen wir hin.", "tr": "Hallederiz.", "i": 302, "c": "c7"}, {"de": "Ich bin dabei!", "tr": "Ben de varım!", "i": 303, "c": "c7"}, {"de": "Bin gleich da.", "tr": "Birazdan oradayım.", "i": 304, "c": "c7"}, {"de": "Bin unterwegs.", "tr": "Yoldayım.", "i": 305, "c": "c7"}, {"de": "Warte mal kurz.", "tr": "Bir saniye bekle.", "i": 306, "c": "c7"}, {"de": "Gib mir 'ne Minute.", "tr": "Bana bir dakika ver.", "i": 307, "c": "c7"}, {"de": "Lass dir Zeit.", "tr": "Acele etme.", "i": 308, "c": "c8"}, {"de": "Nur die Ruhe.", "tr": "Sakin ol.", "i": 309, "c": "c8"}, {"de": "Immer mit der Ruhe!", "tr": "Sakin sakin!", "i": 310, "c": "c8"}, {"de": "Das passt mir gut.", "tr": "Bu bana uygun.", "i": 311, "c": "c8"}, {"de": "Von mir aus.", "tr": "Bana uyar.", "i": 312, "c": "c8"}, {"de": "Meinetwegen.", "tr": "Benim için olur.", "i": 313, "c": "c8"}, {"de": "Abgemacht?", "tr": "Anlaştık?", "i": 314, "c": "c8"}, {"de": "Im Ernst?", "tr": "Cidden mi?", "i": 315, "c": "c8"}, {"de": "Ach so!", "tr": "Ha, anladım!", "i": 316, "c": "c8"}, {"de": "Ach was!", "tr": "Yok artık!", "i": 317, "c": "c8"}, {"de": "Wie cool ist das denn?", "tr": "Bu ne kadar harika!", "i": 318, "c": "c8"}, {"de": "Sowas!", "tr": "Hayret bir şey!", "i": 319, "c": "c8"}, {"de": "Kein Witz!", "tr": "Şaka değil!", "i": 320, "c": "c8"}, {"de": "Ohne Spaß!", "tr": "Ciddi söylüyorum!", "i": 321, "c": "c8"}, {"de": "Ganz ehrlich?", "tr": "Açık konuşayım mı?", "i": 322, "c": "c8"}, {"de": "Keine Ahnung.", "tr": "Hiçbir fikrim yok.", "i": 323, "c": "c8"}, {"de": "Wer weiß?", "tr": "Kim bilir?", "i": 324, "c": "c8"}, {"de": "Mal sehen.", "tr": "Bakalım.", "i": 325, "c": "c8"}, {"de": "Schauen wir mal.", "tr": "Bir bakalım.", "i": 326, "c": "c8"}, {"de": "Das glaube ich dir.", "tr": "Sana inanıyorum.", "i": 327, "c": "c8"}, {"de": "Da hast du recht.", "tr": "O konuda haklısın.", "i": 328, "c": "c8"}, {"de": "Hast du Bock?", "tr": "Canın istiyor mu?", "i": 329, "c": "c8"}, {"de": "Das nervt!", "tr": "Bu sinir bozucu!", "i": 330, "c": "c8"}, {"de": "So ein Mist!", "tr": "Hay aksi!", "i": 331, "c": "c8"}, {"de": "Ich brauch 'ne Pause.", "tr": "Molaya ihtiyacım var.", "i": 332, "c": "c8"}, {"de": "Mir reicht's.", "tr": "Yeter artık.", "i": 333, "c": "c8"}, {"de": "Lass mal.", "tr": "Boş ver.", "i": 334, "c": "c8"}, {"de": "Kopf hoch!", "tr": "Moralini bozma!", "i": 335, "c": "c8"}, {"de": "Was hast du vor?", "tr": "Ne yapmayı planlıyorsun?", "i": 336, "c": "c8"}, {"de": "Hast du was vor?", "tr": "Bir planın var mı?", "i": 337, "c": "c8"}, {"de": "Kommst du mit?", "tr": "Sen de geliyor musun?", "i": 338, "c": "c8"}, {"de": "Lass uns losgehen.", "tr": "Hadi gidelim.", "i": 339, "c": "c8"}, {"de": "Auf geht's!", "tr": "Haydi!", "i": 340, "c": "c8"}, {"de": "Ich komme nach.", "tr": "Ben sonra gelirim.", "i": 341, "c": "c8"}, {"de": "Sag Bescheid.", "tr": "Haber ver.", "i": 342, "c": "c8"}, {"de": "Schreib mir kurz.", "tr": "Bana kısaca yaz.", "i": 343, "c": "c8"}, {"de": "Ruf mich an.", "tr": "Beni ara.", "i": 344, "c": "c8"}, {"de": "Ich meld mich später.", "tr": "Sonra haber veririm.", "i": 345, "c": "c8"}, {"de": "Machen wir halbe-halbe?", "tr": "Yarı yarıya bölüşelim mi?", "i": 346, "c": "c8"}, {"de": "Ich bin knapp bei Kasse.", "tr": "Bu aralar param az.", "i": 347, "c": "c8"}, {"de": "Das ist mir zu teuer.", "tr": "Bu bana çok pahalı.", "i": 348, "c": "c8"}, {"de": "Ich check's nicht.", "tr": "Anlamıyorum.", "i": 349, "c": "c8"}, {"de": "Jetzt hab ich's kapiert.", "tr": "Şimdi anladım.", "i": 350, "c": "c8"}, {"de": "War nur Spaß!", "tr": "Şakaydı!", "i": 351, "c": "c8"}];
+const CHAPTERS = [{"id": "c1", "name": "Sokak Selamı", "sub": "Günlük slang ve ilk tepkiler", "start": 0, "end": 44}, {"id": "c2", "name": "Kim, Ne, Ne Zaman", "sub": "Soru sözcükleri ve kişisel bilgi", "start": 44, "end": 88}, {"id": "c3", "name": "Kafa Karışıklığı", "sub": "Düşünme, karar verme deyimleri", "start": 88, "end": 132}, {"id": "c4", "name": "Söz ve Güven", "sub": "Söz verme, teselli, minnettarlık", "start": 132, "end": 176}, {"id": "c5", "name": "Ekran ve Ev", "sub": "Telefon, ev işleri, mutfak", "start": 176, "end": 220}, {"id": "c6", "name": "Yolda Aksilik", "sub": "Ulaşım, plan değişikliği, yorgunluk", "start": 220, "end": 264}, {"id": "c7", "name": "İçten Sözler", "sub": "Duygular ve güçlü ifadeler", "start": 264, "end": 308}, {"id": "c8", "name": "Vedalaşma", "sub": "Kısa cevaplar ve ayrılık kalıpları", "start": 308, "end": 352}];
+const TOTAL = DATA.length;
+
+/* ============================================================
+   STATE / STORAGE
+   ============================================================ */
+const LS_KEY = "ad_progress_v1";
+const LS_SETTINGS = "ad_settings_v1";
+
+function loadProgress(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { status:{}, favorites:{}, streak:0, lastVisit:null, quizBest:0 };
+}
+function saveProgress(){ localStorage.setItem(LS_KEY, JSON.stringify(progress)); }
+function loadSettings(){
+  try{
+    const raw = localStorage.getItem(LS_SETTINGS);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { theme:"neon", dir:"de-tr" };
+}
+function saveSettings(){ localStorage.setItem(LS_SETTINGS, JSON.stringify(settings)); }
+
+let progress = loadProgress();
+let settings = loadSettings();
+
+// status: 0 = new, 1 = learning, 2 = known
+function getStatus(i){ return progress.status[i] ?? 0; }
+function setStatus(i, s){ progress.status[i] = s; saveProgress(); }
+
+function updateStreak(){
+  const today = new Date().toISOString().slice(0,10);
+  if(progress.lastVisit === today) return;
+  const y = new Date(); y.setDate(y.getDate()-1);
+  const yesterday = y.toISOString().slice(0,10);
+  if(progress.lastVisit === yesterday){ progress.streak += 1; }
+  else if(progress.lastVisit === null){ progress.streak = 1; }
+  else { progress.streak = 1; }
+  progress.lastVisit = today;
+  saveProgress();
+}
+updateStreak();
+
+/* ============================================================
+   THEME + SETTINGS APPLY
+   ============================================================ */
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', settings.theme);
+  document.querySelectorAll('.theme-swatch').forEach(s=>{
+    s.classList.toggle('active', s.dataset.theme === settings.theme);
+  });
+}
+function applyDir(){
+  document.querySelectorAll('.dir-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.dir === settings.dir);
+  });
+}
+applyTheme(); applyDir();
+
+document.getElementById('themeBtn').addEventListener('click', ()=>{
+  document.getElementById('themeModal').classList.add('show');
+});
+document.getElementById('themeModal').addEventListener('click', (e)=>{
+  if(e.target.id === 'themeModal') e.target.classList.remove('show');
+});
+document.getElementById('themeGrid').addEventListener('click', (e)=>{
+  const sw = e.target.closest('.theme-swatch');
+  if(!sw) return;
+  settings.theme = sw.dataset.theme; saveSettings(); applyTheme();
+});
+document.querySelectorAll('.dir-btn').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    settings.dir = b.dataset.dir; saveSettings(); applyDir();
+    renderCard();
+  });
+});
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 1400);
+}
+function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
+
+/* ============================================================
+   TTS (native browser speech synthesis — no external deps)
+   ============================================================ */
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) { toast('Ses özelliği bu cihazda yok'); return; }
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'de-DE'; u.rate = 0.92;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ============================================================
+   TAB NAVIGATION
+   ============================================================ */
+const views = ['cards','quiz','match','list','stats'];
+function showView(name){
+  views.forEach(v=>{
+    document.getElementById('view-'+v).classList.toggle('active', v===name);
+  });
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.view===name);
+  });
+  if(name==='stats') renderStats();
+  if(name==='list') renderList();
+  if(name==='quiz' && !quizState.active) startQuiz();
+  if(name==='match' && !matchState.pairs.length) startMatch();
+}
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.addEventListener('click', ()=>showView(b.dataset.view));
+});
+
+/* ============================================================
+   CHAPTER CHIP HELPERS (shared across cards/quiz/match)
+   ============================================================ */
+function chapterItems(chapterId){
+  if(chapterId==='all') return DATA;
+  return DATA.filter(d=>d.c===chapterId);
+}
+function buildChipRow(container, currentGetter, onSelect){
+  container.innerHTML = '';
+  const allChip = document.createElement('div');
+  allChip.className = 'chip' + (currentGetter()==='all' ? ' active' : '');
+  allChip.textContent = 'Tümü · 352';
+  allChip.addEventListener('click', ()=>onSelect('all'));
+  container.appendChild(allChip);
+  CHAPTERS.forEach(ch=>{
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (currentGetter()===ch.id ? ' active' : '');
+    chip.textContent = ch.name;
+    chip.addEventListener('click', ()=>onSelect(ch.id));
+    container.appendChild(chip);
+  });
+}
+
+/* ============================================================
+   FLASHCARDS
+   ============================================================ */
+let cardsChapter = 'all';
+let cardsPool = [];
+let cardsIdx = 0;
+let cardFlipped = false;
+
+function weightedShuffle(items){
+  // Prioritize new/learning items: duplicate-weighted sampling without true duplication.
+  return items
+    .map(it => ({it, w: Math.random() - (getStatus(it.i)===2 ? 0.25 : 0)}))
+    .sort((a,b)=>a.w-b.w)
+    .map(x=>x.it);
+}
+
+function initCards(){
+  cardsPool = weightedShuffle(chapterItems(cardsChapter));
+  cardsIdx = 0;
+  renderCard();
+}
+function currentCardsProgress(){
+  const items = chapterItems(cardsChapter);
+  const known = items.filter(d=>getStatus(d.i)===2).length;
+  return items.length ? Math.round(known/items.length*100) : 0;
+}
+function renderCard(){
+  if(cardsPool.length===0){ cardsPool = weightedShuffle(chapterItems(cardsChapter)); cardsIdx=0; }
+  if(cardsIdx >= cardsPool.length) cardsIdx = 0;
+  const item = cardsPool[cardsIdx];
+  const flash = document.getElementById('flashcard');
+  flash.classList.remove('flipped');
+  cardFlipped = false;
+  const isDeTr = settings.dir === 'de-tr';
+  document.querySelector('#faceFront .bubble-label').innerHTML = isDeTr ? '🇩🇪 Almanca' : '🇹🇷 Türkçe';
+  document.querySelector('.face.back .bubble-label').innerHTML = isDeTr ? '🇹🇷 Türkçe karşılığı' : '🇩🇪 Almanca karşılığı';
+  document.getElementById('cardFrontText').textContent = isDeTr ? item.de : item.tr;
+  document.getElementById('cardBackText').textContent = isDeTr ? item.tr : item.de;
+  const dot = document.getElementById('statusDot');
+  dot.classList.toggle('known', getStatus(item.i)===2);
+  document.getElementById('cardsProgress').style.width = currentCardsProgress()+'%';
+}
+function nextCard(){ cardsIdx++; renderCard(); }
+
+document.getElementById('flashcard').addEventListener('click', (e)=>{
+  if(e.target.closest('.speak-btn')) return;
+  cardFlipped = !cardFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', cardFlipped);
+});
+document.getElementById('speakBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  const item = cardsPool[cardsIdx];
+  if(item) speak(settings.dir==='de-tr' ? item.de : item.tr);
+});
+
+function markCard(known){
+  const item = cardsPool[cardsIdx];
+  if(!item) return;
+  setStatus(item.i, known ? 2 : 1);
+  vibrate(known ? 12 : 20);
+  toast(known ? 'Harika, biliyorsun! ✅' : 'Tamam, tekrar göreceksin 🔁');
+  nextCard();
+}
+document.getElementById('btnGood').addEventListener('click', ()=>markCard(true));
+document.getElementById('btnAgain').addEventListener('click', ()=>markCard(false));
+document.getElementById('btnShuffle').addEventListener('click', ()=>{
+  cardsPool = weightedShuffle(chapterItems(cardsChapter)); cardsIdx=0; renderCard(); toast('Kartlar karıştırıldı 🔀');
+});
+
+// Swipe gestures
+(function(){
+  const stage = document.getElementById('cardStage');
+  const card = document.getElementById('flashcard');
+  const tagL = document.getElementById('tagLeft');
+  const tagR = document.getElementById('tagRight');
+  let startX=0, startY=0, dx=0, dragging=false, moved=false;
+
+  function pointerDown(x,y){ startX=x; startY=y; dx=0; dragging=true; moved=false; card.classList.add('dragging'); }
+  function pointerMove(x,y){
+    if(!dragging) return;
+    dx = x-startX;
+    if(Math.abs(dx) > 6) moved = true;
+    const rot = dx/22;
+    card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
+    const p = Math.min(Math.abs(dx)/90,1);
+    if(dx>0){ tagR.style.opacity=p; tagR.style.transform=`rotate(12deg) scale(${0.8+0.2*p})`; tagL.style.opacity=0; }
+    else if(dx<0){ tagL.style.opacity=p; tagL.style.transform=`rotate(-12deg) scale(${0.8+0.2*p})`; tagR.style.opacity=0; }
+  }
+  function pointerUp(){
+    if(!dragging) return;
+    dragging=false; card.classList.remove('dragging');
+    tagL.style.opacity=0; tagR.style.opacity=0;
+    if(Math.abs(dx) > 90){
+      const goRight = dx>0;
+      card.style.transform = `translateX(${goRight?600:-600}px) rotate(${goRight?35:-35}deg)`;
+      setTimeout(()=>{ card.style.transform=''; markCard(goRight); }, 220);
+    } else {
+      card.style.transform = '';
+    }
+  }
+  stage.addEventListener('mousedown', e=>pointerDown(e.clientX,e.clientY));
+  window.addEventListener('mousemove', e=>pointerMove(e.clientX,e.clientY));
+  window.addEventListener('mouseup', pointerUp);
+  stage.addEventListener('touchstart', e=>{ const t=e.touches[0]; pointerDown(t.clientX,t.clientY); }, {passive:true});
+  stage.addEventListener('touchmove', e=>{ const t=e.touches[0]; pointerMove(t.clientX,t.clientY); }, {passive:true});
+  stage.addEventListener('touchend', pointerUp);
+
+  card.addEventListener('click', (e)=>{
+    if(moved){ e.stopPropagation(); moved=false; }
+  }, true);
+})();
+
+function selectCardsChapter(id){
+  cardsChapter = id;
+  buildChipRow(document.getElementById('chipRowCards'), ()=>cardsChapter, selectCardsChapter);
+  initCards();
+}
+buildChipRow(document.getElementById('chipRowCards'), ()=>cardsChapter, selectCardsChapter);
+initCards();
+
+// Keyboard shortcuts (desktop)
+document.addEventListener('keydown', (e)=>{
+  const activeView = document.querySelector('.view.active').id;
+  if(activeView==='view-cards'){
+    if(e.code==='Space'){ e.preventDefault(); cardFlipped=!cardFlipped; document.getElementById('flashcard').classList.toggle('flipped',cardFlipped); }
+    if(e.code==='ArrowRight'){ markCard(true); }
+    if(e.code==='ArrowLeft'){ markCard(false); }
+  }
+});
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+let quizChapter = 'all';
+let quizState = { active:false, questions:[], idx:0, score:0, answered:false };
+
+function buildQuizQuestions(pool, n){
+  const source = weightedShuffle(pool).slice(0, Math.min(n, pool.length));
+  return source.map(item=>{
+    const isDeTr = settings.dir==='de-tr';
+    const question = isDeTr ? item.de : item.tr;
+    const correct = isDeTr ? item.tr : item.de;
+    let distractors = DATA.filter(d=>d.i!==item.i);
+    distractors = weightedShuffle(distractors).slice(0,3).map(d=> isDeTr ? d.tr : d.de);
+    const options = [...distractors, correct].sort(()=>Math.random()-0.5);
+    return { item, question, correct, options };
+  });
+}
+function startQuiz(){
+  const pool = chapterItems(quizChapter);
+  quizState = { active:true, questions: buildQuizQuestions(pool, 10), idx:0, score:0, answered:false };
+  renderQuiz();
+}
+function renderQuiz(){
+  const area = document.getElementById('quizArea');
+  if(quizState.idx >= quizState.questions.length){
+    area.innerHTML = `
+      <div class="result-card">
+        <div class="big-num">${quizState.score}/${quizState.questions.length}</div>
+        <p>bu turda doğru bildin</p>
+        <button class="primary-btn" id="quizRetry">Yeni tur başlat</button>
+      </div>`;
+    document.getElementById('quizRetry').addEventListener('click', startQuiz);
+    return;
+  }
+  const q = quizState.questions[quizState.idx];
+  quizState.answered = false;
+  const isDeTr = settings.dir==='de-tr';
+  area.innerHTML = `
+    <div class="quiz-top">
+      <span>Soru ${quizState.idx+1} / ${quizState.questions.length}</span>
+      <span>Skor: ${quizState.score}</span>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-eyebrow">${isDeTr ? 'Bunun Türkçesi ne?' : 'Bunun Almancası ne?'}</div>
+      <div class="quiz-q">${q.question}${isDeTr ? ' <span class="speak-inline" id="quizSpeak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5 6 9H3v6h3l5 4z"/></svg></span>' : ''}</div>
+    </div>
+    <div class="options" id="quizOptions"></div>
+    <div class="quiz-footer"><button class="next-btn" id="quizNext">Sonraki →</button></div>
+  `;
+  const optWrap = document.getElementById('quizOptions');
+  q.options.forEach(opt=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<span>${opt}</span>`;
+    b.addEventListener('click', ()=>answerQuiz(opt, b));
+    optWrap.appendChild(b);
+  });
+  const sp = document.getElementById('quizSpeak');
+  if(sp) sp.addEventListener('click', ()=>speak(q.question));
+}
+function answerQuiz(chosen, btnEl){
+  if(quizState.answered) return;
+  quizState.answered = true;
+  const q = quizState.questions[quizState.idx];
+  const correct = chosen === q.correct;
+  if(correct){ quizState.score++; setStatus(q.item.i, 2); vibrate(12); }
+  else { setStatus(q.item.i, 1); vibrate([15,40,15]); }
+  document.querySelectorAll('#quizOptions .opt').forEach(b=>{
+    const txt = b.textContent;
+    if(txt === q.correct) b.classList.add('correct');
+    else if(b===btnEl) b.classList.add('wrong');
+    else b.classList.add('dim');
+    b.disabled = true;
+  });
+  document.getElementById('quizNext').classList.add('show');
+  document.getElementById('quizNext').addEventListener('click', ()=>{
+    quizState.idx++; renderQuiz();
+  }, {once:true});
+}
+function selectQuizChapter(id){
+  quizChapter = id;
+  buildChipRow(document.getElementById('chipRowQuiz'), ()=>quizChapter, selectQuizChapter);
+  startQuiz();
+}
+buildChipRow(document.getElementById('chipRowQuiz'), ()=>quizChapter, selectQuizChapter);
+
+/* ============================================================
+   MATCH GAME
+   ============================================================ */
+let matchChapter = 'all';
+let matchState = { pairs:[], selected:[], matchedCount:0, timer:null, seconds:0, locked:false };
+
+function startMatch(){
+  clearInterval(matchState.timer);
+  const pool = chapterItems(matchChapter);
+  const chosen = weightedShuffle(pool).slice(0,6);
+  const cells = [];
+  chosen.forEach(item=>{
+    cells.push({key:item.i, side:'de', text:item.de});
+    cells.push({key:item.i, side:'tr', text:item.tr});
+  });
+  cells.sort(()=>Math.random()-0.5);
+  matchState = { pairs:cells, selected:[], matchedCount:0, timer:null, seconds:0, locked:false, total:chosen.length };
+  document.getElementById('matchScore').textContent = `0/${chosen.length}`;
+  document.getElementById('matchTime').textContent = '00:00';
+  matchState.timer = setInterval(()=>{
+    matchState.seconds++;
+    const m = String(Math.floor(matchState.seconds/60)).padStart(2,'0');
+    const s = String(matchState.seconds%60).padStart(2,'0');
+    document.getElementById('matchTime').textContent = `${m}:${s}`;
+  }, 1000);
+  renderMatch();
+}
+function renderMatch(){
+  const area = document.getElementById('matchArea');
+  area.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'match-grid';
+  matchState.pairs.forEach((cell, idx)=>{
+    const el = document.createElement('div');
+    el.className = `match-cell ${cell.side}`;
+    el.textContent = cell.text;
+    el.dataset.idx = idx;
+    el.addEventListener('click', ()=>selectMatchCell(idx, el));
+    grid.appendChild(el);
+  });
+  area.appendChild(grid);
+}
+function selectMatchCell(idx, el){
+  if(matchState.locked) return;
+  if(el.classList.contains('matched') || el.classList.contains('selected')) return;
+  el.classList.add('selected');
+  matchState.selected.push({idx, el});
+  if(matchState.selected.length===2){
+    matchState.locked = true;
+    const [a,b] = matchState.selected;
+    const ca = matchState.pairs[a.idx], cb = matchState.pairs[b.idx];
+    if(ca.key===cb.key && ca.side!==cb.side){
+      setTimeout(()=>{
+        a.el.classList.add('matched'); b.el.classList.add('matched');
+        matchState.selected = []; matchState.locked = false;
+        matchState.matchedCount++;
+        document.getElementById('matchScore').textContent = `${matchState.matchedCount}/${matchState.total}`;
+        setStatus(ca.key, 2);
+        vibrate(12);
+        if(matchState.matchedCount === matchState.total){
+          clearInterval(matchState.timer);
+          setTimeout(showMatchDone, 400);
+        }
+      }, 260);
+    } else {
+      vibrate([15,40,15]);
+      a.el.classList.add('shake'); b.el.classList.add('shake');
+      setTimeout(()=>{
+        a.el.classList.remove('selected','shake'); b.el.classList.remove('selected','shake');
+        matchState.selected = []; matchState.locked = false;
+      }, 500);
+    }
+  }
+}
+function showMatchDone(){
+  const area = document.getElementById('matchArea');
+  area.innerHTML = `
+    <div class="match-done">
+      <div class="emoji">🎉</div>
+      <div class="quiz-q" style="margin-bottom:6px;">Tamamlandı!</div>
+      <p style="color:var(--muted); margin-bottom:20px;">${document.getElementById('matchTime').textContent} sürede tüm eşleşmeleri buldun.</p>
+      <button class="primary-btn" id="matchAgain">Yeni tur</button>
+    </div>`;
+  document.getElementById('matchAgain').addEventListener('click', startMatch);
+}
+function selectMatchChapter(id){
+  matchChapter = id;
+  buildChipRow(document.getElementById('chipRowMatch'), ()=>matchChapter, selectMatchChapter);
+  startMatch();
+}
+buildChipRow(document.getElementById('chipRowMatch'), ()=>matchChapter, selectMatchChapter);
+
+/* ============================================================
+   LIST / BROWSE
+   ============================================================ */
+let listFilter = 'all'; // all | known | learning | new | fav
+const FILTERS = [
+  {id:'all', label:'Tümü'},
+  {id:'new', label:'Yeni'},
+  {id:'learning', label:'Öğreniliyor'},
+  {id:'known', label:'Biliniyor'},
+  {id:'fav', label:'Favoriler'},
+];
+function buildFilterRow(){
+  const row = document.getElementById('filterRow');
+  row.innerHTML = '';
+  FILTERS.forEach(f=>{
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (listFilter===f.id ? ' active':'');
+    chip.textContent = f.label;
+    chip.addEventListener('click', ()=>{ listFilter=f.id; buildFilterRow(); renderList(); });
+    row.appendChild(chip);
+  });
+}
+buildFilterRow();
+
+document.getElementById('searchInput').addEventListener('input', renderList);
+
+function renderList(){
+  const area = document.getElementById('listArea');
+  const q = document.getElementById('searchInput').value.trim().toLocaleLowerCase('tr');
+  let items = DATA;
+  if(listFilter==='known') items = items.filter(d=>getStatus(d.i)===2);
+  else if(listFilter==='learning') items = items.filter(d=>getStatus(d.i)===1);
+  else if(listFilter==='new') items = items.filter(d=>getStatus(d.i)===0);
+  else if(listFilter==='fav') items = items.filter(d=>progress.favorites[d.i]);
+  if(q){
+    items = items.filter(d=> d.de.toLocaleLowerCase('tr').includes(q) || d.tr.toLocaleLowerCase('tr').includes(q));
+  }
+  area.innerHTML = '';
+  if(items.length===0){
+    area.innerHTML = `<div class="empty-state">Eşleşen ifade bulunamadı 🔍</div>`;
+    return;
+  }
+  if(q || listFilter!=='all'){
+    items.forEach(d=> area.appendChild(renderListRow(d)) );
+  } else {
+    CHAPTERS.forEach(ch=>{
+      const chItems = items.filter(d=>d.c===ch.id);
+      if(!chItems.length) return;
+      const h = document.createElement('div');
+      h.className = 'chapter-heading';
+      h.textContent = ch.name + ' · ' + ch.sub;
+      area.appendChild(h);
+      chItems.forEach(d=> area.appendChild(renderListRow(d)) );
+    });
+  }
+}
+function renderListRow(d){
+  const row = document.createElement('div');
+  row.className = 'list-item';
+  const st = getStatus(d.i);
+  const dotClass = st===2 ? 'known' : (st===1 ? 'learning' : '');
+  const isFav = !!progress.favorites[d.i];
+  row.innerHTML = `
+    <div class="list-dot ${dotClass}"></div>
+    <div class="list-text"><div class="de">${d.de}</div><div class="tr">${d.tr}</div></div>
+    <div class="list-star ${isFav?'fav':''}"><svg viewBox="0 0 24 24" fill="${isFav?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.1 8.6 22 9.6 17 14.6 18.2 21.5 12 18.1 5.8 21.5 7 14.6 2 9.6 8.9 8.6"/></svg></div>
+  `;
+  row.querySelector('.list-star').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    progress.favorites[d.i] = !progress.favorites[d.i];
+    saveProgress();
+    renderList();
+  });
+  row.addEventListener('click', ()=>speak(d.de));
+  return row;
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+function renderStats(){
+  document.getElementById('streakTop').textContent = progress.streak;
+  document.getElementById('streakNum').textContent = progress.streak + (progress.streak===1 ? ' gün' : ' gün');
+  const known = DATA.filter(d=>getStatus(d.i)===2).length;
+  const learning = DATA.filter(d=>getStatus(d.i)===1).length;
+  const brandNew = TOTAL - known - learning;
+  document.getElementById('statKnown').textContent = known;
+  document.getElementById('statLearning').textContent = learning;
+  document.getElementById('statNew').textContent = brandNew;
+  const barsWrap = document.getElementById('chapterBars');
+  barsWrap.innerHTML = '';
+  CHAPTERS.forEach(ch=>{
+    const items = chapterItems(ch.id);
+    const k = items.filter(d=>getStatus(d.i)===2).length;
+    const pct = Math.round(k/items.length*100);
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-label"><span>${ch.name}</span><span>${k}/${items.length}</span></div>
+      <div class="bar-bg"><div class="bar-fg" style="width:${pct}%"></div></div>
+    `;
+    barsWrap.appendChild(row);
+  });
+}
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  if(confirm('Tüm ilerleme sıfırlansın mı? Bu işlem geri alınamaz.')){
+    progress.status = {}; progress.favorites = {};
+    saveProgress();
+    renderStats(); renderList(); renderCard();
+    toast('İlerleme sıfırlandı');
+  }
+});
+
+document.getElementById('streakTop').textContent = progress.streak;
+</script>
+</body>
+</html>
